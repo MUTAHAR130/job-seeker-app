@@ -10,7 +10,7 @@ void main() {
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       getPages: AppPages.pages,
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.login,
     ),
   );
 }

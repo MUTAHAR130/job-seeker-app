@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:job_seeker/core/common/widgets/form_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
+import 'package:job_seeker/core/routes/app_routes.dart';
 import 'package:job_seeker/features/auth/controller/auth_controller.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:get/get.dart';
@@ -70,7 +71,7 @@ class VerifyEmailDialog extends StatelessWidget {
                     buttonText: 'Contact Support',
                     invertedColor: true,
                     onPress: () {
-                      Get.back();
+                      Get.toNamed(AppRoutes.home);
                     },
                   ),
                 ),

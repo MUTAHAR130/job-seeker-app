@@ -9,6 +9,7 @@ class ResumeTemplateWidget extends StatelessWidget {
   final String typeTile;
   final String typeProperties;
   final String scoreIcon;
+  final Function? ontap;
 
   const ResumeTemplateWidget({
     super.key,
@@ -17,6 +18,7 @@ class ResumeTemplateWidget extends StatelessWidget {
     required this.scoreIcon,
     required this.typeProperties,
     required this.typeTile,
+    this.ontap
   });
 
   @override
@@ -29,6 +31,15 @@ class ResumeTemplateWidget extends StatelessWidget {
               height: 328,
               width: double.infinity,
               child: SfPdfViewer.asset(resumeAsset),
+            ),
+            Positioned.fill(
+              child: GestureDetector(
+                onTap: (){ontap!();},
+                behavior: HitTestBehavior.opaque,
+                child: Container(
+                  color: Colors.transparent,
+                ),
+              ),
             ),
             Positioned(top: 5, right: 5, child: SvgPicture.string(typeIcon)),
           ],

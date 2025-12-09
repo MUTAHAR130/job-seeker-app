@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
-// import 'package:job_seeker/features/auth/widgets/login_fail_dialog.dart';
+import 'package:job_seeker/features/auth/widgets/login_fail_dialog.dart';
 
 class AuthController extends GetxController {
   TextEditingController emailFieldTC = TextEditingController();
@@ -10,7 +10,7 @@ class AuthController extends GetxController {
   Rx<bool> passHidden = true.obs;
   Rx<bool> confirmPassHidden = true.obs;
   Rx<bool> rememberCheckBox = false.obs;
-  Rx<bool> contactSupportVisible = false.obs;
+  Rx<bool> contactSupportVisible = true.obs;
   Rx<String> verifyStatus = 'not sent'.obs;
 
   togglePassHidden() {
@@ -40,7 +40,7 @@ class AuthController extends GetxController {
   loginAction(){
     //login logic
     //on 5 failed logins
-    // Get.dialog(LoginFailDialog());
-    Get.toNamed(AppRoutes.home);
+    Get.dialog(LoginFailDialog());
+    // Get.toNamed(AppRoutes.home);
   }
 }
