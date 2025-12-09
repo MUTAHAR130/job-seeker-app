@@ -22,6 +22,7 @@ final ThemeData lightTheme = ThemeData(
     backgroundColor: Colors.transparent,
   ),
   listTileTheme: ListTileThemeData(
+    leadingAndTrailingTextStyle: TextStyle(color: Color(0xFF3B464A)),
     textColor: Color(0xFF3B464A),
     selectedTileColor: Color(0xFFDEECF4),
   ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/form_button.dart';
-import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
+import 'package:job_seeker/core/common/widgets/white_card.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/features/auth/controller/auth_controller.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
@@ -12,35 +12,18 @@ class ResetPassConfirm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WhiteCurvedBox(
+    return WhiteCard(
+      title: 'Reset Password',
+      subTitle:
+          'Now that we know it’s you, please create a new password to sign in.',
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            'Reset Password',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Text(
-            'Now that we know it’s you, please create a new password to sign in.',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-            textAlign: TextAlign.center,
-          ),
           SizedBox(height: 15),
           Align(
             alignment: Alignment.centerLeft,
             child: Text.rich(
               TextSpan(
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                 children: <TextSpan>[
                   const TextSpan(text: 'Password'),
                   const TextSpan(
@@ -67,10 +50,7 @@ class ResetPassConfirm extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text.rich(
               TextSpan(
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
                 children: <TextSpan>[
                   const TextSpan(text: 'Confirm Password'),
                   const TextSpan(

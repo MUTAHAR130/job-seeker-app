@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/form_button.dart';
-import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
+import 'package:job_seeker/core/common/widgets/white_card.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/features/auth/controller/auth_controller.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
@@ -12,28 +12,12 @@ class ForgotPassInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WhiteCurvedBox(
+    return WhiteCard(
+      title: 'Email Verification',
+      subTitle:
+          'Enter your email address and we\'ll send you a code to reset your password.',
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            'Email Verification',
-            style: TextStyle(
-              fontSize: 20,
-              color: Get.theme.colorScheme.tertiary,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Text(
-            'Enter your email address and we\'ll send you a code to reset your password.',
-            style: TextStyle(
-              fontSize: 14,
-              color: Get.theme.colorScheme.tertiary,
-              fontWeight: FontWeight.w400,
-            ),
-            textAlign: TextAlign.center,
-          ),
           SizedBox(height: 15),
           Align(
             alignment: Alignment.centerLeft,

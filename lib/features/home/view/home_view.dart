@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_seeker/features/home/controller/home_controller.dart';
 import 'package:job_seeker/features/home/widgets/create_resume_message.dart';
+import 'package:job_seeker/features/home/widgets/generate_resume_options.dart';
 import 'package:job_seeker/features/home/widgets/home_drawer.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  final HomeController homeController = Get.put(HomeController());
+  HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,13 @@ class HomeView extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  CreateResumeMessage(),
+                  Obx((){
+                    if(homeController.shownMenu.value == 'createResume'){
+                      return CreateResumeMessage();
+                    } else {
+                      return GenerateResumeOptions();
+                    }
+                  }),
                   const Center(child: Text('Cover Letter List Content')),
                 ],
               ),

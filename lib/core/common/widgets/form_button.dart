@@ -5,12 +5,16 @@ class FormButton extends StatelessWidget {
   final String buttonText;
   final Function onPress;
   final bool? invertedColor;
+  final double? bheight;
+  final double? bwidth;
 
   const FormButton({
     super.key,
     required this.buttonText,
     required this.onPress,
     this.invertedColor,
+    this.bheight,
+    this.bwidth
   });
 
   @override
@@ -32,8 +36,8 @@ class FormButton extends StatelessWidget {
         backgroundColor: WidgetStatePropertyAll( invertedColor == true ? Get.theme.colorScheme.surface : Get.theme.colorScheme.primary),
       ),
       child: SizedBox(
-        height: 48,
-        width: double.infinity,
+        height: bheight ?? 48,
+        width: bwidth ?? double.infinity,
         child: Center(
           child: Text(
             buttonText,
