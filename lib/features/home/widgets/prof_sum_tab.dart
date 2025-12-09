@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_seeker/core/common/widgets/form_button.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
 import 'package:get/get.dart';
@@ -29,7 +29,6 @@ class ProfSumTab extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // CircleAvatar(radius: 16,child: Container(color: Colors.red),),
                   Text.rich(
                     TextSpan(
                       style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
@@ -45,6 +44,7 @@ class ProfSumTab extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: 8),
                   TextFormField(
                     controller: homeController.profSumTC,
                     maxLines: 7,
@@ -63,7 +63,7 @@ class ProfSumTab extends StatelessWidget {
             SizedBox(height: 10),
             Align(
               alignment: Alignment.centerRight,
-              child: FormButton(
+              child: ActionButton(
                 buttonText: 'Save Professional Summary',
                 onPress: () {},
                 bwidth: 190,

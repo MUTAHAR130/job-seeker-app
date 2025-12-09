@@ -19,6 +19,7 @@ class WhiteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WhiteCurvedBox(
+      margin: 24,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,

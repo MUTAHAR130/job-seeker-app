@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:job_seeker/core/common/widgets/form_button.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:job_seeker/core/common/icons/app_icons.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
 import 'package:get/get.dart';
@@ -30,10 +32,25 @@ class BasicInfoTab extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // CircleAvatar(radius: 16,child: Container(color: Colors.red),),
+                  InkWell(
+                    onTap: (){},
+                    child: Stack(
+                      children: [
+                        CircleAvatar(
+                          radius: 30,
+                          backgroundImage: AssetImage('assets/images/temp.jpg'),
+                        ),
+                        Positioned(top: 0, right: 0,child: SvgPicture.string(AppIcons.editBoxIcon)),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10),
                   Text.rich(
                     TextSpan(
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
                       children: <TextSpan>[
                         const TextSpan(text: 'Full Name'),
                         const TextSpan(
@@ -50,9 +67,13 @@ class BasicInfoTab extends StatelessWidget {
                     controller: homeController.nameFieldTC,
                     hintText: 'Enter name',
                   ),
+                  SizedBox(height: 15),
                   Text.rich(
                     TextSpan(
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
                       children: <TextSpan>[
                         const TextSpan(text: 'Contact Email'),
                         const TextSpan(
@@ -65,13 +86,18 @@ class BasicInfoTab extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: 8),
                   InputField(
                     controller: homeController.emailFieldTC,
                     hintText: 'Enter email',
                   ),
+                  SizedBox(height: 15),
                   Text.rich(
                     TextSpan(
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
                       children: <TextSpan>[
                         const TextSpan(text: 'Phone Number '),
                         const TextSpan(
@@ -81,6 +107,7 @@ class BasicInfoTab extends StatelessWidget {
                       ],
                     ),
                   ),
+                  SizedBox(height: 8),
                   InputField(
                     controller: homeController.emailFieldTC,
                     hintText: 'Enter email',
@@ -91,7 +118,7 @@ class BasicInfoTab extends StatelessWidget {
             SizedBox(height: 10),
             Align(
               alignment: Alignment.centerRight,
-              child: FormButton(
+              child: ActionButton(
                 buttonText: 'Save Basic Information',
                 onPress: () {},
                 bwidth: 150,

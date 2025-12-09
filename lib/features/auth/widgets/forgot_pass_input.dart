@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_seeker/core/common/widgets/form_button.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_card.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/features/auth/controller/auth_controller.dart';
@@ -47,7 +47,7 @@ class ForgotPassInput extends StatelessWidget {
             hintText: 'Enter email',
           ),
           SizedBox(height: 15),
-          FormButton(
+          ActionButton(
             buttonText: 'Send Reset Link',
             onPress: authController.sendVerification,
           ),

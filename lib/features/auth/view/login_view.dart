@@ -5,7 +5,7 @@ import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
 import 'package:job_seeker/features/auth/controller/auth_controller.dart';
-import 'package:job_seeker/core/common/widgets/form_button.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 
 class LoginView extends StatelessWidget {
@@ -19,6 +19,7 @@ class LoginView extends StatelessWidget {
       backgroundColor: Get.theme.scaffoldBackgroundColor,
       body: Center(
         child: WhiteCurvedBox(
+          margin: 24,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -154,7 +155,7 @@ class LoginView extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 14),
-              FormButton(buttonText: 'Login', onPress: authController.loginAction),
+              ActionButton(buttonText: 'Login', onPress: authController.loginAction),
             ],
           ),
         ),

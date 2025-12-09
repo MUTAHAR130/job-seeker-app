@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:job_seeker/core/common/widgets/form_button.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/features/auth/widgets/verify_email_dialog.dart';
@@ -15,6 +15,7 @@ class LoginFailDialog extends StatelessWidget {
       backgroundColor: Colors.transparent,
       body: Center(
         child: WhiteCurvedBox(
+          margin: 24,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -38,7 +39,7 @@ class LoginFailDialog extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 15),
-              FormButton(
+              ActionButton(
                 buttonText: 'Verify your email address',
                 onPress: () {
                   Get.back();

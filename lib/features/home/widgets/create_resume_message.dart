@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
-import 'package:job_seeker/core/common/widgets/form_button.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_card.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
@@ -22,14 +22,14 @@ class CreateResumeMessage extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: 15),
-              FormButton(
+              ActionButton(
                 buttonText: 'Create Resume',
                 onPress: () {
                   homeController.changeMenu('generateResume');
                 },
               ),
               SizedBox(height: 15),
-              FormButton(
+              ActionButton(
                 buttonText: 'Upload Resume',
                 invertedColor: true,
                 onPress: () {

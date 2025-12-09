@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/date_selector_widget.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/option_toggle_tile.dart';
-import 'package:job_seeker/core/common/widgets/resume_detail_tile.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
+import 'package:job_seeker/core/common/widgets/resume_detail_tile.dart';
 
-class WorkExpTab extends StatelessWidget {
+class EducationTab extends StatelessWidget {
   final HomeController homeController = Get.find<HomeController>();
 
-  WorkExpTab({super.key});
+  EducationTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class WorkExpTab extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Work Experience',
+                  'Education',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
                 InkWell(
@@ -45,7 +45,7 @@ class WorkExpTab extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Visibility(
-              visible: true, //shown when adding new job
+              visible: true, //shown when adding new section
               child: Column(
                 children: [
                   WhiteCurvedBox(
@@ -59,7 +59,7 @@ class WorkExpTab extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                             ),
                             children: <TextSpan>[
-                              const TextSpan(text: 'Title'),
+                              const TextSpan(text: 'Degree'),
                               const TextSpan(
                                 text: '*',
                                 style: TextStyle(
@@ -72,8 +72,8 @@ class WorkExpTab extends StatelessWidget {
                         ),
                         SizedBox(height: 8),
                         InputField(
-                          controller: homeController.jobTitleTC,
-                          hintText: 'Enter name',
+                          controller: homeController.degreeTitleTC,
+                          hintText: 'Enter degree',
                         ),
                         SizedBox(height: 15),
                         Text.rich(
@@ -83,7 +83,7 @@ class WorkExpTab extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                             ),
                             children: <TextSpan>[
-                              const TextSpan(text: 'Company'),
+                              const TextSpan(text: 'Institute'),
                               const TextSpan(
                                 text: '*',
                                 style: TextStyle(
@@ -96,8 +96,8 @@ class WorkExpTab extends StatelessWidget {
                         ),
                         SizedBox(height: 8),
                         InputField(
-                          controller: homeController.nameFieldTC,
-                          hintText: 'Enter name',
+                          controller: homeController.instituteTC,
+                          hintText: 'Enter institute',
                         ),
                         SizedBox(height: 15),
                         Text.rich(
@@ -157,7 +157,7 @@ class WorkExpTab extends StatelessWidget {
                         OptionToggleTile(
                           toggleValue: true,
                           toggleFunction: (val) {},
-                          tileText: 'Currently work here',
+                          tileText: 'Currently study here',
                         ),
                         Text.rich(
                           TextSpan(
@@ -179,7 +179,7 @@ class WorkExpTab extends StatelessWidget {
                         ),
                         SizedBox(height: 8),
                         TextFormField(
-                          controller: homeController.workDescTC,
+                          controller: homeController.eduDescTC,
                           maxLines: 7,
                           textAlignVertical: TextAlignVertical.top,
                           decoration: InputDecoration(
@@ -190,7 +190,7 @@ class WorkExpTab extends StatelessWidget {
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                             border: const OutlineInputBorder(),
                             label: Text(
-                              'Write a short summary about your work experience',
+                              'Write a short summary about your education',
                             ),
                             labelStyle: TextStyle(
                               color: Get.theme.colorScheme.tertiary,
@@ -204,23 +204,18 @@ class WorkExpTab extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: ActionButton(
-                      buttonText: 'Save Work Experience',
+                      buttonText: 'Save Education',
                       onPress: () {},
-                      bwidth: 160,
+                      bwidth: 100,
                     ),
                   ),
                 ],
               ),
             ),
             ResumeDetailTile(
-              titleText: 'Senior UI/UX Designer at Maze Digital',
+              titleText: 'Bachelors of science in Software Engineering at Sindh madrassatul islam university (SMIU)',
               onTapDelete: () {},
-              subTitleText: 'June 2025 - Present',
-            ),
-            ResumeDetailTile(
-              titleText: 'Lead UI/UX Designer at Zenkoders',
-              onTapDelete: () {},
-              subTitleText: 'Sep 2024 - May 2025',
+              subTitleText: 'Aug 2022 - Present',
             ),
           ],
         ),

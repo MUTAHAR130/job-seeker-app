@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_seeker/core/common/widgets/form_button.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_card_rich.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:get/get.dart';
@@ -22,7 +22,7 @@ class ResetRequestPending extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 15),
-          FormButton(
+          ActionButton(
             buttonText: 'Resend Link',
             onPress: () {
               //temp

@@ -9,11 +9,13 @@ class AppColors {
 final ThemeData lightTheme = ThemeData(
   colorScheme: const ColorScheme.light(
     primary: AppColors.primaryLight,
+    secondary: Color(0xFFAF9B78),
     surface: AppColors.backgroundLight,
     onPrimary: Colors.white,
     outline: Color(0xFFE9EDEE),
     tertiary: Color(0xFF3B464A),
-    onSurface: Color(0xFFDEECF4),
+    onSurface: Color(0xFF3B464A),
+    // onSurface: Color(0xFFDEECF4),
   ),
   hintColor: Color(0xFF626D6F),
   scaffoldBackgroundColor: Color(0xFFF6F3EE),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_seeker/core/common/widgets/form_button.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_card.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
@@ -40,7 +40,7 @@ class GenerateResumeOptions extends StatelessWidget {
                 changeVal: homeController.changRadio,
               )),
               SizedBox(height: 10),
-              FormButton(
+              ActionButton(
                 buttonText: 'Generate Resume',
                 onPress: () {
                   Get.toNamed(AppRoutes.resumeTemplate);

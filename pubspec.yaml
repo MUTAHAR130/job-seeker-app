@@ -37,6 +37,7 @@ dependencies:
   get: ^4.7.3
   flutter_svg: ^2.2.3
   syncfusion_flutter_pdfviewer: ^31.1.19
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:

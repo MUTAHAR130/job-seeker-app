@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:job_seeker/core/routes/app_routes.dart';
+// import 'package:job_seeker/core/routes/app_routes.dart';
 import 'package:job_seeker/features/auth/widgets/login_fail_dialog.dart';
 
 class AuthController extends GetxController {

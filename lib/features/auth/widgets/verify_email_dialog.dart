@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:job_seeker/core/common/widgets/form_button.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
 import 'package:job_seeker/features/auth/controller/auth_controller.dart';
@@ -18,6 +18,7 @@ class VerifyEmailDialog extends StatelessWidget {
       backgroundColor: Colors.transparent,
       body: Center(
         child: WhiteCurvedBox(
+          margin: 24,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -57,7 +58,7 @@ class VerifyEmailDialog extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15),
-              FormButton(
+              ActionButton(
                 buttonText: 'Resend Link',
                 onPress: () {
                   Get.back();
@@ -67,7 +68,7 @@ class VerifyEmailDialog extends StatelessWidget {
               Obx(
                 () => Visibility(
                   visible: authController.contactSupportVisible.value,
-                  child: FormButton(
+                  child: ActionButton(
                     buttonText: 'Contact Support',
                     invertedColor: true,
                     onPress: () {

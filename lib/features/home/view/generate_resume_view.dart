@@ -2,13 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
-import 'package:job_seeker/core/common/widgets/form_button.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
+import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/widgets/award_tab.dart';
+import 'package:job_seeker/features/home/widgets/certification_tab.dart';
+import 'package:job_seeker/features/home/widgets/education_tab.dart';
+import 'package:job_seeker/features/home/widgets/language_tab.dart';
 import 'package:job_seeker/features/home/widgets/prof_sum_tab.dart';
 import 'package:job_seeker/features/home/widgets/basic_info_tab.dart';
 import 'package:job_seeker/features/home/widgets/final_preview_tab.dart';
+import 'package:job_seeker/features/home/widgets/skills_tab.dart';
+import 'package:job_seeker/features/home/widgets/work_exp_tab.dart';
 
 class GenerateResumeView extends StatelessWidget {
-  const GenerateResumeView({super.key});
+  final HomeController homeController = Get.find<HomeController>();
+
+  GenerateResumeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,24 +33,29 @@ class GenerateResumeView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Resume',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                  InkWell(
+                    onTap: () {
+                      homeController.changeTitle();
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Obx(
+                          () => Text(
+                            homeController.resumeTitle.value,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.string(AppIcons.editIcon),
-                      ),
-                    ],
+                        SizedBox(width: 5),
+                        SvgPicture.string(AppIcons.editIcon),
+                      ],
+                    ),
                   ),
 
-                  FormButton(
+                  ActionButton(
                     buttonText: 'Download PDF',
                     onPress: () {},
                     bheight: 32,
@@ -107,18 +121,21 @@ class GenerateResumeView extends StatelessWidget {
             ),
 
             Expanded(
-              child: TabBarView(
-                children: [
-                  BasicInfoTab(),
-                  ProfSumTab(),
-                  const Center(child: Text('Work Exp')),
-                  const Center(child: Text('Education')),
-                  const Center(child: Text('Certifications')),
-                  const Center(child: Text('Awards')),
-                  const Center(child: Text('Skills')),
-                  const Center(child: Text('Languages')),
-                  FinalPreviewTab()
-                ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: TabBarView(
+                  children: [
+                    BasicInfoTab(),
+                    ProfSumTab(),
+                    WorkExpTab(),
+                    EducationTab(),
+                    CertificationTab(),
+                    AwardTab(),
+                    SkillsTab(),
+                    LanguageTab(),
+                    FinalPreviewTab(),
+                  ],
+                ),
               ),
             ),
           ],

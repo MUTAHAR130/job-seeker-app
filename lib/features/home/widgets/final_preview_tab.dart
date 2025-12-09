@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_seeker/core/common/widgets/form_button.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:job_seeker/features/home/widgets/text_scale_tab.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -24,6 +24,7 @@ class FinalPreviewTab extends StatelessWidget {
               ),
               SizedBox(height: 30),
               WhiteCurvedBox(
+                margin: 24,
                 child: Column(
                   children: [
                     Stack(
@@ -59,7 +60,7 @@ class FinalPreviewTab extends StatelessWidget {
                       ],
                     ),
                     SizedBox(height: 15),
-                    FormButton(
+                    ActionButton(
                       buttonText: 'Explore Resume Score',
                       onPress: () {},
                     ),
