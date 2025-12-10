@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/controller/resume_controller.dart';
 import 'package:job_seeker/features/home/widgets/value_display_slider.dart';
 
 class TextScaleTab extends StatelessWidget {
-  final HomeController homeController = Get.find<HomeController>();
+  final ResumeController resumeController = Get.find<ResumeController>();
 
   TextScaleTab({super.key});
 
@@ -62,8 +62,8 @@ class TextScaleTab extends StatelessWidget {
             max: 20,
             roundOff: true,
             valueSuffix: 'px',
-            currentSliderValue: homeController.textScale.value,
-            onChange: homeController.changeTextScale,
+            currentSliderValue: resumeController.textScale.value,
+            onChange: resumeController.changeTextScale,
           ),
         ),
         Text(
@@ -76,8 +76,8 @@ class TextScaleTab extends StatelessWidget {
             max: 0.4,
             valueSuffix: 'in',
             roundOff: false,
-            currentSliderValue: homeController.spaceSize.value,
-            onChange: homeController.changeSpaceSize,
+            currentSliderValue: resumeController.spaceSize.value,
+            onChange: resumeController.changeSpaceSize,
           ),
         ),
       ],

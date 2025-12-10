@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
-import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/controller/resume_controller.dart';
 import 'package:get/get.dart';
 
 class LanguageTab extends StatelessWidget {
-  final HomeController homeController = Get.find<HomeController>();
+  final ResumeController resumeController = Get.find<ResumeController>();
 
   LanguageTab({super.key});
 

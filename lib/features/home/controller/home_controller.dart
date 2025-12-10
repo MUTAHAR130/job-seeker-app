@@ -1,67 +1,83 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:job_seeker/features/home/widgets/edit_resume_title.dart';
+import 'package:job_seeker/core/common/icons/app_icons.dart';
+import 'package:job_seeker/core/routes/app_routes.dart';
+import 'package:job_seeker/features/home/models/drawer_option_model.dart';
+import 'package:job_seeker/features/home/models/saved_resume_model.dart';
 
-class HomeController extends GetxController{
-  TextEditingController resumeTitleTC = TextEditingController();
-  //basic info
-  TextEditingController nameFieldTC = TextEditingController();
-  TextEditingController emailFieldTC = TextEditingController();
-  //prof sum
-  TextEditingController profSumTC = TextEditingController();
-  //work detail
-  TextEditingController jobTitleTC = TextEditingController();
-  TextEditingController jobCompanyTC = TextEditingController();
-  TextEditingController workDescTC = TextEditingController();
-  //edu detail
-  TextEditingController degreeTitleTC = TextEditingController();
-  TextEditingController instituteTC = TextEditingController();
-  TextEditingController eduDescTC = TextEditingController();
-  //cert detail
-  TextEditingController certNameTC = TextEditingController();
-  TextEditingController certOrganizationTC = TextEditingController();
-  TextEditingController certDescTC = TextEditingController();
-  //award detail
-  TextEditingController awardNameTC = TextEditingController();
-  TextEditingController awardOrganizationTC = TextEditingController();
-  TextEditingController awardDescTC = TextEditingController();
-  //skill detail
-  TextEditingController skillTC = TextEditingController();
+class HomeController extends GetxController {
+  List<DrawerOptionModel> drawerOptions = [
+    DrawerOptionModel(
+      title: 'Dashboard',
+      drawerIcon: AppIcons.dashboardIcon,
+      selected: true,
+      pageRoute: AppRoutes.home,
+    ),
+    DrawerOptionModel(
+      title: 'Job Search',
+      drawerIcon: AppIcons.searchIcon,
+      selected: false,
+      pageRoute: AppRoutes.jobSearchView,
+    ),
+    DrawerOptionModel(
+      title: 'AI Interviews',
+      drawerIcon: AppIcons.aiHelpIcon,
+      selected: false,
+      pageRoute: '',
+    ),
+    DrawerOptionModel(
+      title: 'Video Resumes',
+      drawerIcon: AppIcons.videoResumeIcon,
+      selected: false,
+      pageRoute: '',
+    ),
+    DrawerOptionModel(
+      title: 'Messages',
+      drawerIcon: AppIcons.messagesIcon,
+      selected: false,
+      pageRoute: '',
+    ),
+    DrawerOptionModel(
+      title: 'Saved Filters',
+      drawerIcon: AppIcons.savedFilterIcon,
+      selected: false,
+      pageRoute: '',
+    ),
+    DrawerOptionModel(
+      title: 'Job Settings',
+      drawerIcon: AppIcons.jobSettingsIcon,
+      selected: false,
+      pageRoute: '',
+    ),
+  ];
 
-  Rx<String> resumeTitle = 'Untitled'.obs;
-  Rx<String> shownMenu = 'createResume'.obs;
-  Rx<int> radioSelected = 1.obs;
-  Rx<double> textScale = 12.0.obs;
-  Rx<double> spaceSize = 0.25.obs;
-  final startDate = (null as DateTime?).obs;
-  final endDate = (null as DateTime?).obs;
+  List<SavedResumeModel> savedResumeData = [
+    SavedResumeModel(
+      resumeTitle: 'Resume 1',
+      resumeAsset: 'assets/docs/Resume1.pdf',
+      isDefault: true,
+    ),
+    SavedResumeModel(
+      resumeTitle: 'Resume 2',
+      resumeAsset: 'assets/docs/Resume1.pdf',
+    ),
+  ];
 
-  void setStartDate(DateTime date) {
-    startDate.value = date;
-  }
+  List<SavedResumeModel> savedCoverLetterData = [
+    SavedResumeModel(
+      resumeTitle: 'Cover Letter 1',
+      resumeAsset: 'assets/docs/Resume1.pdf',
+      isDefault: true,
+    ),
+    SavedResumeModel(
+      resumeTitle: 'Cover Letter 2',
+      resumeAsset: 'assets/docs/Resume1.pdf',
+    ),
+  ];
 
-  void setEndDate(DateTime date) {
-    endDate.value = date;
-  }
+  Rx<String> shownResumeMenu = 'createResume'.obs;
+  Rx<String> shownLetterMenu = 'createLetter'.obs;
 
-  changRadio(value){
-    radioSelected.value = value;
-  }
-
-  changeMenu(String value){
-    shownMenu.value = value;
-  }
-
-  changeTextScale(double value){
-    textScale.value = value;
-  }
-
-  changeSpaceSize(double value){
-    spaceSize.value = value;
-  }
-
-  changeTitle(){
-    resumeTitleTC.text = resumeTitle.value;
-    Get.dialog(EditResumeTitle());
+  changeMenu(String value) {
+    shownResumeMenu.value = value;
   }
 }

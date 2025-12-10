@@ -9,7 +9,7 @@ class ResumeTemplateWidget extends StatelessWidget {
   final String typeTile;
   final String typeProperties;
   final String scoreIcon;
-  final Function? ontap;
+  final Function? onTap;
 
   const ResumeTemplateWidget({
     super.key,
@@ -18,7 +18,7 @@ class ResumeTemplateWidget extends StatelessWidget {
     required this.scoreIcon,
     required this.typeProperties,
     required this.typeTile,
-    this.ontap
+    this.onTap
   });
 
   @override
@@ -34,7 +34,7 @@ class ResumeTemplateWidget extends StatelessWidget {
             ),
             Positioned.fill(
               child: GestureDetector(
-                onTap: (){ontap!();},
+                onTap: (){onTap!();},
                 behavior: HitTestBehavior.opaque,
                 child: Container(
                   color: Colors.transparent,

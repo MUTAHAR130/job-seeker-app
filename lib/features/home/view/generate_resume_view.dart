@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
-import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/controller/resume_controller.dart';
 import 'package:job_seeker/features/home/widgets/award_tab.dart';
 import 'package:job_seeker/features/home/widgets/certification_tab.dart';
 import 'package:job_seeker/features/home/widgets/education_tab.dart';
@@ -15,7 +15,7 @@ import 'package:job_seeker/features/home/widgets/skills_tab.dart';
 import 'package:job_seeker/features/home/widgets/work_exp_tab.dart';
 
 class GenerateResumeView extends StatelessWidget {
-  final HomeController homeController = Get.find<HomeController>();
+  final ResumeController resumeController = Get.find<ResumeController>();
 
   GenerateResumeView({super.key});
 
@@ -35,14 +35,14 @@ class GenerateResumeView extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      homeController.changeTitle();
+                      resumeController.changeTitle();
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Obx(
                           () => Text(
-                            homeController.resumeTitle.value,
+                            resumeController.resumeTitle.value,
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,

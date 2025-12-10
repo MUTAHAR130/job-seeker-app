@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
+import 'package:job_seeker/core/common/widgets/multi_line_input_field.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
-import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/controller/resume_controller.dart';
 import 'package:get/get.dart';
 
 class ProfSumTab extends StatelessWidget {
-  final HomeController homeController = Get.find<HomeController>();
+  final ResumeController resumeController = Get.find<ResumeController>();
 
   ProfSumTab({super.key});
 
@@ -25,39 +26,12 @@ class ProfSumTab extends StatelessWidget {
             SizedBox(height: 5),
             WhiteCurvedBox(
               margin: 0,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text.rich(
-                    TextSpan(
-                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-                      children: <TextSpan>[
-                        const TextSpan(text: 'Professional Summary'),
-                        const TextSpan(
-                          text: '*',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  TextFormField(
-                    controller: homeController.profSumTC,
-                    maxLines: 7,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      border: const OutlineInputBorder(),
-                      label: Text('Write a short summary about your professional background'),
-                      labelStyle: TextStyle(color: Get.theme.colorScheme.tertiary,)
-                    ),
-                  ),
-                ],
+              child: MultiLineInputField(
+                controller: resumeController.profSumTC,
+                label: 'Professional Summary',
+                mandatory: true,
+                hintText:
+                    'Write a short summary about your professional background',
               ),
             ),
             SizedBox(height: 10),

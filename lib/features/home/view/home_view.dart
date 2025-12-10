@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/controller/resume_controller.dart';
+import 'package:job_seeker/features/home/widgets/create_cover_letter_message.dart';
 import 'package:job_seeker/features/home/widgets/create_resume_message.dart';
-import 'package:job_seeker/features/home/widgets/generate_resume_options.dart';
 import 'package:job_seeker/features/home/widgets/home_drawer.dart';
+import 'package:job_seeker/features/home/widgets/saved_resume_list.dart';
 
 class HomeView extends StatelessWidget {
+  final ResumeController resumeController = Get.put(ResumeController());
   final HomeController homeController = Get.put(HomeController());
+
   HomeView({super.key});
 
   @override
@@ -45,14 +49,26 @@ class HomeView extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  Obx((){
-                    if(homeController.shownMenu.value == 'createResume'){
-                      return CreateResumeMessage();
+                  Obx(() {
+                    if (homeController.shownResumeMenu.value == 'resumeList') {
+                      return SavedResumeList(
+                        itemCount: homeController.savedResumeData.length,
+                        savedResumeData: homeController.savedResumeData,
+                      );
                     } else {
-                      return GenerateResumeOptions();
+                      return CreateResumeMessage();
                     }
                   }),
-                  const Center(child: Text('Cover Letter List Content')),
+                  Obx(() {
+                    if (homeController.shownLetterMenu.value == 'letterList') {
+                      return SavedResumeList(
+                        itemCount: homeController.savedCoverLetterData.length,
+                        savedResumeData: homeController.savedCoverLetterData,
+                      );
+                    } else {
+                      return CreateCoverLetterMessage();
+                    }
+                  }),
                 ],
               ),
             ),

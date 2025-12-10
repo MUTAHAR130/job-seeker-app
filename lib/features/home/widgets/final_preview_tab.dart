@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
+import 'package:job_seeker/core/routes/app_routes.dart';
 import 'package:job_seeker/features/home/widgets/text_scale_tab.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:get/get.dart';
@@ -62,7 +63,7 @@ class FinalPreviewTab extends StatelessWidget {
                     SizedBox(height: 15),
                     ActionButton(
                       buttonText: 'Explore Resume Score',
-                      onPress: () {},
+                      onPress: () {Get.toNamed(AppRoutes.resumeScoreView);},
                     ),
                   ],
                 ),

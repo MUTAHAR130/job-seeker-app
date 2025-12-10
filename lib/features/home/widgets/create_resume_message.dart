@@ -4,6 +4,7 @@ import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_card.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/widgets/generate_resume_options.dart';
 
 class CreateResumeMessage extends StatelessWidget {
   final HomeController homeController = Get.find<HomeController>();
@@ -25,7 +26,7 @@ class CreateResumeMessage extends StatelessWidget {
               ActionButton(
                 buttonText: 'Create Resume',
                 onPress: () {
-                  homeController.changeMenu('generateResume');
+                  Get.dialog(GenerateResumeOptions());
                 },
               ),
               SizedBox(height: 15),
@@ -33,6 +34,8 @@ class CreateResumeMessage extends StatelessWidget {
                 buttonText: 'Upload Resume',
                 invertedColor: true,
                 onPress: () {
+                  //debug
+                  homeController.shownResumeMenu.value = 'resumeList';
                   Get.back();
                 },
               ),

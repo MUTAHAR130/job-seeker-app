@@ -17,12 +17,6 @@ class ResumeDetailTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // const Color borderColor = Color(0xFFC7B199);
-    // const Color primaryTextColor = Color(
-    //   0xFF3B464A,
-    // );
-    // const Color secondaryTextColor = Color(0xFF626D6F);
-
     return Container(
       margin: const EdgeInsets.only(top: 15.0),
       decoration: BoxDecoration(

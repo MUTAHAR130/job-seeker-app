@@ -17,6 +17,18 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Get.theme.scaffoldBackgroundColor,
+      appBar: AppBar(
+        title: Center(
+          child: SizedBox(
+            width: 195,
+            height: 36,
+            child: Image.asset(
+              'assets/images/app_logo.png',
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+        ),
+      ),
       body: Center(
         child: WhiteCurvedBox(
           margin: 24,
@@ -63,50 +75,18 @@ class LoginView extends StatelessWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 15),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text.rich(
-                  TextSpan(
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-                    children: <TextSpan>[
-                      const TextSpan(text: 'Email'),
-                      const TextSpan(
-                        text: '*',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
               InputField(
                 controller: authController.emailFieldTC,
+                label: 'Email',
+                mandatory: true,
                 hintText: 'Enter email',
               ),
-              SizedBox(height: 10),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text.rich(
-                  TextSpan(
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-                    children: <TextSpan>[
-                      const TextSpan(text: 'Password'),
-                      const TextSpan(
-                        text: '*',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              SizedBox(height: 15),
               Obx(
                 () => InputField(
                   controller: authController.passwordFieldTC,
+                  label: 'Password',
+                  mandatory: true,
                   hidden: authController.passHidden.value,
                   hiddenToggle: authController.togglePassHidden,
                   hintText: 'Enter password',
@@ -155,7 +135,10 @@ class LoginView extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 14),
-              ActionButton(buttonText: 'Login', onPress: authController.loginAction),
+              ActionButton(
+                buttonText: 'Login',
+                onPress: authController.loginAction,
+              ),
             ],
           ),
         ),

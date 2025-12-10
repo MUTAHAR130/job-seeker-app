@@ -86,7 +86,7 @@ class ResumeTemplateView extends StatelessWidget {
                 Get.toNamed(AppRoutes.generateResume);
               },
               child: ResumeTemplateWidget(
-                ontap: (){Get.toNamed(AppRoutes.generateResume);},
+                onTap: (){Get.toNamed(AppRoutes.generateResume);},
                 typeIcon: AppIcons.freeIcon,
                 resumeAsset: 'assets/docs/Resume1.pdf',
                 scoreIcon: AppIcons.p70Icon,

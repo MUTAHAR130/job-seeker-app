@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/date_selector_widget.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
+import 'package:job_seeker/core/common/widgets/multi_line_input_field.dart';
 import 'package:job_seeker/core/common/widgets/option_toggle_tile.dart';
 import 'package:job_seeker/core/common/widgets/resume_detail_tile.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
-import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/controller/resume_controller.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 
 class WorkExpTab extends StatelessWidget {
-  final HomeController homeController = Get.find<HomeController>();
+  final ResumeController resumeController = Get.find<ResumeController>();
 
   WorkExpTab({super.key});
 
@@ -52,51 +53,17 @@ class WorkExpTab extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text.rich(
-                          TextSpan(
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            children: <TextSpan>[
-                              const TextSpan(text: 'Title'),
-                              const TextSpan(
-                                text: '*',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 8),
                         InputField(
-                          controller: homeController.jobTitleTC,
+                          controller: resumeController.jobTitleTC,
+                          label: 'Title',
+                          mandatory: true,
                           hintText: 'Enter name',
                         ),
                         SizedBox(height: 15),
-                        Text.rich(
-                          TextSpan(
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            children: <TextSpan>[
-                              const TextSpan(text: 'Company'),
-                              const TextSpan(
-                                text: '*',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 8),
                         InputField(
-                          controller: homeController.nameFieldTC,
+                          controller: resumeController.nameFieldTC,
+                          label: 'Company',
+                          mandatory: true,
                           hintText: 'Enter name',
                         ),
                         SizedBox(height: 15),
@@ -122,8 +89,8 @@ class WorkExpTab extends StatelessWidget {
                         Obx(
                           () => DateSelectorField(
                             hintText: 'Select start date',
-                            currentDate: homeController.startDate.value,
-                            onDateSelected: homeController.setStartDate,
+                            currentDate: resumeController.startDate.value,
+                            onDateSelected: resumeController.setStartDate,
                           ),
                         ),
                         SizedBox(height: 15),
@@ -149,8 +116,8 @@ class WorkExpTab extends StatelessWidget {
                         Obx(
                           () => DateSelectorField(
                             hintText: 'Select end date',
-                            currentDate: homeController.endDate.value,
-                            onDateSelected: homeController.setEndDate,
+                            currentDate: resumeController.endDate.value,
+                            onDateSelected: resumeController.setEndDate,
                           ),
                         ),
                         SizedBox(height: 15),
@@ -159,43 +126,12 @@ class WorkExpTab extends StatelessWidget {
                           toggleFunction: (val) {},
                           tileText: 'Currently work here',
                         ),
-                        Text.rich(
-                          TextSpan(
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            children: <TextSpan>[
-                              const TextSpan(text: 'Description'),
-                              const TextSpan(
-                                text: '*',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        TextFormField(
-                          controller: homeController.workDescTC,
-                          maxLines: 7,
-                          textAlignVertical: TextAlignVertical.top,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 5,
-                              horizontal: 10,
-                            ),
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-                            border: const OutlineInputBorder(),
-                            label: Text(
+                        MultiLineInputField(
+                          controller: resumeController.workDescTC,
+                          label: 'Description',
+                          mandatory: true,
+                          hintText:
                               'Write a short summary about your work experience',
-                            ),
-                            labelStyle: TextStyle(
-                              color: Get.theme.colorScheme.tertiary,
-                            ),
-                          ),
                         ),
                       ],
                     ),

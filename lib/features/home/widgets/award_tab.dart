@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/date_selector_widget.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
-import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/controller/resume_controller.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 
+import '../../../core/common/widgets/multi_line_input_field.dart';
+
 class AwardTab extends StatelessWidget {
-  final HomeController homeController = Get.find<HomeController>();
+  final ResumeController resumeController = Get.find<ResumeController>();
 
   AwardTab({super.key});
 
@@ -50,29 +52,15 @@ class AwardTab extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Award Title',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        SizedBox(height: 8),
                         InputField(
-                          controller: homeController.awardNameTC,
+                          controller: resumeController.awardNameTC,
+                          label: 'Award Title',
                           hintText: 'Enter certificate name',
                         ),
                         SizedBox(height: 15),
-                        Text(
-                          'Organization',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        SizedBox(height: 8),
                         InputField(
-                          controller: homeController.awardOrganizationTC,
+                          controller: resumeController.awardOrganizationTC,
+                          label: 'Organization',
                           hintText: 'Enter awarding organization',
                         ),
                         SizedBox(height: 15),
@@ -87,37 +75,16 @@ class AwardTab extends StatelessWidget {
                         Obx(
                           () => DateSelectorField(
                             hintText: 'Select issue date',
-                            currentDate: homeController.startDate.value,
-                            onDateSelected: homeController.setStartDate,
+                            currentDate: resumeController.startDate.value,
+                            onDateSelected: resumeController.setStartDate,
                           ),
                         ),
                         SizedBox(height: 15),
-                        Text(
-                          'Description',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        TextFormField(
-                          controller: homeController.awardDescTC,
-                          maxLines: 7,
-                          textAlignVertical: TextAlignVertical.top,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 5,
-                              horizontal: 10,
-                            ),
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
-                            border: const OutlineInputBorder(),
-                            label: Text(
-                              'Add details about the award (optional)',
-                            ),
-                            labelStyle: TextStyle(
-                              color: Get.theme.colorScheme.tertiary,
-                            ),
-                          ),
+                        MultiLineInputField(
+                          controller: resumeController.awardDescTC,
+                          label: 'Description',
+                          hintText:
+                          'Add details about the award (optional)',
                         ),
                       ],
                     ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class ActionButton extends StatelessWidget {
@@ -6,8 +7,11 @@ class ActionButton extends StatelessWidget {
   final Function onPress;
   final bool? invertedColor;
   final bool? noBorder;
+  final bool? noColor;
   final double? bheight;
   final double? bwidth;
+  final String? prefixIcon;
+  final double? hPadding;
 
   const ActionButton({
     super.key,
@@ -17,6 +21,9 @@ class ActionButton extends StatelessWidget {
     this.noBorder,
     this.bheight,
     this.bwidth,
+    this.prefixIcon,
+    this.hPadding,
+    this.noColor,
   });
 
   @override
@@ -26,6 +33,9 @@ class ActionButton extends StatelessWidget {
         onPress();
       },
       style: ButtonStyle(
+        padding: WidgetStatePropertyAll(
+          EdgeInsets.symmetric(horizontal: hPadding ?? 8),
+        ),
         shadowColor: WidgetStatePropertyAll(Colors.transparent),
         shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
@@ -34,13 +44,15 @@ class ActionButton extends StatelessWidget {
               color: noBorder == true
                   ? Colors.transparent
                   : Get.theme.colorScheme.tertiary,
-              width: 2,
+              width: 1,
             ),
           ),
         ),
         backgroundColor: WidgetStatePropertyAll(
           invertedColor == true
               ? Get.theme.colorScheme.surface
+              : noColor == true
+              ? Colors.transparent
               : Get.theme.colorScheme.primary,
         ),
       ),
@@ -48,13 +60,22 @@ class ActionButton extends StatelessWidget {
         height: bheight ?? 48,
         width: bwidth ?? double.infinity,
         child: Center(
-          child: Text(
-            buttonText,
-            style: TextStyle(
-              color: invertedColor == true
-                  ? Get.theme.colorScheme.tertiary
-                  : Get.theme.colorScheme.onPrimary,
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              prefixIcon != null ? SvgPicture.string(prefixIcon!) : SizedBox(),
+              SizedBox(width: prefixIcon != null ? 5 : 0),
+              Text(
+                buttonText,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: invertedColor == true
+                      ? Get.theme.colorScheme.tertiary
+                      : Get.theme.colorScheme.onPrimary,
+                ),
+              ),
+            ],
           ),
         ),
       ),

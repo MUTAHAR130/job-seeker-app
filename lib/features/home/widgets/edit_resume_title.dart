@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:get/get.dart';
-import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/controller/resume_controller.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 
 class EditResumeTitle extends StatelessWidget {
-  final HomeController homeController = Get.find<HomeController>();
+  final ResumeController resumeController = Get.find<ResumeController>();
 
   EditResumeTitle({super.key});
 
@@ -37,24 +37,10 @@ class EditResumeTitle extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 15),
-              Text.rich(
-                TextSpan(
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-                  children: <TextSpan>[
-                    const TextSpan(text: 'Title'),
-                    const TextSpan(
-                      text: '*',
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 8),
               InputField(
-                controller: homeController.resumeTitleTC,
+                controller: resumeController.resumeTitleTC,
+                label: 'Title',
+                mandatory: true,
                 hintText: 'Enter name',
               ),
               SizedBox(height: 15),
@@ -75,11 +61,11 @@ class EditResumeTitle extends StatelessWidget {
                     bwidth: 50,
                     buttonText: 'Save',
                     onPress: () {
-                      homeController.resumeTitle.value = homeController
+                      resumeController.resumeTitle.value = resumeController
                           .resumeTitleTC
                           .text
                           .trim();
-                      homeController.resumeTitleTC.clear();
+                      resumeController.resumeTitleTC.clear();
                       Get.back();
                     },
                   ),

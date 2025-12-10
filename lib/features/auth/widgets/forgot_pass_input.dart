@@ -19,31 +19,10 @@ class ForgotPassInput extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 15),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text.rich(
-              TextSpan(
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Get.theme.colorScheme.tertiary,
-                  fontWeight: FontWeight.w400,
-                ),
-                children: <TextSpan>[
-                  const TextSpan(text: 'Email'),
-                  const TextSpan(
-                    text: '*',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
           InputField(
             controller: authController.emailFieldTC,
+            label: 'Email',
+            mandatory: true,
             hintText: 'Enter email',
           ),
           SizedBox(height: 15),

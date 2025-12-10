@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
-import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/controller/resume_controller.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 import 'package:job_seeker/core/common/widgets/resume_detail_tile.dart';
 import 'package:job_seeker/features/home/widgets/delete_item_dialog.dart';
 
 class SkillsTab extends StatelessWidget {
-  final HomeController homeController = Get.find<HomeController>();
+  final ResumeController resumeController = Get.find<ResumeController>();
 
   SkillsTab({super.key});
 
@@ -51,16 +51,9 @@ class SkillsTab extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Skill',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        SizedBox(height: 8),
                         InputField(
-                          controller: homeController.skillTC,
+                          controller: resumeController.skillTC,
+                          label: 'Skill',
                           hintText: 'Enter a skill',
                         ),
                       ],

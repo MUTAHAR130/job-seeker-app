@@ -19,54 +19,22 @@ class ResetPassConfirm extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 15),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text.rich(
-              TextSpan(
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-                children: <TextSpan>[
-                  const TextSpan(text: 'Password'),
-                  const TextSpan(
-                    text: '*',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
           Obx(
             () => InputField(
               controller: authController.passwordFieldTC,
+              label: 'Password',
+              mandatory: true,
               hidden: authController.passHidden.value,
               hiddenToggle: authController.togglePassHidden,
               hintText: 'Enter password',
             ),
           ),
           SizedBox(height: 15),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text.rich(
-              TextSpan(
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
-                children: <TextSpan>[
-                  const TextSpan(text: 'Confirm Password'),
-                  const TextSpan(
-                    text: '*',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
           Obx(
             () => InputField(
               controller: authController.confirmPassFieldTC,
+              label: 'Confirm Password',
+              mandatory: true,
               hidden: authController.confirmPassHidden.value,
               hiddenToggle: authController.toggleConfirmPassHidden,
               hintText: 'Enter confirm password',

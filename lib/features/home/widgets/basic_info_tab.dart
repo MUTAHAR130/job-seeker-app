@@ -3,12 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
-import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/controller/resume_controller.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 
 class BasicInfoTab extends StatelessWidget {
-  final HomeController homeController = Get.find<HomeController>();
+  final ResumeController resumeController = Get.find<ResumeController>();
 
   BasicInfoTab({super.key});
 
@@ -45,50 +45,17 @@ class BasicInfoTab extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
-                  Text.rich(
-                    TextSpan(
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      children: <TextSpan>[
-                        const TextSpan(text: 'Full Name'),
-                        const TextSpan(
-                          text: '*',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                   InputField(
-                    controller: homeController.nameFieldTC,
+                    controller: resumeController.nameFieldTC,
+                    label: 'Full Name',
+                    mandatory: true,
                     hintText: 'Enter name',
                   ),
                   SizedBox(height: 15),
-                  Text.rich(
-                    TextSpan(
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      children: <TextSpan>[
-                        const TextSpan(text: 'Contact Email'),
-                        const TextSpan(
-                          text: '*',
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 8),
                   InputField(
-                    controller: homeController.emailFieldTC,
+                    controller: resumeController.emailFieldTC,
+                    label: 'Contact Email',
+                    mandatory: true,
                     hintText: 'Enter email',
                   ),
                   SizedBox(height: 15),
@@ -109,8 +76,8 @@ class BasicInfoTab extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   InputField(
-                    controller: homeController.emailFieldTC,
-                    hintText: 'Enter email',
+                    controller: resumeController.emailFieldTC,
+                    hintText: 'Enter phone number',
                   ),
                 ],
               ),
