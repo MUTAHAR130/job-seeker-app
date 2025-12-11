@@ -7,7 +7,13 @@ import 'package:job_seeker/core/routes/app_routes.dart';
 import 'package:job_seeker/features/job_search/controller/jobs_controller.dart';
 import 'package:job_seeker/features/job_search/widgets/tabs/all_jobs_tab.dart';
 import 'package:job_seeker/features/job_search/widgets/tabs/applied_jobs_tab.dart';
+import 'package:job_seeker/features/job_search/widgets/tabs/hired_jobs_tab.dart';
+import 'package:job_seeker/features/job_search/widgets/tabs/interviewed_jobs.dart';
+import 'package:job_seeker/features/job_search/widgets/tabs/offered_jobs_tab.dart';
+import 'package:job_seeker/features/job_search/widgets/tabs/rejected_jobs_tab.dart';
+import 'package:job_seeker/features/job_search/widgets/tabs/reviewed_jobs_tab.dart';
 import 'package:job_seeker/features/job_search/widgets/tabs/saved_jobs_tab.dart';
+import 'package:job_seeker/features/job_search/widgets/tabs/shortlisted_jobs_tab.dart';
 
 class JobSearchView extends StatelessWidget {
   final JobController jobController = Get.put(JobController());
@@ -108,12 +114,12 @@ class JobSearchView extends StatelessWidget {
                         AllJobsTab(),
                         SavedJobsTab(),
                         AppliedJobsTab(),
-                        Center(child: Text('Reviewed')),
-                        Center(child: Text('Shortlisted')),
-                        Center(child: Text('interviewed')),
-                        Center(child: Text('Offered')),
-                        Center(child: Text('hired')),
-                        Center(child: Text('Rejected')),
+                        ReviewedJobsTab(),
+                        ShortlistedJobsTab(),
+                        InterviewedJobs(),
+                        OfferedJobsTab(),
+                        HiredJobsTab(),
+                        RejectedJobsTab(),
                       ],
                     ),
                   ),
