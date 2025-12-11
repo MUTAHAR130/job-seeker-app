@@ -1,80 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_seeker/features/dashboard/controller/cover_letter_controller.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
-import 'package:job_seeker/features/home/controller/resume_controller.dart';
-import 'package:job_seeker/features/home/widgets/create_cover_letter_message.dart';
-import 'package:job_seeker/features/home/widgets/create_resume_message.dart';
+import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
+import 'package:job_seeker/features/dashboard/view/dashboard_view.dart';
 import 'package:job_seeker/features/home/widgets/home_drawer.dart';
-import 'package:job_seeker/features/home/widgets/saved_resume_list.dart';
+import 'package:job_seeker/features/job_search/view/job_search_view.dart';
 
 class HomeView extends StatelessWidget {
   final ResumeController resumeController = Get.put(ResumeController());
   final HomeController homeController = Get.put(HomeController());
+  final CoverLetterController coverLetterController = Get.put(
+    CoverLetterController(),
+  );
 
   HomeView({super.key});
 
+  final List<Widget> pageList = [
+    DashboardView(),
+    JobSearchView(),
+    Center(child: Text('AI Interviews')),
+    Center(child: Text('Video Resumes')),
+    Center(child: Text('Messages')),
+    Center(child: Text('Saved Filters')),
+    Center(child: Text('job Settings')),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        drawer: HomeDrawer(),
-        appBar: AppBar(
-          // actions: [],
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 2, top: 5),
-              child: TabBar(
-                isScrollable: true,
-                indicatorSize: TabBarIndicatorSize.label,
-                unselectedLabelColor: Get.theme.hintColor,
-                dividerColor: Colors.transparent,
-                indicator: const UnderlineTabIndicator(
-                  borderSide: BorderSide(width: 3.0),
-                  insets: EdgeInsets.symmetric(horizontal: 8.0),
-                ),
-                labelPadding: const EdgeInsets.symmetric(horizontal: 8),
-                tabAlignment: TabAlignment.start,
-
-                tabs: const [
-                  Tab(text: "Resumes"),
-                  Tab(text: "Cover Letter"),
-                ],
-              ),
-            ),
-
-            Expanded(
-              child: TabBarView(
-                children: [
-                  Obx(() {
-                    if (homeController.shownResumeMenu.value == 'resumeList') {
-                      return SavedResumeList(
-                        itemCount: homeController.savedResumeData.length,
-                        savedResumeData: homeController.savedResumeData,
-                      );
-                    } else {
-                      return CreateResumeMessage();
-                    }
-                  }),
-                  Obx(() {
-                    if (homeController.shownLetterMenu.value == 'letterList') {
-                      return SavedResumeList(
-                        itemCount: homeController.savedCoverLetterData.length,
-                        savedResumeData: homeController.savedCoverLetterData,
-                      );
-                    } else {
-                      return CreateCoverLetterMessage();
-                    }
-                  }),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+    return Scaffold(
+      drawer: HomeDrawer(),
+      appBar: AppBar(),
+      body: Obx(() => pageList[homeController.selectedPageIndex.value]),
     );
   }
 }

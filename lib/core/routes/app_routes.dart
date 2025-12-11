@@ -2,18 +2,20 @@ import 'package:get/get.dart';
 import 'package:job_seeker/features/auth/bindings/login_binding.dart';
 import 'package:job_seeker/features/auth/view/login_view.dart';
 import 'package:job_seeker/features/auth/view/forgot_password_view.dart';
-import 'package:job_seeker/features/home/view/cover_letter_select_resume_view.dart';
-import 'package:job_seeker/features/home/view/generate_cover_letter_view.dart';
-import 'package:job_seeker/features/home/view/generate_resume_view.dart';
+import 'package:job_seeker/features/dashboard/view/cover_letter_select_resume_view.dart';
+import 'package:job_seeker/features/dashboard/view/dashboard_view.dart';
+import 'package:job_seeker/features/dashboard/view/generate_cover_letter_view.dart';
+import 'package:job_seeker/features/dashboard/view/generate_resume_view.dart';
 import 'package:job_seeker/features/home/view/home_view.dart';
-import 'package:job_seeker/features/home/view/resume_score_view.dart';
-import 'package:job_seeker/features/home/view/resume_template_view.dart';
-import 'package:job_seeker/features/job/view/job_search_view.dart';
+import 'package:job_seeker/features/dashboard/view/resume_score_view.dart';
+import 'package:job_seeker/features/dashboard/view/resume_template_view.dart';
+import 'package:job_seeker/features/job_search/view/job_search_view.dart';
 
 class AppRoutes {
   static const String login = '/login';
   static const String forgotPassword = '/forgotPassword';
   static const String home = '/home';
+  static const String dashBoard = '/dashBoard';
   static const String resumeTemplate = '/resumeTemplate';
   static const String generateResume = '/generateResume';
   static const String generateCoverLetter = '/generateCoverLetter';
@@ -31,6 +33,7 @@ class AppPages {
     ),
     GetPage(name: AppRoutes.forgotPassword, page: () => ForgotPasswordView()),
     GetPage(name: AppRoutes.home, page: () => HomeView()),
+    GetPage(name: AppRoutes.dashBoard, page: () => DashboardView()),
     GetPage(name: AppRoutes.resumeTemplate, page: () => ResumeTemplateView()),
     GetPage(name: AppRoutes.generateResume, page: () => GenerateResumeView()),
     GetPage(

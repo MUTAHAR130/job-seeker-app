@@ -5,6 +5,8 @@ import 'package:job_seeker/features/home/models/drawer_option_model.dart';
 import 'package:job_seeker/features/home/models/saved_resume_model.dart';
 
 class HomeController extends GetxController {
+  Rx<int> selectedPageIndex = 0.obs;
+
   List<DrawerOptionModel> drawerOptions = [
     DrawerOptionModel(
       title: 'Dashboard',
