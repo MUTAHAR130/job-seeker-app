@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:job_seeker/core/common/widgets/drop_down_menu.dart';
 import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
 import 'package:job_seeker/core/common/widgets/value_display_slider.dart';
 
@@ -14,42 +15,11 @@ class TextScaleTab extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Font',
-          style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
-        ),
-        SizedBox(height: 10),
-        Container(
-          height: 48,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.0),
-            color: Get.theme.colorScheme.surface,
-          ),
-          child: DropdownButtonFormField(
-            hint: Text('Select'),
-            style: TextStyle(
-              fontSize: 12,
-              color: Get.theme.colorScheme.tertiary,
-              fontWeight:
-                  FontWeight.w400, // Make the selected text slightly bolder
-            ),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.transparent),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.transparent),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.transparent),
-              ),
-              labelText: null,
-            ),
-            items: [],
-            onChanged: (val) {},
-          ),
+        LabeledDropDownMenu(
+          label: 'Font',
+          items: [],
+          onChange: () {},
+          hintText: 'Select',
         ),
         SizedBox(height: 10),
         Text(
@@ -61,6 +31,7 @@ class TextScaleTab extends StatelessWidget {
             min: 1,
             max: 20,
             roundOff: true,
+            valuePrefix: '',
             valueSuffix: 'px',
             currentSliderValue: resumeController.textScale.value,
             onChange: resumeController.changeTextScale,
@@ -71,9 +42,10 @@ class TextScaleTab extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
         ),
         Obx(
-              () => ValueDisplaySlider(
+          () => ValueDisplaySlider(
             min: 0.1,
             max: 0.4,
+            valuePrefix: '',
             valueSuffix: 'in',
             roundOff: false,
             currentSliderValue: resumeController.spaceSize.value,

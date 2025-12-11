@@ -1,10 +1,10 @@
 class SavedResumeModel {
   String resumeAsset;
-  String resumeTitle;
+  String title;
   bool? isDefault;
 
   SavedResumeModel({
-    required this.resumeTitle,
+    required this.title,
     required this.resumeAsset,
     this.isDefault,
   });

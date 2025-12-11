@@ -21,6 +21,7 @@ class JobListingDialog extends StatelessWidget {
         child: WhiteCurvedBox(
           margin: 24,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -57,15 +58,31 @@ class JobListingDialog extends StatelessWidget {
               SizedBox(height: 15),
               ActionButton(
                 buttonText: 'Filter',
-                invertedColor: true,
+                inverted: true,
                 prefixIcon: AppIcons.sliderBarsIcon,
                 onPress: () {},
               ),
               //jobs list view here
+              // SizedBox(height: 15),
+              // Transform.scale(
+              //   scale: 0.8,
+              //   child: JobTile(
+              //     jobCondition: AppIcons.expiringSoonIcon,
+              //     jobTitle: 'UI/UX Designer',
+              //     jobSalary: 'Competitive Package',
+              //     bookMarked: true,
+              //     companyLogo: AppIcons.googleIconSvg,
+              //     companyName: 'Google',
+              //     companyLocation: 'Los Angeles, California, US',
+              //     workHourType: AppIcons.fullTimeIcon,
+              //     workLocation: AppIcons.onSiteIcon,
+              //     datePosted: DateTime(2025, 9, 2),
+              //   ),
+              // ),
               SizedBox(height: 15),
               ActionButton(
                 buttonText: 'Generate Resume',
-                bwidth: 120,
+                width: 120,
                 onPress: () {},
               ),
             ],

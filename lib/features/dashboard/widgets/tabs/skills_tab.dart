@@ -65,7 +65,7 @@ class SkillsTab extends StatelessWidget {
                     child: ActionButton(
                       buttonText: 'Save Skill',
                       onPress: () {},
-                      bwidth: 90,
+                      width: 90,
                     ),
                   ),
                 ],

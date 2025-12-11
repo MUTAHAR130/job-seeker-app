@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:job_seeker/features/dashboard/widgets/edit_resume_title.dart';
+import 'package:job_seeker/features/dashboard/widgets/dialogs/edit_resume_dialog.dart';
 
 class CoverLetterController extends GetxController {
   TextEditingController resumeTitleTC = TextEditingController();
@@ -22,7 +22,7 @@ class CoverLetterController extends GetxController {
 
   changeTitle() {
     resumeTitleTC.text = coverTitle.value;
-    Get.dialog(EditTitle());
+    Get.dialog(EditTitleDialog());
   }
 
   changeLetterRadio(value) {

@@ -6,7 +6,7 @@ class OptionToggleTile extends StatelessWidget {
   final bool toggleValue;
   final bool? subTile;
   final bool? hasSubTiles;
-  final Function(bool value) toggleFunction;
+  final Function toggleFunction;
 
   const OptionToggleTile(
       {super.key,
@@ -34,6 +34,8 @@ class OptionToggleTile extends StatelessWidget {
           toggleFunction(value);
         },
         activeColor: Get.theme.colorScheme.secondary,
+        inactiveThumbColor: Get.theme.colorScheme.surface,
+        inactiveTrackColor: Get.theme.colorScheme.outline,
       ),
     );
   }

@@ -28,7 +28,7 @@ class SavedResumeList extends StatelessWidget {
             padding: const EdgeInsets.only(top: 15),
             child: SavedResumeWidget(
               resumeAsset: savedResumeData[index].resumeAsset,
-              resumeTitle: savedResumeData[index].resumeTitle,
+              resumeTitle: savedResumeData[index].title,
               isDefault: savedResumeData[index].isDefault,
               isRadio: isRadio,
               groupVal: groupVal,

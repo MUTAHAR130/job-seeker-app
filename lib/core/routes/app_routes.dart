@@ -9,7 +9,10 @@ import 'package:job_seeker/features/dashboard/view/generate_resume_view.dart';
 import 'package:job_seeker/features/home/view/home_view.dart';
 import 'package:job_seeker/features/dashboard/view/resume_score_view.dart';
 import 'package:job_seeker/features/dashboard/view/resume_template_view.dart';
+import 'package:job_seeker/features/job_search/view/job_detail_view.dart';
+import 'package:job_seeker/features/job_search/view/job_filter_view.dart';
 import 'package:job_seeker/features/job_search/view/job_search_view.dart';
+import 'package:job_seeker/features/saved_filters/view/saved_filter_view.dart';
 
 class AppRoutes {
   static const String login = '/login';
@@ -22,6 +25,9 @@ class AppRoutes {
   static const String coverLetterSelectResume = '/coverLetterSelectResume';
   static const String resumeScoreView = '/resumeScoreView';
   static const String jobSearchView = '/jobSearchView';
+  static const String jobFilterView = '/jobFilterView';
+  static const String jobDetailView = '/jobDetailView';
+  static const String savedFiltersView = '/savedFiltersView';
 }
 
 class AppPages {
@@ -46,5 +52,8 @@ class AppPages {
     ),
     GetPage(name: AppRoutes.resumeScoreView, page: () => ResumeScoreView()),
     GetPage(name: AppRoutes.jobSearchView, page: () => JobSearchView()),
+    GetPage(name: AppRoutes.jobFilterView, page: () => JobFilterView()),
+    GetPage(name: AppRoutes.jobDetailView, page: () => JobDetailView()),
+    GetPage(name: AppRoutes.savedFiltersView, page: () => SavedFiltersView()),
   ];
 }

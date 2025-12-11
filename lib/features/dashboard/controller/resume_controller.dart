@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/features/home/models/score_sub_category_model.dart';
-import 'package:job_seeker/features/dashboard/widgets/edit_resume_title.dart';
+import 'package:job_seeker/features/dashboard/widgets/dialogs/edit_resume_dialog.dart';
 
 class ResumeController extends GetxController {
   TextEditingController resumeTitleTC = TextEditingController();
@@ -97,6 +97,6 @@ class ResumeController extends GetxController {
 
   changeTitle() {
     resumeTitleTC.text = resumeTitle.value;
-    Get.dialog(EditTitle());
+    Get.dialog(EditTitleDialog());
   }
 }

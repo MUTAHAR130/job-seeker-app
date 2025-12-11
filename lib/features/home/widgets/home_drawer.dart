@@ -50,13 +50,7 @@ class HomeDrawer extends StatelessWidget {
                         icon: controller.drawerOptions[index].drawerIcon,
                         selected: controller.drawerOptions[index].selected,
                         onTap: () {
-                          for (var campaign in controller.drawerOptions) {
-                            campaign.selected = false;
-                          }
-                          controller.drawerOptions[index].selected = true;
-                          homeController.selectedPageIndex.value = index;
-                          controller.update(['homeDrawer']);
-                          Get.back();
+                          controller.changeDrawer(index);
                         },
                       );
                     },

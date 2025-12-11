@@ -23,6 +23,7 @@ class DashboardView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 2, top: 5),
               child: TabBar(
+                splashFactory: NoSplash.splashFactory,
                 isScrollable: true,
                 indicatorSize: TabBarIndicatorSize.label,
                 unselectedLabelColor: Get.theme.hintColor,

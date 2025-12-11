@@ -17,6 +17,7 @@ final ThemeData lightTheme = ThemeData(
     onSurface: Color(0xFF3B464A),
     // onSurface: Color(0xFFDEECF4),
   ),
+  dividerColor: Color(0xFFE8E0D3),
   hintColor: Color(0xFF626D6F),
   scaffoldBackgroundColor: Color(0xFFF6F3EE),
   appBarTheme: const AppBarTheme(

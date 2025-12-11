@@ -70,7 +70,7 @@ class VerifyEmailDialog extends StatelessWidget {
                   visible: authController.contactSupportVisible.value,
                   child: ActionButton(
                     buttonText: 'Contact Support',
-                    invertedColor: true,
+                    inverted: true,
                     onPress: () {
                       Get.toNamed(AppRoutes.home);
                     },

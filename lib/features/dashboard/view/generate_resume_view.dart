@@ -58,8 +58,8 @@ class GenerateResumeView extends StatelessWidget {
                   ActionButton(
                     buttonText: 'Download PDF',
                     onPress: () {},
-                    bheight: 32,
-                    bwidth: 100,
+                    height: 32,
+                    width: 100,
                   ),
                 ],
               ),

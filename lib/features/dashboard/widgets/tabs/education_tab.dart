@@ -143,7 +143,7 @@ class EducationTab extends StatelessWidget {
                     child: ActionButton(
                       buttonText: 'Save Education',
                       onPress: () {},
-                      bwidth: 100,
+                      width: 100,
                     ),
                   ),
                 ],

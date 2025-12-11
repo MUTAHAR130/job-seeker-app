@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/delete_item_dialog.dart';
-import 'package:job_seeker/features/dashboard/widgets/edit_resume_title.dart';
+import 'package:job_seeker/features/dashboard/widgets/dialogs/edit_resume_dialog.dart';
 import 'package:job_seeker/features/dashboard/widgets/dialogs/set_default_dialog.dart';
 
 enum MenuItemAction {
@@ -31,7 +31,7 @@ class ThreeDotPopupMenu extends StatelessWidget {
       case MenuItemAction.duplicate:
         break;
       case MenuItemAction.edit:
-        Get.dialog(EditTitle());
+        Get.dialog(EditTitleDialog());
         break;
       case MenuItemAction.delete:
         Get.dialog(DeleteItemDialog());

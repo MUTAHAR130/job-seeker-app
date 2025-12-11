@@ -5,7 +5,7 @@ import 'package:job_seeker/features/home/models/drawer_option_model.dart';
 import 'package:job_seeker/features/home/models/saved_resume_model.dart';
 
 class HomeController extends GetxController {
-  Rx<int> selectedPageIndex = 0.obs;
+  Rx<int> selectedPageIndex = 0.obs; //default val 0
 
   List<DrawerOptionModel> drawerOptions = [
     DrawerOptionModel(
@@ -42,7 +42,7 @@ class HomeController extends GetxController {
       title: 'Saved Filters',
       drawerIcon: AppIcons.savedFilterIcon,
       selected: false,
-      pageRoute: '',
+      pageRoute: AppRoutes.savedFiltersView,
     ),
     DrawerOptionModel(
       title: 'Job Settings',
@@ -54,24 +54,21 @@ class HomeController extends GetxController {
 
   List<SavedResumeModel> savedResumeData = [
     SavedResumeModel(
-      resumeTitle: 'Resume 1',
+      title: 'Resume 1',
       resumeAsset: 'assets/docs/Resume1.pdf',
       isDefault: true,
     ),
-    SavedResumeModel(
-      resumeTitle: 'Resume 2',
-      resumeAsset: 'assets/docs/Resume1.pdf',
-    ),
+    SavedResumeModel(title: 'Resume 2', resumeAsset: 'assets/docs/Resume1.pdf'),
   ];
 
   List<SavedResumeModel> savedCoverLetterData = [
     SavedResumeModel(
-      resumeTitle: 'Cover Letter 1',
+      title: 'Cover Letter 1',
       resumeAsset: 'assets/docs/Resume1.pdf',
       isDefault: true,
     ),
     SavedResumeModel(
-      resumeTitle: 'Cover Letter 2',
+      title: 'Cover Letter 2',
       resumeAsset: 'assets/docs/Resume1.pdf',
     ),
   ];
@@ -81,5 +78,15 @@ class HomeController extends GetxController {
 
   changeMenu(String value) {
     shownResumeMenu.value = value;
+  }
+
+  changeDrawer(index) {
+    for (var campaign in drawerOptions) {
+      campaign.selected = false;
+    }
+    drawerOptions[index].selected = true;
+    selectedPageIndex.value = index;
+    update(['homeDrawer']);
+    Get.back();
   }
 }

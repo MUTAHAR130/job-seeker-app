@@ -5,32 +5,36 @@ import 'package:get/get.dart';
 class ActionButton extends StatelessWidget {
   final String buttonText;
   final Function onPress;
-  final bool? invertedColor;
+  final bool? inverted;
   final bool? noBorder;
   final bool? noColor;
-  final double? bheight;
-  final double? bwidth;
+  final double? height;
+  final double? width;
   final String? prefixIcon;
   final double? hPadding;
+  final Color? bgColor;
+  final bool? disabled;
 
   const ActionButton({
     super.key,
     required this.buttonText,
     required this.onPress,
-    this.invertedColor,
+    this.inverted,
     this.noBorder,
-    this.bheight,
-    this.bwidth,
+    this.height,
+    this.width,
     this.prefixIcon,
     this.hPadding,
     this.noColor,
+    this.bgColor,
+    this.disabled,
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        onPress();
+        disabled == true ? null : onPress();
       },
       style: ButtonStyle(
         padding: WidgetStatePropertyAll(
@@ -49,16 +53,19 @@ class ActionButton extends StatelessWidget {
           ),
         ),
         backgroundColor: WidgetStatePropertyAll(
-          invertedColor == true
-              ? Get.theme.colorScheme.surface
-              : noColor == true
-              ? Colors.transparent
-              : Get.theme.colorScheme.primary,
+          bgColor ??
+              (disabled == true
+                  ? Get.theme.colorScheme.outline
+                  : noColor == true
+                  ? Colors.transparent
+                  : inverted == true
+                  ? Get.theme.colorScheme.surface
+                  : Get.theme.colorScheme.primary),
         ),
       ),
       child: SizedBox(
-        height: bheight ?? 48,
-        width: bwidth ?? double.infinity,
+        height: height ?? 48,
+        width: width ?? double.infinity,
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -70,7 +77,7 @@ class ActionButton extends StatelessWidget {
                 buttonText,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  color: invertedColor == true
+                  color: inverted == true
                       ? Get.theme.colorScheme.tertiary
                       : Get.theme.colorScheme.onPrimary,
                 ),

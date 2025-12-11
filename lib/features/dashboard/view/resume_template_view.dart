@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
+import 'package:job_seeker/core/common/widgets/drop_down_menu.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
 import 'package:job_seeker/features/dashboard/widgets/resume_template_widget.dart';
 
@@ -40,53 +41,25 @@ class ResumeTemplateView extends StatelessWidget {
             SizedBox(height: 5),
             Align(
               alignment: Alignment.centerRight,
-              child: Container(
-                width: 128,
+              child: LabeledDropDownMenu(
+                items: templateOptions,
+                onChange: () {},
+                defaultValue: 'All Templates',
+                hintText: '',
                 height: 32,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6.0),
-                  color: Get.theme.colorScheme.surface,
-                ),
-                child: DropdownButtonFormField(
-                  value: 'All Templates',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Get.theme.colorScheme.tertiary,
-                    fontWeight: FontWeight
-                        .w400, // Make the selected text slightly bolder
-                  ),
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent),
-                    ),
-                    labelText: null,
-                  ),
-                  items: templateOptions.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (val) {},
-                ),
+                width: 128,
               ),
             ),
             SizedBox(height: 5),
             //will be in list view builder
             InkWell(
-              onTap: (){
+              onTap: () {
                 Get.toNamed(AppRoutes.generateResume);
               },
               child: ResumeTemplateWidget(
-                onTap: (){Get.toNamed(AppRoutes.generateResume);},
+                onTap: () {
+                  Get.toNamed(AppRoutes.generateResume);
+                },
                 typeIcon: AppIcons.freeIcon,
                 resumeAsset: 'assets/docs/Resume1.pdf',
                 scoreIcon: AppIcons.p70Icon,

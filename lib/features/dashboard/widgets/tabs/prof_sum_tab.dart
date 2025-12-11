@@ -40,7 +40,7 @@ class ProfSumTab extends StatelessWidget {
               child: ActionButton(
                 buttonText: 'Save Professional Summary',
                 onPress: () {},
-                bwidth: 190,
+                width: 190,
               ),
             ),
           ],

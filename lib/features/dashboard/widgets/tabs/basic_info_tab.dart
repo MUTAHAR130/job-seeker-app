@@ -40,7 +40,7 @@ class BasicInfoTab extends StatelessWidget {
                           radius: 30,
                           backgroundImage: AssetImage('assets/images/temp.jpg'),
                         ),
-                        Positioned(top: 0, right: 0,child: SvgPicture.string(AppIcons.editBoxIcon)),
+                        Positioned(top: 0, right: 0,child: SvgPicture.string(AppIcons.editBoxRoundIcon)),
                       ],
                     ),
                   ),
@@ -88,7 +88,7 @@ class BasicInfoTab extends StatelessWidget {
               child: ActionButton(
                 buttonText: 'Save Basic Information',
                 onPress: () {},
-                bwidth: 150,
+                width: 150,
               ),
             ),
           ],

@@ -26,7 +26,7 @@ class CoverLetterSelectResumeView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: ActionButton(
         buttonText: 'Generate',
-        bwidth: MediaQuery.sizeOf(context).width * 0.85,
+        width: MediaQuery.sizeOf(context).width * 0.85,
         onPress: () {
           Get.toNamed(AppRoutes.generateCoverLetter);
         },

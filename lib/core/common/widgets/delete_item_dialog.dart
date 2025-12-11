@@ -42,9 +42,9 @@ class DeleteItemDialog extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ActionButton(
-                    bwidth: 50,
+                    width: 50,
                     buttonText: 'Cancel',
-                    invertedColor: true,
+                    inverted: true,
                     noBorder: true,
                     onPress: () {
                       Get.back();
@@ -52,7 +52,7 @@ class DeleteItemDialog extends StatelessWidget {
                   ),
                   SizedBox(width: 10),
                   ActionButton(
-                    bwidth: 50,
+                    width: 50,
                     buttonText: 'Delete',
                     onPress: () {
                       Get.back();

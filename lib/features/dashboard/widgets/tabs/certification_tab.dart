@@ -93,7 +93,7 @@ class CertificationTab extends StatelessWidget {
                     child: ActionButton(
                       buttonText: 'Save Certificate',
                       onPress: () {},
-                      bwidth: 110,
+                      width: 110,
                     ),
                   ),
                 ],

@@ -5,10 +5,10 @@ import 'package:get/get.dart';
 import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 
-class EditTitle extends StatelessWidget {
+class EditTitleDialog extends StatelessWidget {
   final ResumeController resumeController = Get.find<ResumeController>();
 
-  EditTitle({super.key});
+  EditTitleDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +48,9 @@ class EditTitle extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ActionButton(
-                    bwidth: 50,
+                    width: 50,
                     buttonText: 'Cancel',
-                    invertedColor: true,
+                    inverted: true,
                     noBorder: true,
                     onPress: () {
                       Get.back();
@@ -58,7 +58,7 @@ class EditTitle extends StatelessWidget {
                   ),
                   SizedBox(width: 10),
                   ActionButton(
-                    bwidth: 50,
+                    width: 50,
                     buttonText: 'Save',
                     onPress: () {
                       resumeController.resumeTitle.value = resumeController

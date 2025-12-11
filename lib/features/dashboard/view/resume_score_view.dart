@@ -136,8 +136,8 @@ class ResumeScoreView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ActionButton(
-                    bwidth: 150,
-                    invertedColor: true,
+                    width: 150,
+                    inverted: true,
                     hPadding: 0,
                     buttonText: 'Regenerate with AI',
                     onPress: () {},
@@ -152,7 +152,7 @@ class ResumeScoreView extends StatelessWidget {
                       ),
                     ),
                     child: ActionButton(
-                      bwidth: 150,
+                      width: 150,
                       hPadding: 0,
                       noColor: true,
                       noBorder: true,

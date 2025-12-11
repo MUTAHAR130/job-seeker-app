@@ -32,7 +32,7 @@ class CreateResumeMessage extends StatelessWidget {
               SizedBox(height: 15),
               ActionButton(
                 buttonText: 'Upload Resume',
-                invertedColor: true,
+                inverted: true,
                 onPress: () {
                   //debug
                   homeController.shownResumeMenu.value = 'resumeList';

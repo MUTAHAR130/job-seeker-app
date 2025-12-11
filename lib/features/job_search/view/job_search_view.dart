@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:job_seeker/features/job_search/widgets/all_jobs_tab.dart';
+import 'package:job_seeker/core/common/icons/app_icons.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
+import 'package:job_seeker/core/common/widgets/input_field.dart';
+import 'package:job_seeker/core/routes/app_routes.dart';
+import 'package:job_seeker/features/job_search/controller/jobs_controller.dart';
+import 'package:job_seeker/features/job_search/widgets/tabs/all_jobs_tab.dart';
+import 'package:job_seeker/features/job_search/widgets/tabs/applied_jobs_tab.dart';
+import 'package:job_seeker/features/job_search/widgets/tabs/saved_jobs_tab.dart';
 
 class JobSearchView extends StatelessWidget {
-  const JobSearchView({super.key});
+  final JobController jobController = Get.put(JobController());
+  JobSearchView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +19,9 @@ class JobSearchView extends StatelessWidget {
     child: Scaffold(
       body: Column(children: [
         Padding(
-          padding: const EdgeInsets.only(left: 2, top: 5),
+          padding: const EdgeInsets.only(left: 2, top: 5, right: 2),
           child: TabBar(
+            splashFactory: NoSplash.splashFactory,
             isScrollable: true,
             indicatorSize: TabBarIndicatorSize.label,
             unselectedLabelColor: Get.theme.hintColor,
@@ -65,20 +74,50 @@ class JobSearchView extends StatelessWidget {
             ],
           ),
         ),
+
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: TabBarView(
+            child: Column(
               children: [
-                AllJobsTab(),
-                Center(child: Text('Saved')),
-                Center(child: Text('Applied')),
-                Center(child: Text('Reviewed')),
-                Center(child: Text('Shortlisted')),
-                Center(child: Text('interviewed')),
-                Center(child: Text('Offered')),
-                Center(child: Text('hired')),
-                Center(child: Text('Rejected')),
+                SizedBox(height: 15),
+                InputField(
+                  controller: jobController.jobListingSearchTC,
+                  prefixIcon: Icons.search,
+                  hintText: 'Search Job Title',
+                ),
+                SizedBox(height: 15),
+                InputField(
+                  controller: jobController.jobListingLocationTC,
+                  prefixIcon: Icons.location_on_outlined,
+                  hintText: 'Search Location',
+                ),
+                SizedBox(height: 15),
+                ActionButton(
+                  buttonText: 'Filter',
+                  inverted: true,
+                  prefixIcon: AppIcons.sliderBarsIcon,
+                  onPress: () {Get.toNamed(AppRoutes.jobFilterView);},
+                ),
+                SizedBox(height: 15),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: TabBarView(
+                      children: [
+                        AllJobsTab(),
+                        SavedJobsTab(),
+                        AppliedJobsTab(),
+                        Center(child: Text('Reviewed')),
+                        Center(child: Text('Shortlisted')),
+                        Center(child: Text('interviewed')),
+                        Center(child: Text('Offered')),
+                        Center(child: Text('hired')),
+                        Center(child: Text('Rejected')),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

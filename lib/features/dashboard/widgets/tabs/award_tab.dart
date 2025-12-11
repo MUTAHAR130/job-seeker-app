@@ -95,7 +95,7 @@ class AwardTab extends StatelessWidget {
                     child: ActionButton(
                       buttonText: 'Save Award',
                       onPress: () {},
-                      bwidth: 90,
+                      width: 90,
                     ),
                   ),
                 ],

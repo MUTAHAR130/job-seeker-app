@@ -142,7 +142,7 @@ class WorkExpTab extends StatelessWidget {
                     child: ActionButton(
                       buttonText: 'Save Work Experience',
                       onPress: () {},
-                      bwidth: 160,
+                      width: 160,
                     ),
                   ),
                 ],
