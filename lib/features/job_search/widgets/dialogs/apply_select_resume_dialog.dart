@@ -67,11 +67,9 @@ class ApplySelectResumeDialog extends StatelessWidget {
                               return RadioTileSecondary(
                                 title:
                                     homeController.savedResumeData[index].title,
-                                isDefault:
-                                    homeController
-                                        .savedResumeData[index]
-                                        .isDefault ??
-                                    false,
+                                isDefault: homeController
+                                    .savedResumeData[index]
+                                    .isDefault,
                                 radioVal: index,
                                 groupVal: 1,
                                 onTap: () {},

@@ -69,11 +69,9 @@ class ApplySelectLetterDialog extends StatelessWidget {
                                 title: homeController
                                     .savedCoverLetterData[index]
                                     .title,
-                                isDefault:
-                                    homeController
-                                        .savedCoverLetterData[index]
-                                        .isDefault ??
-                                    false,
+                                isDefault: homeController
+                                    .savedCoverLetterData[index]
+                                    .isDefault,
                                 radioVal: index,
                                 groupVal: 0,
                                 onTap: () {},

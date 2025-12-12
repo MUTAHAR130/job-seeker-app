@@ -6,7 +6,9 @@ import 'package:get/get.dart';
 import 'package:job_seeker/features/job_search/widgets/dialogs/offer_detail_dialog.dart';
 
 class InterviewDetailDialog extends StatelessWidget {
-  const InterviewDetailDialog({super.key});
+  final bool? requestAccept;
+
+  const InterviewDetailDialog({super.key, this.requestAccept});
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,67 @@ class InterviewDetailDialog extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(height: requestAccept != null ? 15 : 0),
+                  requestAccept != null
+                      ? (requestAccept == true
+                            ? Container(
+                                padding: EdgeInsets.all(8),
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color:
+                                      Get.theme.listTileTheme.selectedTileColor,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  border: BoxBorder.all(
+                                    color: Get.theme.colorScheme.tertiary,
+                                  ),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.info_outline),
+                                    SizedBox(width: 5),
+                                    Expanded(
+                                      child: Text(
+                                        'Rescheduling request has been sent to recruiter. Wait for recruiter’s response.',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            : Container(
+                                padding: EdgeInsets.all(8),
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Colors.red.shade50,
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
+                                  border: BoxBorder.all(color: Colors.red),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(Icons.close),
+                                    SizedBox(width: 5),
+                                    Expanded(
+                                      child: Text(
+                                        'Rescheduling request has been rejected by recruiter.',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ))
+                      : SizedBox(),
                   SizedBox(height: 15),
                   Container(
                     padding: EdgeInsets.all(10),
@@ -134,14 +197,14 @@ class InterviewDetailDialog extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 15),
-                  ActionButton(
+                  requestAccept == null ? ActionButton(
                     inverted: true,
                     buttonText: 'Reschedule Request',
                     onPress: () {
                       Get.back();
                       Get.dialog(OfferDetailDialog());
                     },
-                  ),
+                  ) : SizedBox(),
                 ],
               ),
             ),

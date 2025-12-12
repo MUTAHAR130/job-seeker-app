@@ -14,3 +14,9 @@ void main() {
     ),
   );
 }
+
+
+//TODO: fix drop down menu style
+//TODO: fix video thumbnails
+//TODO: fix snack bar alignment
+//TODO: finish recording video part

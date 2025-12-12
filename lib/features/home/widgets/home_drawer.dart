@@ -48,6 +48,8 @@ class HomeDrawer extends StatelessWidget {
                       return DrawerTile(
                         title: controller.drawerOptions[index].title,
                         icon: controller.drawerOptions[index].drawerIcon,
+                        filledIcon:
+                            controller.drawerOptions[index].filledDrawerIcon,
                         selected: controller.drawerOptions[index].selected,
                         onTap: () {
                           controller.changeDrawer(index);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ValueDisplaySlider extends StatelessWidget {
+class CustomValueDisplaySlider extends StatelessWidget {
   final double min;
   final double max;
   final bool? showMin;
@@ -10,7 +11,7 @@ class ValueDisplaySlider extends StatelessWidget {
   final Function onChange;
   final bool roundOff;
 
-  const ValueDisplaySlider({
+  const CustomValueDisplaySlider({
     super.key,
     this.showMin,
     required this.min,
@@ -35,8 +36,9 @@ class ValueDisplaySlider extends StatelessWidget {
                 height: 36,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Get.theme.colorScheme.surface,
                   borderRadius: BorderRadius.circular(8.0),
+                  border: BoxBorder.all(color: Get.theme.colorScheme.outline),
                 ),
                 child: Text(
                   '$valuePrefix${roundOff ? min.round() : min}$valueSuffix',
@@ -81,8 +83,9 @@ class ValueDisplaySlider extends StatelessWidget {
           height: 36,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Get.theme.colorScheme.surface,
             borderRadius: BorderRadius.circular(8.0),
+            border: BoxBorder.all(color: Get.theme.colorScheme.outline),
           ),
           child: Text(
             '$valuePrefix${roundOff ? currentSliderValue.round() : currentSliderValue.toStringAsFixed(2)}$valueSuffix',

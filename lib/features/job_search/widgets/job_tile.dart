@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/common/widgets/drop_down_menu.dart';
@@ -20,6 +21,7 @@ class JobTile extends StatelessWidget {
   final bool? isDeletable;
   final bool? statusKnown;
   final String? defaultValue;
+  final bool? noIcon;
 
   JobTile({
     super.key,
@@ -38,6 +40,7 @@ class JobTile extends StatelessWidget {
     this.isDeletable,
     this.statusKnown,
     this.defaultValue,
+    this.noIcon,
   });
 
   final List<String> jobStatusOptions = [
@@ -62,7 +65,13 @@ class JobTile extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Radio(value: 1, groupValue: 1, onChanged: (val) {}),
+            Radio(
+              value: 1,
+              groupValue: 1,
+              onChanged: (val) {},
+              visualDensity: VisualDensity.compact,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,11 +99,23 @@ class JobTile extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        jobTitle,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                      Expanded(
+                        child: Text(
+                          jobTitle,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: false,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 1,
+                        height: 16,
+                        margin: EdgeInsets.symmetric(horizontal: 6),
+                        decoration: BoxDecoration(
+                            border: BoxBorder.all(color: Get.theme.colorScheme.outline)
                         ),
                       ),
                       Row(
@@ -107,20 +128,25 @@ class JobTile extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          InkWell(
-                            onTap: () {
-                              onIconTap();
-                            },
-                            child: statusKnown == true
-                                ? SizedBox()
-                                : (isDeletable == true
-                                      ? SvgPicture.string(AppIcons.deleteIcon)
-                                      : (bookMarked
-                                            ? Icon(Icons.bookmark)
-                                            : Icon(
-                                                Icons.bookmark_border_outlined,
-                                              ))),
-                          ),
+                          noIcon == true
+                              ? SizedBox()
+                              : InkWell(
+                                  onTap: () {
+                                    onIconTap();
+                                  },
+                                  child: statusKnown == true
+                                      ? SizedBox()
+                                      : (isDeletable == true
+                                            ? SvgPicture.string(
+                                                AppIcons.deleteIcon,
+                                              )
+                                            : (bookMarked
+                                                  ? Icon(Icons.bookmark)
+                                                  : Icon(
+                                                      Icons
+                                                          .bookmark_border_outlined,
+                                                    ))),
+                                ),
                         ],
                       ),
                     ],
@@ -129,11 +155,15 @@ class JobTile extends StatelessWidget {
                   Row(
                     children: [
                       SvgPicture.string(companyLogo),
-                      Text(
-                        '$companyName - $companyLocation',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
+                      Expanded(
+                        child: Text(
+                          '$companyName - $companyLocation',
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: false,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                     ],

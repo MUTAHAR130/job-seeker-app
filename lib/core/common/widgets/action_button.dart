@@ -72,16 +72,24 @@ class ActionButton extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               prefixIcon != null ? SvgPicture.string(prefixIcon!) : SizedBox(),
-              SizedBox(width: prefixIcon != null ? 5 : 0),
-              Text(
-                buttonText,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  color: inverted == true
-                      ? Get.theme.colorScheme.tertiary
-                      : Get.theme.colorScheme.onPrimary,
-                ),
+              SizedBox(
+                width: buttonText == ''
+                    ? 0
+                    : prefixIcon != null
+                    ? 5
+                    : 0,
               ),
+              buttonText != ''
+                  ? Text(
+                      buttonText,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: inverted == true
+                            ? Get.theme.colorScheme.tertiary
+                            : Get.theme.colorScheme.onPrimary,
+                      ),
+                    )
+                  : SizedBox(),
             ],
           ),
         ),

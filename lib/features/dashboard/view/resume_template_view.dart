@@ -52,19 +52,27 @@ class ResumeTemplateView extends StatelessWidget {
             ),
             SizedBox(height: 5),
             //will be in list view builder
-            InkWell(
-              onTap: () {
-                Get.toNamed(AppRoutes.generateResume);
-              },
-              child: ResumeTemplateWidget(
-                onTap: () {
-                  Get.toNamed(AppRoutes.generateResume);
+            Expanded(
+              child: ListView.builder(
+                // shrinkWrap: true,
+                itemCount: 2,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.generateResume);
+                    },
+                    child: ResumeTemplateWidget(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.generateResume);
+                      },
+                      typeIcon: AppIcons.freeIcon,
+                      resumeAsset: 'assets/docs/Resume1.pdf',
+                      score: 70,
+                      typeProperties: '70% + Basic ATS Ready',
+                      typeTile: 'Modern Professional',
+                    ),
+                  );
                 },
-                typeIcon: AppIcons.freeIcon,
-                resumeAsset: 'assets/docs/Resume1.pdf',
-                scoreIcon: AppIcons.p70Icon,
-                typeProperties: '70% + Basic ATS Ready',
-                typeTile: 'Modern Professional',
               ),
             ),
           ],

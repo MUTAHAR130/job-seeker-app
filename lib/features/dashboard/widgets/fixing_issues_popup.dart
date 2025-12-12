@@ -14,7 +14,7 @@ class FixingIssuesPopup extends StatelessWidget {
           height: 212,
           width: 224,
           child: WhiteCurvedBox(
-            bColor: Get.theme.scaffoldBackgroundColor,
+            color: Get.theme.scaffoldBackgroundColor,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

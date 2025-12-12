@@ -3,9 +3,15 @@ import 'package:get/get.dart';
 
 class BubbleListWidget extends StatelessWidget {
   final String text;
+  final bool? noOnTap;
   final Function onTap;
 
-  const BubbleListWidget({super.key, required this.text, required this.onTap});
+  const BubbleListWidget({
+    super.key,
+    required this.text,
+    required this.onTap,
+    this.noOnTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +33,8 @@ class BubbleListWidget extends StatelessWidget {
               text,
               style: TextStyle(fontWeight: FontWeight.w400, fontSize: 12),
             ),
-            SizedBox(width: 5),
-            Icon(Icons.close, size: 12,),
+            SizedBox(width: noOnTap == true ? 0 : 5),
+            noOnTap == true ? SizedBox() : Icon(Icons.close, size: 12),
           ],
         ),
       ),

@@ -6,6 +6,7 @@ class LabeledDropDownMenu extends StatelessWidget {
   final double? fontSize;
   final double? height;
   final double? width;
+  final bool? mandatory;
   final List<String> items;
   final Function onChange;
   final String hintText;
@@ -21,6 +22,7 @@ class LabeledDropDownMenu extends StatelessWidget {
     required this.onChange,
     required this.hintText,
     this.defaultValue,
+    this.mandatory,
   });
 
   @override
@@ -30,11 +32,19 @@ class LabeledDropDownMenu extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         label != null
-            ? Text(
-                label!,
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: fontSize ?? 14,
+            ? Text.rich(
+                TextSpan(
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                  children: <TextSpan>[
+                    TextSpan(text: label!),
+                    TextSpan(
+                      text: mandatory == true ? '*' : '',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               )
             : SizedBox(),

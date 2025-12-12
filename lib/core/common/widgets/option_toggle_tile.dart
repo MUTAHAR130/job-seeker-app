@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 class OptionToggleTile extends StatelessWidget {
   final String tileText;
   final bool toggleValue;
-  final bool? subTile;
-  final bool? hasSubTiles;
+  final String? subTitle;
+  // final bool? hasSubTiles;
   final Function toggleFunction;
 
   const OptionToggleTile(
@@ -13,13 +13,13 @@ class OptionToggleTile extends StatelessWidget {
         required this.toggleValue,
         required this.toggleFunction,
         required this.tileText,
-        this.subTile,
-        this.hasSubTiles});
+        this.subTitle,});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.all(0),
+      horizontalTitleGap: 5,
       dense: true,
       title: Text(
         tileText,
@@ -28,6 +28,13 @@ class OptionToggleTile extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
       ),
+      subtitle: subTitle != null ? Text(
+        subTitle!,
+        style: const TextStyle(
+          fontSize: 12.0,
+          fontWeight: FontWeight.w400,
+        ),
+      ) : null,
       trailing: Switch(
         value: toggleValue,
         onChanged: (value) {

@@ -159,7 +159,7 @@ class JobFilterView extends StatelessWidget {
               ),
               SizedBox(height: 8),
               Obx(
-                () => ValueDisplaySlider(
+                () => CustomValueDisplaySlider(
                   min: 0,
                   max: 100,
                   valuePrefix: '\$',

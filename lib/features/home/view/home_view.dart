@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
+import 'package:job_seeker/features/ai_interviews/view/ai_interviews_view.dart';
 import 'package:job_seeker/features/dashboard/controller/cover_letter_controller.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
 import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
 import 'package:job_seeker/features/dashboard/view/dashboard_view.dart';
 import 'package:job_seeker/features/home/widgets/home_drawer.dart';
 import 'package:job_seeker/features/job_search/view/job_search_view.dart';
+import 'package:job_seeker/features/job_settings/controller/job_settings_controller.dart';
+import 'package:job_seeker/features/job_settings/view/job_settings_view.dart';
+import 'package:job_seeker/features/messages/controller/message_controller.dart';
+import 'package:job_seeker/features/messages/view/message_view.dart';
 import 'package:job_seeker/features/saved_filters/controller/saved_filters_controller.dart';
 import 'package:job_seeker/features/saved_filters/view/saved_filter_view.dart';
+import 'package:job_seeker/features/video_resumes/controller/video_resumes_controller.dart';
+import 'package:job_seeker/features/video_resumes/view/video_resumes_view.dart';
 
 class HomeView extends StatelessWidget {
   final ResumeController resumeController = Get.put(ResumeController());
@@ -19,17 +26,24 @@ class HomeView extends StatelessWidget {
   final CoverLetterController coverLetterController = Get.put(
     CoverLetterController(),
   );
+  final MessageController messageController = Get.put(MessageController());
+  final JobSettingsController jobSettingsController = Get.put(
+    JobSettingsController(),
+  );
+  final VideoResumesController videoResumesController = Get.put(
+    VideoResumesController(),
+  );
 
   HomeView({super.key});
 
   final List<Widget> pageList = [
     DashboardView(),
     JobSearchView(),
-    Center(child: Text('AI Interviews')),
-    Center(child: Text('Video Resumes')),
-    Center(child: Text('Messages')),
+    AIInterviewsView(),
+    VideoResumesView(),
+    MessageView(),
     SavedFiltersView(),
-    Center(child: Text('job Settings')),
+    JobSettingsView(),
   ];
 
   @override
@@ -49,6 +63,7 @@ class HomeView extends StatelessWidget {
             radius: 20,
             backgroundImage: AssetImage('assets/images/temp.jpg'),
           ),
+          SizedBox(width: 10),
         ],
       ),
       body: Obx(() => pageList[homeController.selectedPageIndex.value]),

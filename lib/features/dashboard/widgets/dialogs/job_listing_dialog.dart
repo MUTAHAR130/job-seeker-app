@@ -7,6 +7,7 @@ import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/features/dashboard/widgets/dialogs/tailored_resume_options.dart';
+import 'package:job_seeker/features/job_search/widgets/job_tile.dart';
 
 class JobListingDialog extends StatelessWidget {
   final ResumeController resumeController = Get.find<ResumeController>();
@@ -63,22 +64,22 @@ class JobListingDialog extends StatelessWidget {
                 onPress: () {},
               ),
               //jobs list view here
-              // SizedBox(height: 15),
-              // Transform.scale(
-              //   scale: 0.8,
-              //   child: JobTile(
-              //     jobCondition: AppIcons.expiringSoonIcon,
-              //     jobTitle: 'UI/UX Designer',
-              //     jobSalary: 'Competitive Package',
-              //     bookMarked: true,
-              //     companyLogo: AppIcons.googleIconSvg,
-              //     companyName: 'Google',
-              //     companyLocation: 'Los Angeles, California, US',
-              //     workHourType: AppIcons.fullTimeIcon,
-              //     workLocation: AppIcons.onSiteIcon,
-              //     datePosted: DateTime(2025, 9, 2),
-              //   ),
-              // ),
+              SizedBox(height: 15),
+              JobTile(
+                jobCondition: AppIcons.expiringSoonIcon,
+                jobTitle: 'UI/UX Designer',
+                jobSalary: 'Competitive Package',
+                bookMarked: true,
+                companyLogo: AppIcons.googleIconSvg,
+                companyName: 'Google',
+                companyLocation: 'Los Angeles, California, US',
+                workHourType: AppIcons.fullTimeIcon,
+                workLocation: AppIcons.onSiteIcon,
+                datePosted: DateTime(2025, 9, 2),
+                noIcon: true,
+                onTileTap: (){},
+                onIconTap: (){},
+              ),
               SizedBox(height: 15),
               ActionButton(
                 buttonText: 'Generate Resume',

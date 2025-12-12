@@ -27,7 +27,7 @@ class TextScaleTab extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
         ),
         Obx(
-          () => ValueDisplaySlider(
+          () => CustomValueDisplaySlider(
             min: 1,
             max: 20,
             roundOff: true,
@@ -42,7 +42,7 @@ class TextScaleTab extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
         ),
         Obx(
-          () => ValueDisplaySlider(
+          () => CustomValueDisplaySlider(
             min: 0.1,
             max: 0.4,
             valuePrefix: '',

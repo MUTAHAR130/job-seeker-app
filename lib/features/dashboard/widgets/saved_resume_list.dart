@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_seeker/features/home/models/saved_resume_model.dart';
+import 'package:job_seeker/features/dashboard/models/saved_resume_model.dart';
 import 'package:job_seeker/features/dashboard/widgets/saved_resume_widget.dart';
 
 class SavedResumeList extends StatelessWidget {
