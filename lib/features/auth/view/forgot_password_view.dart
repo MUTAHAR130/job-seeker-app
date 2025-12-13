@@ -33,17 +33,19 @@ class ForgotPasswordView extends StatelessWidget {
             ),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Obx(() {
-            if (authController.verifyStatus.value == 'pending'){
-              return ResetRequestPending();
-            } else if (authController.verifyStatus.value == 'confirm'){
-              return ResetPassConfirm();
-            } else {
-              return ForgotPassInput();
-            }
-          }),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Obx(() {
+              if (authController.verifyStatus.value == 'pending'){
+                return ResetRequestPending();
+              } else if (authController.verifyStatus.value == 'confirm'){
+                return ResetPassConfirm();
+              } else {
+                return ForgotPassInput();
+              }
+            }),
+          ),
         ),
       ),
     );
