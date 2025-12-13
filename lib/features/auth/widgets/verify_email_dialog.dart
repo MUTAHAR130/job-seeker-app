@@ -72,7 +72,7 @@ class VerifyEmailDialog extends StatelessWidget {
                     buttonText: 'Contact Support',
                     inverted: true,
                     onPress: () {
-                      Get.toNamed(AppRoutes.home);
+                      Get.offAllNamed(AppRoutes.home);
                     },
                   ),
                 ),

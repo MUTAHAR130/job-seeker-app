@@ -36,7 +36,6 @@ class CreateResumeMessage extends StatelessWidget {
                 onPress: () {
                   //debug
                   homeController.shownResumeMenu.value = 'resumeList';
-                  Get.back();
                 },
               ),
             ],

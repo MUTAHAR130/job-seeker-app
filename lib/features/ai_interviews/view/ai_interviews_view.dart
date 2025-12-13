@@ -43,14 +43,14 @@ class AIInterviewsView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 LabeledDropDownMenu(
-                  width: MediaQuery.sizeOf(context).width * 0.42,
+                  width: MediaQuery.sizeOf(context).width * 0.36,
                   items: [],
                   onChange: () {},
                   hintText: 'Exp. Level',
                 ),
                 SizedBox(width: 5),
                 LabeledDropDownMenu(
-                  width: MediaQuery.sizeOf(context).width * 0.42,
+                  width: MediaQuery.sizeOf(context).width * 0.36,
                   items: [],
                   onChange: () {},
                   hintText: 'All Status',
