@@ -45,10 +45,26 @@ dependencies:
   video_thumbnail: ^0.5.6
   path_provider: ^2.1.5
   dropdown_button2: ^2.3.9
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_launcher_icons:
+  # (Required) Path to your high-res master icon image
+  image_path: "assets/images/app_icon.png"
+
+  # (Required) Platforms to generate icons for
+  android: true
+  ios: true
+
+  # Optional: For Android, if you want adaptive icons (recommended)
+  # You need a separate background image for adaptive icons.
+  adaptive_icon_background: "#FFFFFF" # Color or path to a background image
+
+  # Optional: For iOS, you may need to specify if you want to keep the old icon setup
+  # ios_app_icon_setup: false
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

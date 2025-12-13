@@ -15,7 +15,6 @@ void main() {
   );
 }
 
-
 //TODO: fix snack bar alignment
 //TODO: test out video player
 //TODO: finish recording video part
