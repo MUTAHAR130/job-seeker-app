@@ -9,12 +9,13 @@ import 'package:job_seeker/features/dashboard/controller/cover_letter_controller
 import 'package:get/get.dart';
 
 class JobDetailsDialog extends StatelessWidget {
+  final String buttonLabel;
   final Widget onBack;
   final Function action;
   final CoverLetterController coverLetterController =
       Get.find<CoverLetterController>();
 
-  JobDetailsDialog({super.key, required this.onBack, required this.action});
+  JobDetailsDialog({super.key, required this.onBack, required this.action, required this.buttonLabel});
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +80,7 @@ class JobDetailsDialog extends StatelessWidget {
               ),
               SizedBox(height: 15),
               ActionButton(
-                buttonText: 'Generate Resume',
+                buttonText: buttonLabel,
                 onPress: () {
                   action();
                 },

@@ -12,7 +12,7 @@ class SavedVideoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: videoResumesController.savedVideoData.length,
+      itemCount: 1, //fix later
       itemBuilder: (context, index) {
         return SavedVideoWidget(
           asset: videoResumesController.savedVideoData[index].resumeAsset,

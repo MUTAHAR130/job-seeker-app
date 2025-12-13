@@ -43,7 +43,7 @@ class VideoPlayerView extends StatelessWidget {
                     // The VideoPlayer automatically shows the static first frame.
                     // This overlay simply provides the play icon and darkens the view.
                     child: Container(
-                      color: Colors.black.withOpacity(0.1),
+                      // color: Colors.black.withOpacity(0.1),
                       alignment: Alignment.center,
                       child: const Icon(
                         Icons.play_circle_fill,

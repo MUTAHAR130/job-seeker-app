@@ -61,6 +61,7 @@ class GenerateCoverLetterOptions extends StatelessWidget {
                     Get.back();
                     Get.dialog(
                       JobDetailsDialog(
+                        buttonLabel: 'Generate Resume',
                         onBack: GenerateCoverLetterOptions(),
                         action: () {
                           Get.toNamed(AppRoutes.coverLetterSelectResume);

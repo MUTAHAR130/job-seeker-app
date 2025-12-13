@@ -38,7 +38,7 @@ class ActionButton extends StatelessWidget {
       },
       style: ButtonStyle(
         padding: WidgetStatePropertyAll(
-          EdgeInsets.symmetric(horizontal: hPadding ?? 8),
+          EdgeInsets.symmetric(horizontal: hPadding ?? 8, vertical: 0),
         ),
         shadowColor: WidgetStatePropertyAll(Colors.transparent),
         shape: WidgetStatePropertyAll(

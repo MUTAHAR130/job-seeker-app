@@ -8,11 +8,14 @@ import 'package:job_seeker/core/common/widgets/input_field.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/features/video_resumes/controller/upload_video_controller.dart';
+import 'package:job_seeker/features/video_resumes/controller/video_resumes_controller.dart';
 
 class UploadVideoView extends StatelessWidget {
   final UploadVideoController uploadVideoController = Get.put(
     UploadVideoController(),
   );
+  final VideoResumesController videoResumesController =
+      Get.find<VideoResumesController>();
 
   UploadVideoView({super.key});
 
@@ -126,6 +129,8 @@ class UploadVideoView extends StatelessWidget {
                         buttonText: 'Upload Video',
                         onPress: () {
                           Get.back();
+                          videoResumesController.shownVideoResumeMenu.value =
+                              '';
                           CustomSnackBar.showSnackBar('Video Uploaded');
                         },
                       ),

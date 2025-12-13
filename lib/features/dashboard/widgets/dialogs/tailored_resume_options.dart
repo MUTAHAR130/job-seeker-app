@@ -61,7 +61,13 @@ class TailoredResumeOptions extends StatelessWidget {
                     Get.dialog(JobListingDialog());
                   } else {
                     Get.back();
-                    Get.dialog(JobDetailsDialog(onBack: TailoredResumeOptions(),action: (){},));
+                    Get.dialog(
+                      JobDetailsDialog(
+                        buttonLabel: 'Generate Resume',
+                        onBack: TailoredResumeOptions(),
+                        action: () {},
+                      ),
+                    );
                   }
                 },
               ),

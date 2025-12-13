@@ -6,13 +6,15 @@ class WhiteCurvedBox extends StatelessWidget {
   final double? radius;
   final double? margin;
   final Color? color;
+  final Color? borderColor;
 
   const WhiteCurvedBox({
     super.key,
     required this.child,
     this.radius,
     this.margin,
-    this.color
+    this.color,
+    this.borderColor,
   });
 
   @override
@@ -23,6 +25,7 @@ class WhiteCurvedBox extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(radius ?? 12)),
         color: color ?? Get.theme.colorScheme.surface,
+        border: BoxBorder.all(color: borderColor ?? Colors.transparent),
       ),
       child: child,
     );

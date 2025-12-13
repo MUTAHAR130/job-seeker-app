@@ -42,7 +42,9 @@ class RadioTile extends StatelessWidget {
               child: Radio(
                 value: radioVal,
                 groupValue: groupVal,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  changeVal(value);
+                },
               ),
             ),
             const SizedBox(width: 8.0),

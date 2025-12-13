@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:job_seeker/features/ai_interviews/view/ai_interviews_view.dart';
+import 'package:job_seeker/features/ai_interviews/view/mock_interview_complete_view.dart';
+import 'package:job_seeker/features/ai_interviews/view/mock_interview_view.dart';
 import 'package:job_seeker/features/auth/bindings/login_binding.dart';
 import 'package:job_seeker/features/auth/view/login_view.dart';
 import 'package:job_seeker/features/auth/view/forgot_password_view.dart';
@@ -10,6 +12,7 @@ import 'package:job_seeker/features/dashboard/view/generate_resume_view.dart';
 import 'package:job_seeker/features/home/view/home_view.dart';
 import 'package:job_seeker/features/dashboard/view/resume_score_view.dart';
 import 'package:job_seeker/features/dashboard/view/resume_template_view.dart';
+import 'package:job_seeker/features/home/view/profile_view.dart';
 import 'package:job_seeker/features/job_search/view/job_detail_view.dart';
 import 'package:job_seeker/features/job_search/view/job_filter_view.dart';
 import 'package:job_seeker/features/job_search/view/job_search_view.dart';
@@ -30,6 +33,7 @@ class AppRoutes {
 
   //home
   static const String home = '/home';
+  static const String profileView = '/profileView';
 
   //dashboard
   static const String dashBoard = '/dashBoard';
@@ -63,6 +67,8 @@ class AppRoutes {
 
   //ai interviews
   static const String aiInterviewView = '/aiInterviewView';
+  static const String mocInterviewView = '/mockInterviewView';
+  static const String mockInterviewCompleteView = '/mockInterviewCompleteVIew';
 }
 
 class AppPages {
@@ -76,6 +82,7 @@ class AppPages {
     GetPage(name: AppRoutes.forgotPassword, page: () => ForgotPasswordView()),
     //home
     GetPage(name: AppRoutes.home, page: () => HomeView()),
+    GetPage(name: AppRoutes.profileView, page: () => ProfileView()),
     //dashboard
     GetPage(name: AppRoutes.dashBoard, page: () => DashboardView()),
     GetPage(name: AppRoutes.resumeTemplate, page: () => ResumeTemplateView()),
@@ -114,5 +121,10 @@ class AppPages {
     ),
     //ai interviews
     GetPage(name: AppRoutes.aiInterviewView, page: () => AIInterviewsView()),
+    GetPage(name: AppRoutes.mocInterviewView, page: () => MockInterviewView()),
+    GetPage(
+      name: AppRoutes.mockInterviewCompleteView,
+      page: () => MockInterviewCompleteView(),
+    ),
   ];
 }

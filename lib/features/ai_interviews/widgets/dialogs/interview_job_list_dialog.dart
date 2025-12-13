@@ -5,15 +5,16 @@ import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
-import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
+import 'package:job_seeker/features/ai_interviews/controller/ai_interview_controller.dart';
+import 'package:job_seeker/features/ai_interviews/widgets/dialogs/interview_context_dialog.dart';
 import 'package:get/get.dart';
-import 'package:job_seeker/features/dashboard/widgets/dialogs/tailored_resume_options.dart';
 import 'package:job_seeker/features/job_search/widgets/job_tile.dart';
 
-class JobListingDialog extends StatelessWidget {
-  final ResumeController resumeController = Get.find<ResumeController>();
+class InterviewJobListDialog extends StatelessWidget {
+  final AIInterviewController aiInterviewController =
+      Get.find<AIInterviewController>();
 
-  JobListingDialog({super.key});
+  InterviewJobListDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class JobListingDialog extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       Get.back();
-                      Get.dialog(TailoredResumeOptions());
+                      Get.dialog(InterviewContextDialog());
                     },
                     icon: SvgPicture.string(AppIcons.backIcon),
                   ),
@@ -45,15 +46,20 @@ class JobListingDialog extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 8),
+              Text(
+                'Choose a job you\'ve applied to',
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
+              ),
               SizedBox(height: 15),
               InputField(
-                controller: resumeController.jobSearchTC,
+                controller: aiInterviewController.jobSearchTC,
                 prefixIcon: Icons.search,
                 hintText: 'Search Job Title',
               ),
               SizedBox(height: 15),
               InputField(
-                controller: resumeController.jobLocationTC,
+                controller: aiInterviewController.jobLocationTC,
                 prefixIcon: Icons.location_on_outlined,
                 hintText: 'Search Location',
               ),
@@ -80,15 +86,14 @@ class JobListingDialog extends StatelessWidget {
                 workLocation: AppIcons.onSiteIcon,
                 datePosted: DateTime(2025, 9, 2),
                 noIcon: true,
-                onTileTap: (){},
-                onIconTap: (){},
+                onTileTap: () {},
+                onIconTap: () {},
               ),
               SizedBox(height: 15),
-              ActionButton(
-                buttonText: 'Generate Resume',
-                width: 120,
-                onPress: () {},
-              ),
+              ActionButton(buttonText: 'Start Mock Interview', onPress: () {
+                Get.back();
+                Get.toNamed(AppRoutes.mocInterviewView);
+              }),
             ],
           ),
         ),

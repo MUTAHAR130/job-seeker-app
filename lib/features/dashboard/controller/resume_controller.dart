@@ -38,8 +38,8 @@ class ResumeController extends GetxController {
   TextEditingController skillTC = TextEditingController();
 
   //job listing dialog fields
-  TextEditingController jobListingSearchTC = TextEditingController();
-  TextEditingController jobListingLocationTC = TextEditingController();
+  TextEditingController jobSearchTC = TextEditingController();
+  TextEditingController jobLocationTC = TextEditingController();
   List<ScoreSubCategoryModel> structureFormatingCats = [
     ScoreSubCategoryModel(
       subTitle: 'ATS may not detect Work Experience, Education, or Skills.',

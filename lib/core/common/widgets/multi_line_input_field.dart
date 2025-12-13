@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 class MultiLineInputField extends StatelessWidget {
   final TextEditingController controller;
+  final bool? expandable;
   final String? label;
   final bool? mandatory;
   final String? hintText;
@@ -17,6 +18,7 @@ class MultiLineInputField extends StatelessWidget {
     this.label,
     this.mandatory,
     this.hintText,
+    this.expandable,
   });
 
   @override
@@ -48,7 +50,8 @@ class MultiLineInputField extends StatelessWidget {
         SizedBox(height: label != null ? 8 : 0),
         TextFormField(
           controller: controller,
-          maxLines: 7,
+          minLines: expandable == true ? 7 : null,
+          maxLines: expandable == true ? null : 7,
           decoration: InputDecoration(
             fillColor: Get.theme.colorScheme.surface,
             filled: true,

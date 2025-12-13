@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
+import 'package:job_seeker/core/routes/app_routes.dart';
+import 'package:job_seeker/features/ai_interviews/controller/ai_interview_controller.dart';
 import 'package:job_seeker/features/ai_interviews/view/ai_interviews_view.dart';
 import 'package:job_seeker/features/dashboard/controller/cover_letter_controller.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
@@ -33,6 +37,9 @@ class HomeView extends StatelessWidget {
   final VideoResumesController videoResumesController = Get.put(
     VideoResumesController(),
   );
+  final AIInterviewController aiInterviewController = Get.put(
+    AIInterviewController(),
+  );
 
   HomeView({super.key});
 
@@ -52,16 +59,23 @@ class HomeView extends StatelessWidget {
       drawer: HomeDrawer(),
       appBar: AppBar(
         actions: [
+          SvgPicture.string(AppIcons.freePlanIcon, height: 28,),
+          SizedBox(width: 10),
           ActionButton(
-            width: 70,
+            width: 68,
             height: 32,
             buttonText: 'Upgrade',
             onPress: () {},
           ),
           SizedBox(width: 10),
-          CircleAvatar(
-            radius: 20,
-            backgroundImage: AssetImage('assets/images/temp.jpg'),
+          InkWell(
+            onTap: (){
+              Get.toNamed(AppRoutes.profileView);
+            },
+            child: CircleAvatar(
+              radius: 20,
+              backgroundImage: AssetImage('assets/images/temp.jpg'),
+            ),
           ),
           SizedBox(width: 10),
         ],
