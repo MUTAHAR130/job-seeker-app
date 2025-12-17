@@ -138,7 +138,7 @@ class ApplyPreviewDialog extends StatelessWidget {
                         buttonText: 'Continue',
                         onPress: () {
                           Get.back();
-                          CustomSnackBar.showSnackBar('Applied to job successfully');
+                          CustomSnackBar.showSuccessSnackBar('Applied to job successfully');
                         },
                       ),
                     ],

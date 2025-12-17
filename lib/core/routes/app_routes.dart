@@ -13,6 +13,7 @@ import 'package:job_seeker/features/home/view/home_view.dart';
 import 'package:job_seeker/features/dashboard/view/resume_score_view.dart';
 import 'package:job_seeker/features/dashboard/view/resume_template_view.dart';
 import 'package:job_seeker/features/home/view/profile_view.dart';
+import 'package:job_seeker/features/home/widgets/splash_screen.dart';
 import 'package:job_seeker/features/job_search/view/job_detail_view.dart';
 import 'package:job_seeker/features/job_search/view/job_filter_view.dart';
 import 'package:job_seeker/features/job_search/view/job_search_view.dart';
@@ -27,6 +28,7 @@ import 'package:job_seeker/features/video_resumes/view/upload_video_view.dart';
 import 'package:job_seeker/features/video_resumes/view/video_resumes_view.dart';
 
 class AppRoutes {
+  static const String splashScreen = '/splashScreen';
   //auth
   static const String login = '/login';
   static const String forgotPassword = '/forgotPassword';
@@ -73,6 +75,7 @@ class AppRoutes {
 
 class AppPages {
   static final List<GetPage> pages = [
+    GetPage(name: AppRoutes.splashScreen, page: () => SplashScreen()),
     //auth
     GetPage(
       name: AppRoutes.login,

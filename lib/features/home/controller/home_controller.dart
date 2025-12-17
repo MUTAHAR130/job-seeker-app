@@ -1,11 +1,32 @@
 import 'package:get/get.dart';
+import 'package:job_seeker/core/common/constant/app_constants.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
+import 'package:job_seeker/core/services/shared_data.dart';
+import 'package:job_seeker/features/home/data/services/home_api_services.dart';
 import 'package:job_seeker/features/home/models/drawer_option_model.dart';
 import 'package:job_seeker/features/dashboard/models/saved_resume_model.dart';
+import 'package:job_seeker/features/home/models/user_model.dart';
 
 class HomeController extends GetxController {
-  Rx<int> selectedPageIndex = 0.obs; //default val 0
+  @override
+  void onReady() {
+    super.onReady();
+    initialize();
+  }
+
+  initialize() async {
+    if(await SharedData.containKey(AppConstants.tokenKey)) {
+      var response = await HomeApiServices.getUser();
+      currentUser = UserModel.fromJson(response['user']);
+      Get.offNamed(AppRoutes.home);
+    } else {
+      Get.offNamed(AppRoutes.login);
+    }
+  }
+
+  Rx<int> selectedPageIndex = 0.obs;
+  UserModel? currentUser;
 
   List<DrawerOptionModel> drawerOptions = [
     DrawerOptionModel(
@@ -101,5 +122,10 @@ class HomeController extends GetxController {
     update(['homeDrawer']);
     await Future.delayed(Duration(milliseconds: 500));
     Get.back();
+  }
+
+  logOut() async {
+    await SharedData.removeKey(AppConstants.tokenKey);
+    Get.offAllNamed(AppRoutes.login);
   }
 }

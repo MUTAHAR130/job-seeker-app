@@ -33,7 +33,7 @@ class JobDetailView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Filters',
+                    'Job Detail',
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                   ),
                   Row(

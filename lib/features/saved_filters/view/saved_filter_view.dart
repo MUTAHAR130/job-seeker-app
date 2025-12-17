@@ -38,7 +38,7 @@ class SavedFiltersView extends StatelessWidget {
                     InkWell(
                       onTap: () async {
                         await Get.toNamed(AppRoutes.jobFilterView);
-                        CustomSnackBar.showSnackBar('Filter Updated');
+                        CustomSnackBar.showSuccessSnackBar('Filter Updated');
                       },
                       child: SvgPicture.string(AppIcons.editBoxIcon),
                     ),

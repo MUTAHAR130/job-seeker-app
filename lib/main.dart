@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/colors/theme_data.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
+import 'package:job_seeker/core/services/shared_data.dart';
+import 'package:job_seeker/features/home/controller/home_controller.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedData.initPrefs();
+  Get.put(HomeController());
   runApp(
     GetMaterialApp(
       title: "Job Seeker",
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       getPages: AppPages.pages,
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.splashScreen,
     ),
   );
 }
 
-//TODO: fix snack bar alignment
 //TODO: test out video player
-//TODO: finish recording video part
+//TODO: test out recording video

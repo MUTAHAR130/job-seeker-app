@@ -22,8 +22,8 @@ import 'package:job_seeker/features/video_resumes/controller/video_resumes_contr
 import 'package:job_seeker/features/video_resumes/view/video_resumes_view.dart';
 
 class HomeView extends StatelessWidget {
+  final HomeController homeController = Get.find<HomeController>();
   final ResumeController resumeController = Get.put(ResumeController());
-  final HomeController homeController = Get.put(HomeController());
   final SavedFiltersController savedFiltersController = Get.put(
     SavedFiltersController(),
   );

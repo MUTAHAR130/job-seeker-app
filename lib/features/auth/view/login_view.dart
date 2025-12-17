@@ -83,6 +83,7 @@ class LoginView extends StatelessWidget {
                     label: 'Email',
                     mandatory: true,
                     hintText: 'Enter email',
+                    focusNode: authController.emailFocusNode,
                   ),
                   SizedBox(height: 15),
                   Obx(
@@ -93,6 +94,7 @@ class LoginView extends StatelessWidget {
                       hidden: authController.passHidden.value,
                       hiddenToggle: authController.togglePassHidden,
                       hintText: 'Enter password',
+                      focusNode: authController.passFocusNode,
                     ),
                   ),
                   SizedBox(height: 10),
@@ -125,6 +127,8 @@ class LoginView extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
+                          authController.emailFocusNode.unfocus();
+                          authController.passFocusNode.unfocus();
                           Get.toNamed(AppRoutes.forgotPassword);
                         },
                         child: Text(

@@ -21,7 +21,7 @@ class ResetPassConfirm extends StatelessWidget {
           SizedBox(height: 15),
           Obx(
             () => InputField(
-              controller: authController.passwordFieldTC,
+              controller: authController.currentPassFieldTC,
               label: 'Password',
               mandatory: true,
               hidden: authController.passHidden.value,
@@ -32,7 +32,7 @@ class ResetPassConfirm extends StatelessWidget {
           SizedBox(height: 15),
           Obx(
             () => InputField(
-              controller: authController.confirmPassFieldTC,
+              controller: authController.newPassFieldTC,
               label: 'Confirm Password',
               mandatory: true,
               hidden: authController.confirmPassHidden.value,

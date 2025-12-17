@@ -3,9 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/common/widgets/bubble_list_widget.dart';
+import 'package:job_seeker/features/home/controller/home_controller.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+  final HomeController homeController = Get.find<HomeController>();
+
+  ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +18,12 @@ class ProfileView extends StatelessWidget {
           'My Profile',
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
+        actions: [
+          InkWell(onTap: () {
+            homeController.logOut();
+          }, child: SvgPicture.string(AppIcons.logoutIcon)),
+          SizedBox(width: 10),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -28,11 +37,11 @@ class ProfileView extends StatelessWidget {
                 backgroundImage: AssetImage('assets/images/temp.jpg'),
               ),
               title: Text(
-                'Dave Smith',
+                '${homeController.currentUser?.firstName} ${homeController.currentUser?.lastName}',
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
               ),
               subtitle: Text(
-                'davesmith@gmail.com',
+                homeController.currentUser!.email,
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
               ),
             ),
@@ -43,7 +52,7 @@ class ProfileView extends StatelessWidget {
                 width: 48,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(25)),
-                  color: Get.theme.colorScheme.surface
+                  color: Get.theme.colorScheme.surface,
                 ),
                 child: Center(child: SvgPicture.string(AppIcons.bagIcon)),
               ),
@@ -56,7 +65,7 @@ class ProfileView extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
               ),
             ),
-            BubbleListWidget(text: 'MARKETING', onTap: (){}, noOnTap: true,)
+            BubbleListWidget(text: 'MARKETING', onTap: () {}, noOnTap: true),
           ],
         ),
       ),

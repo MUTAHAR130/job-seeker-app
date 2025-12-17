@@ -131,7 +131,7 @@ class UploadVideoView extends StatelessWidget {
                           Get.back();
                           videoResumesController.shownVideoResumeMenu.value =
                               '';
-                          CustomSnackBar.showSnackBar('Video Uploaded');
+                          CustomSnackBar.showSuccessSnackBar('Video Uploaded');
                         },
                       ),
                     ],

@@ -13,6 +13,7 @@ class InputField extends StatelessWidget {
   final IconData? suffixIcon;
   final String? svgPrefixIcon;
   final Function? hiddenToggle;
+  final FocusNode? focusNode;
   static final customBorder = OutlineInputBorder(
     borderSide: BorderSide(color: Get.theme.colorScheme.outline),
     borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -29,6 +30,7 @@ class InputField extends StatelessWidget {
     this.hiddenToggle,
     this.hintText,
     this.svgPrefixIcon,
+    this.focusNode,
   });
 
   @override
@@ -62,6 +64,8 @@ class InputField extends StatelessWidget {
           height: 48,
           child: TextFormField(
             obscureText: hidden ?? false,
+            // showCursor: !(hidden ?? false),
+            focusNode: focusNode ?? null,
             controller: controller,
             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 12),
             decoration: InputDecoration(

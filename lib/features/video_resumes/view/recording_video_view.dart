@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:job_seeker/features/video_resumes/controller/record_video_controller.dart';
+import 'package:job_seeker/features/video_resumes/widgets/camera_screen.dart';
 
 class RecordingVideoView extends StatelessWidget {
   final RecordVideoController recordVideoController =
@@ -54,7 +55,8 @@ class RecordingVideoView extends StatelessWidget {
               WhiteCurvedBox(
                 child: SizedBox(
                   height: 400,
-                  child: Center(child: Text('Live Recording Here \n Working on')),
+                  child: CameraScreen(),
+                  // child: Center(child: Text('Live Recording Here \n Working on')),
                 ),
               ),
               SizedBox(height: 15),
