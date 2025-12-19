@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_card.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
-import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
+import 'package:job_seeker/features/dashboard/controller/new_resume_controller.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/features/dashboard/widgets/dialogs/generate_resume_options.dart';
 import 'package:job_seeker/features/dashboard/widgets/dialogs/job_details_dialog.dart';
@@ -10,7 +10,7 @@ import 'package:job_seeker/features/dashboard/widgets/dialogs/job_listing_dialog
 import 'package:job_seeker/core/common/widgets/radio_tile.dart';
 
 class TailoredResumeOptions extends StatelessWidget {
-  final ResumeController resumeController = Get.find<ResumeController>();
+  final NewResumeController resumeController = Get.find<NewResumeController>();
 
   TailoredResumeOptions({super.key});
 

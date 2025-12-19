@@ -5,6 +5,7 @@ import 'package:job_seeker/features/ai_interviews/view/mock_interview_view.dart'
 import 'package:job_seeker/features/auth/bindings/login_binding.dart';
 import 'package:job_seeker/features/auth/view/login_view.dart';
 import 'package:job_seeker/features/auth/view/forgot_password_view.dart';
+import 'package:job_seeker/features/auth/view/sign_in_view.dart';
 import 'package:job_seeker/features/dashboard/view/cover_letter_select_resume_view.dart';
 import 'package:job_seeker/features/dashboard/view/dashboard_view.dart';
 import 'package:job_seeker/features/dashboard/view/generate_cover_letter_view.dart';
@@ -29,9 +30,11 @@ import 'package:job_seeker/features/video_resumes/view/video_resumes_view.dart';
 
 class AppRoutes {
   static const String splashScreen = '/splashScreen';
+
   //auth
-  static const String login = '/login';
-  static const String forgotPassword = '/forgotPassword';
+  static const String loginView = '/loginView';
+  static const String signInView = '/signInView';
+  static const String forgotPasswordView = '/forgotPasswordView';
 
   //home
   static const String home = '/home';
@@ -77,12 +80,12 @@ class AppPages {
   static final List<GetPage> pages = [
     GetPage(name: AppRoutes.splashScreen, page: () => SplashScreen()),
     //auth
+    GetPage(name: AppRoutes.loginView, page: () => LoginView()),
+    GetPage(name: AppRoutes.signInView, page: () => SignInView()),
     GetPage(
-      name: AppRoutes.login,
-      page: () => LoginView(),
-      binding: LoginBinding(),
+      name: AppRoutes.forgotPasswordView,
+      page: () => ForgotPasswordView(),
     ),
-    GetPage(name: AppRoutes.forgotPassword, page: () => ForgotPasswordView()),
     //home
     GetPage(name: AppRoutes.home, page: () => HomeView()),
     GetPage(name: AppRoutes.profileView, page: () => ProfileView()),

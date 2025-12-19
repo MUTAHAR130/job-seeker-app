@@ -2,13 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:get/get.dart';
-import 'package:job_seeker/features/dashboard/controller/new_resume_controller.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 
-class EditTitleDialog extends StatelessWidget {
-  final NewResumeController resumeController = Get.find<NewResumeController>();
+class EditItemTitleDialog extends StatelessWidget {
+  final int index;
+  final String currentTitle;
+  final Function onConfirm;
+  final TextEditingController editTC = TextEditingController();
 
-  EditTitleDialog({super.key});
+  EditItemTitleDialog({
+    super.key,
+    required this.index,
+    required this.currentTitle,
+    required this.onConfirm,
+  }) {
+    editTC.text = currentTitle;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +47,7 @@ class EditTitleDialog extends StatelessWidget {
               ),
               SizedBox(height: 15),
               InputField(
-                controller: resumeController.resumeTitleTC,
+                controller: editTC,
                 label: 'Title',
                 mandatory: true,
                 hintText: 'Enter name',
@@ -61,11 +70,7 @@ class EditTitleDialog extends StatelessWidget {
                     width: 50,
                     buttonText: 'Save',
                     onPress: () {
-                      resumeController.resumeTitle.value = resumeController
-                          .resumeTitleTC
-                          .text
-                          .trim();
-                      resumeController.resumeTitleTC.clear();
+                      onConfirm(index, editTC.text.trim());
                       Get.back();
                     },
                   ),

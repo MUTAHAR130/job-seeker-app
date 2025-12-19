@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:job_seeker/core/common/app_url.dart';
 import 'package:job_seeker/core/data/network/base_api_services.dart';
 import 'package:job_seeker/core/data/network/network_api_services.dart';
@@ -30,10 +29,12 @@ class HomeApiServices {
     }
   }
 
-  static Future uploadAvatar(formData) async {
+  static Future uploadAvatar(data) async {
     try {
-      return await _apiClient.postApi(
-          '${AppUrl.userUrl}/upload-avatar', formData);
+      return await _apiClient.multiPartPostApi(
+        '${AppUrl.userUrl}/upload-avatar',
+        {'avatar': data},
+      );
     } catch (e) {
       rethrow;
     }

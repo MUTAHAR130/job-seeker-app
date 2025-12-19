@@ -5,18 +5,29 @@ import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/delete_item_dialog.dart';
 import 'package:job_seeker/features/dashboard/widgets/dialogs/edit_resume_dialog.dart';
 import 'package:job_seeker/features/dashboard/widgets/dialogs/set_default_dialog.dart';
+import 'package:job_seeker/features/dashboard/widgets/edit_item_title_dialog.dart';
 
-enum MenuItemAction {
-  downloadPdf,
-  setDefault,
-  duplicate,
-  edit,
-  delete,
-}
+enum MenuItemAction { downloadPdf, setDefault, duplicate, edit, delete }
 
 class ThreeDotPopupMenu extends StatelessWidget {
   final int index;
-  const ThreeDotPopupMenu({super.key, required this.index});
+  final String currentTitle;
+  final Function? onDownload;
+  final Function? onDefault;
+  final Function? onDuplicate;
+  final Function? onEdit;
+  final Function? onDelete;
+
+  const ThreeDotPopupMenu({
+    super.key,
+    required this.index,
+    required this.currentTitle,
+    this.onDownload,
+    this.onDefault,
+    this.onDuplicate,
+    this.onEdit,
+    this.onDelete,
+  });
 
   void _onMenuItemSelected(MenuItemAction action) {
     //trigger functions on specific actions on the index
@@ -26,15 +37,25 @@ class ThreeDotPopupMenu extends StatelessWidget {
       case MenuItemAction.downloadPdf:
         break;
       case MenuItemAction.setDefault:
-        Get.dialog(SetDefaultDialog());
+        Get.dialog(
+          SetDefaultDialog(index: index, onConfirm: onDefault ?? () {}),
+        );
         break;
       case MenuItemAction.duplicate:
         break;
       case MenuItemAction.edit:
-        Get.dialog(EditTitleDialog());
+        Get.dialog(
+          EditItemTitleDialog(
+            index: index,
+            onConfirm: onEdit ?? () {},
+            currentTitle: currentTitle,
+          ),
+        );
         break;
       case MenuItemAction.delete:
-        Get.dialog(DeleteItemDialog());
+        Get.dialog(
+          DeleteItemDialog(index: index, onConfirm: onDelete ?? () {}),
+        );
         break;
     }
   }
@@ -74,26 +95,31 @@ class ThreeDotPopupMenu extends StatelessWidget {
       offset: const Offset(0, 40),
 
       itemBuilder: (BuildContext context) => <PopupMenuEntry<MenuItemAction>>[
-        _buildPopupMenuItem(
-          value: MenuItemAction.downloadPdf,
-          icon: AppIcons.downloadIcon,
-          title: 'Download PDF',
-        ),
+        if (onDownload != null)
+          _buildPopupMenuItem(
+            value: MenuItemAction.downloadPdf,
+            icon: AppIcons.downloadIcon,
+            title: 'Download PDF',
+          ),
+        if(onDefault != null)
         _buildPopupMenuItem(
           value: MenuItemAction.setDefault,
           icon: AppIcons.bookMarkIcon,
           title: 'Set as default',
         ),
+        if(onDuplicate != null)
         _buildPopupMenuItem(
           value: MenuItemAction.duplicate,
           icon: AppIcons.duplicateIcon,
           title: 'Duplicate',
         ),
+        if(onEdit != null)
         _buildPopupMenuItem(
           value: MenuItemAction.edit,
           icon: AppIcons.editIcon,
           title: 'Edit',
         ),
+        if(onDelete != null)
         _buildPopupMenuItem(
           value: MenuItemAction.delete,
           icon: AppIcons.deleteIcon,

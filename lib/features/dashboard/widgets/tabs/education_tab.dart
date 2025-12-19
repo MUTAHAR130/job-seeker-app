@@ -3,7 +3,7 @@ import 'package:job_seeker/core/common/widgets/date_selector_widget.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/option_toggle_tile.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
-import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
+import 'package:job_seeker/features/dashboard/controller/new_resume_controller.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 import 'package:job_seeker/core/common/widgets/resume_detail_tile.dart';
@@ -11,7 +11,7 @@ import 'package:job_seeker/core/common/widgets/resume_detail_tile.dart';
 import '../../../../core/common/widgets/multi_line_input_field.dart';
 
 class EducationTab extends StatelessWidget {
-  final ResumeController resumeController = Get.find<ResumeController>();
+  final NewResumeController resumeController = Get.find<NewResumeController>();
 
   EducationTab({super.key});
 

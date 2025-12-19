@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:job_seeker/features/home/controller/home_controller.dart';
 import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
+import 'package:job_seeker/features/dashboard/data/services/shown_menu.dart';
+import 'package:job_seeker/features/home/controller/home_controller.dart';
 import 'package:job_seeker/features/dashboard/widgets/create_cover_letter_message.dart';
 import 'package:job_seeker/features/dashboard/widgets/create_resume_message.dart';
-import 'package:job_seeker/features/dashboard/widgets/saved_resume_list.dart';
+import 'package:job_seeker/features/dashboard/widgets/resume_list.dart';
 
 class DashboardView extends StatelessWidget {
-  final ResumeController resumeController = Get.find<ResumeController>();
+  final ResumeController resumeController = Get.put(ResumeController());
   final HomeController homeController = Get.find<HomeController>();
 
   DashboardView({super.key});
@@ -45,32 +46,93 @@ class DashboardView extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  Obx(() {
-                    if (homeController.shownResumeMenu.value == 'resumeList') {
-                      return SavedResumeList(
-                        itemCount: homeController.savedResumeData.length,
-                        savedResumeData: homeController.savedResumeData,
-                      );
-                    } else {
-                      return CreateResumeMessage();
-                    }
-                  }),
-                  Obx(() {
-                    if (homeController.shownLetterMenu.value == 'letterList') {
-                      return SavedResumeList(
-                        itemCount: homeController.savedCoverLetterData.length,
-                        savedResumeData: homeController.savedCoverLetterData,
-                      );
-                    } else {
-                      return CreateCoverLetterMessage();
-                    }
-                  }),
+                  FutureBuilder(
+                    future: ResumeListWidget(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return snapshot.data!;
+                      } else if (snapshot.hasError) {
+                        debugPrint('${snapshot.error}');
+                        return const Material(
+                          color: Colors.transparent,
+                          child: Center(
+                            child: Text(
+                              "An Error Occurred",
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      }
+                      return const Center(child: CircularProgressIndicator());
+                    },
+                  ),
+                  FutureBuilder(
+                    future: LetterListWidget(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return snapshot.data!;
+                      } else if (snapshot.hasError) {
+                        debugPrint('${snapshot.error}');
+                        return const Material(
+                          color: Colors.transparent,
+                          child: Center(
+                            child: Text(
+                              "An Error Occurred",
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        );
+                      }
+                      return const Center(child: CircularProgressIndicator());
+                    },
+                  ),
                 ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Future<Widget> ResumeListWidget() async {
+    if (resumeController.initialR) {
+      await resumeController.getResumes();
+    }
+    return GetBuilder(
+      id: 'resumeList',
+      init: resumeController,
+      builder: (controller) {
+        if (resumeController.shownResumeMenu == ShownMenu.hasData) {
+          return ResumeList(
+            itemCount: resumeController.resumeData.length,
+            resumeData: resumeController.resumeData,
+          );
+        } else {
+          return CreateResumeMessage();
+        }
+      },
+    );
+  }
+
+  Future<Widget> LetterListWidget() async {
+    if (resumeController.initialC) {
+      await resumeController.getCoverLetters();
+    }
+    return GetBuilder(
+      id: 'letterList',
+      init: resumeController,
+      builder: (controller) {
+        if (resumeController.shownLetterMenu == ShownMenu.hasData) {
+          return Container();
+          // return ResumeList(
+          //   itemCount: homeController.savedCoverLetterData.length,
+          //   resumeData: homeController.savedCoverLetterData,
+          // );
+        } else {
+          return CreateCoverLetterMessage();
+        }
+      },
     );
   }
 }

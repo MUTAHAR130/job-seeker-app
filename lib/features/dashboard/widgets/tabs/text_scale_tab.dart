@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/drop_down_menu.dart';
-import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
+import 'package:job_seeker/features/dashboard/controller/new_resume_controller.dart';
 import 'package:job_seeker/core/common/widgets/value_display_slider.dart';
 
 class TextScaleTab extends StatelessWidget {
-  final ResumeController resumeController = Get.find<ResumeController>();
+  final NewResumeController resumeController = Get.find<NewResumeController>();
 
   TextScaleTab({super.key});
 

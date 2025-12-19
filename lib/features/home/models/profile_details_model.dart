@@ -1,39 +1,49 @@
-class UserModel {
+class ProfileDetailsModel {
+  // Basic Information
   final String id;
   final String email;
   final String firstName;
   final String lastName;
   final String gender;
   final String userType;
-  final DateTime createdAt;
   final String accountStatus;
   final bool isEmailVerified;
-  final List<dynamic> connectedAccounts;
-  String? profilePicture;
+  final bool twoFactorEnabled;
+  final DateTime? createdAt;
+  final DateTime? deletedAt;
+
+  // Profile Media & Contact
+  final String? profilePicture;
   final String? phoneNumber;
   final String? address;
   final String? city;
   final String? state;
   final String? country;
   final String? postalCode;
+
+  // Social & External Links
   final String? linkedin;
   final String? github;
   final String? website;
-  final bool twoFactorEnabled;
-  final DateTime? deletedAt;
-  final String planId;
+  final List<dynamic> connectedAccounts;
 
-  UserModel({
+  // Account Relations
+  final String planId;
+  final dynamic jobSeeker;
+  final dynamic recruiter;
+
+  ProfileDetailsModel({
     required this.id,
     required this.email,
     required this.firstName,
     required this.lastName,
     required this.gender,
     required this.userType,
-    required this.createdAt,
     required this.accountStatus,
     required this.isEmailVerified,
-    required this.connectedAccounts,
+    required this.twoFactorEnabled,
+    this.createdAt,
+    this.deletedAt,
     this.profilePicture,
     this.phoneNumber,
     this.address,
@@ -44,24 +54,25 @@ class UserModel {
     this.linkedin,
     this.github,
     this.website,
-    required this.twoFactorEnabled,
-    this.deletedAt,
+    required this.connectedAccounts,
     required this.planId,
+    this.jobSeeker,
+    this.recruiter,
   });
 
-  // Factory constructor to create a User from JSON
-  factory UserModel.fromJson(Map<String, dynamic> json) {
-    return UserModel(
+  factory ProfileDetailsModel.fromJson(Map<String, dynamic> json) {
+    return ProfileDetailsModel(
       id: json['id'] ?? '',
       email: json['email'] ?? '',
       firstName: json['first_name'] ?? '',
       lastName: json['last_name'] ?? '',
       gender: json['gender'] ?? 'NOT_SPECIFIED',
       userType: json['user_type'] ?? '',
-      createdAt: DateTime.parse(json['created_at']),
-      accountStatus: json['account_status'] ?? '',
+      accountStatus: json['account_status'] ?? 'ACTIVE',
       isEmailVerified: json['is_email_verified'] ?? false,
-      connectedAccounts: List<dynamic>.from(json['connected_accounts'] ?? []),
+      twoFactorEnabled: json['two_factor_enabled'] ?? false,
+      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : null,
+      deletedAt: json['deleted_at'] != null ? DateTime.parse(json['deleted_at']) : null,
       profilePicture: json['profile_picture'],
       phoneNumber: json['phone_number'],
       address: json['address'],
@@ -72,13 +83,13 @@ class UserModel {
       linkedin: json['linkedin'],
       github: json['github'],
       website: json['website'],
-      twoFactorEnabled: json['two_factor_enabled'] ?? false,
-      deletedAt: json['deleted_at'] != null ? DateTime.parse(json['deleted_at']) : null,
+      connectedAccounts: json['connected_accounts'] ?? [],
       planId: json['plan_id'] ?? '',
+      jobSeeker: json['job_seeker'],
+      recruiter: json['recruiter'],
     );
   }
 
-  // Method to convert User instance back to JSON
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -87,10 +98,11 @@ class UserModel {
       'last_name': lastName,
       'gender': gender,
       'user_type': userType,
-      'created_at': createdAt.toIso8601String(),
       'account_status': accountStatus,
       'is_email_verified': isEmailVerified,
-      'connected_accounts': connectedAccounts,
+      'two_factor_enabled': twoFactorEnabled,
+      'created_at': createdAt?.toIso8601String(),
+      'deleted_at': deletedAt?.toIso8601String(),
       'profile_picture': profilePicture,
       'phone_number': phoneNumber,
       'address': address,
@@ -101,9 +113,13 @@ class UserModel {
       'linkedin': linkedin,
       'github': github,
       'website': website,
-      'two_factor_enabled': twoFactorEnabled,
-      'deleted_at': deletedAt?.toIso8601String(),
+      'connected_accounts': connectedAccounts,
       'plan_id': planId,
+      'job_seeker': jobSeeker,
+      'recruiter': recruiter,
     };
   }
+
+  // Helper for UI
+  String get fullName => '$firstName $lastName';
 }

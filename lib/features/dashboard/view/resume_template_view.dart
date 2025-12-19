@@ -3,9 +3,12 @@ import 'package:get/get.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/common/widgets/drop_down_menu.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
+import 'package:job_seeker/features/dashboard/controller/new_resume_controller.dart';
 import 'package:job_seeker/features/dashboard/widgets/resume_template_widget.dart';
 
 class ResumeTemplateView extends StatelessWidget {
+  final NewResumeController newResumeController =
+      Get.find<NewResumeController>();
   final List<String> templateOptions = [
     'All Templates',
     'ATS Optimized',
@@ -51,32 +54,53 @@ class ResumeTemplateView extends StatelessWidget {
               ),
             ),
             SizedBox(height: 5),
-            //will be in list view builder
-            Expanded(
-              child: ListView.builder(
-                // shrinkWrap: true,
-                itemCount: 2,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.generateResume);
-                    },
-                    child: ResumeTemplateWidget(
-                      onTap: () {
-                        Get.toNamed(AppRoutes.generateResume);
-                      },
-                      typeIcon: AppIcons.freeIcon,
-                      resumeAsset: 'assets/docs/Resume1.pdf',
-                      score: 70,
-                      typeProperties: '70% + Basic ATS Ready',
-                      typeTile: 'Modern Professional',
+            FutureBuilder(
+              future: TemplateList(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return snapshot.data!;
+                } else if (snapshot.hasError) {
+                  debugPrint('${snapshot.error}');
+                  return const Material(
+                    color: Colors.transparent,
+                    child: Center(
+                      child: Text(
+                        "An Error Occurred",
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   );
-                },
-              ),
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Future<Widget> TemplateList() async {
+    if(newResumeController.initial){
+      await newResumeController.getResumeTemplates();
+    }
+    return Expanded(
+      child: ListView.builder(
+        // shrinkWrap: true,
+        itemCount: newResumeController.templateData.length,
+        itemBuilder: (context, index) {
+          return InkWell(
+            onTap: () {
+              Get.toNamed(AppRoutes.generateResume);
+            },
+            child: ResumeTemplateWidget(
+              onTap: () {
+                Get.toNamed(AppRoutes.generateResume);
+              },
+              data: newResumeController.templateData[index],
+            ),
+          );
+        },
       ),
     );
   }

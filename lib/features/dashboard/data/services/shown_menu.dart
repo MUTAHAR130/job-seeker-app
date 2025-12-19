@@ -1,0 +1,4 @@
+enum ShownMenu {
+  noData,
+  hasData,
+}

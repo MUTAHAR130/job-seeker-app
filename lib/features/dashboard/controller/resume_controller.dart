@@ -1,102 +1,139 @@
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:job_seeker/core/common/icons/app_icons.dart';
-import 'package:job_seeker/features/dashboard/models/score_sub_category_model.dart';
-import 'package:job_seeker/features/dashboard/widgets/dialogs/edit_resume_dialog.dart';
+import 'package:http/http.dart' as http;
+import 'package:job_seeker/features/dashboard/data/services/dashboard_api_services.dart';
+import 'package:job_seeker/features/dashboard/data/services/shown_menu.dart';
+import 'package:job_seeker/features/dashboard/models/resume_model.dart';
+import 'package:job_seeker/features/home/controller/home_controller.dart';
 
 class ResumeController extends GetxController {
-  TextEditingController resumeTitleTC = TextEditingController();
+  final HomeController homeController = Get.find<HomeController>();
+  bool initialR = true;
+  bool initialC = true;
+  var shownResumeMenu = ShownMenu.hasData;
+  var shownLetterMenu = ShownMenu.hasData;
+  List<ResumeModel> resumeData = [];
+  List coverLetterData = [];
+  var selectedFile = Rxn<File>();
+  String fileName = '';
 
-  //basic info fields
-  TextEditingController nameFieldTC = TextEditingController();
-  TextEditingController emailFieldTC = TextEditingController();
-
-  //prof sum fields
-  TextEditingController profSumTC = TextEditingController();
-
-  //work fields
-  TextEditingController jobTitleTC = TextEditingController();
-  TextEditingController jobCompanyTC = TextEditingController();
-  TextEditingController workDescTC = TextEditingController();
-
-  //edu fields
-  TextEditingController degreeTitleTC = TextEditingController();
-  TextEditingController instituteTC = TextEditingController();
-  TextEditingController eduDescTC = TextEditingController();
-
-  //cert fields
-  TextEditingController certNameTC = TextEditingController();
-  TextEditingController certOrganizationTC = TextEditingController();
-  TextEditingController certDescTC = TextEditingController();
-
-  //award fields
-  TextEditingController awardNameTC = TextEditingController();
-  TextEditingController awardOrganizationTC = TextEditingController();
-  TextEditingController awardDescTC = TextEditingController();
-
-  //skill fields
-  TextEditingController skillTC = TextEditingController();
-
-  //job listing dialog fields
-  TextEditingController jobSearchTC = TextEditingController();
-  TextEditingController jobLocationTC = TextEditingController();
-  List<ScoreSubCategoryModel> structureFormatingCats = [
-    ScoreSubCategoryModel(
-      subTitle: 'ATS may not detect Work Experience, Education, or Skills.',
-      title: 'Headings',
-      statusIcon: AppIcons.warningIcon,
-    ),
-    ScoreSubCategoryModel(
-      subTitle: 'Content may not be read properly by ATS.',
-      title: 'Single-column layout',
-      statusIcon: AppIcons.warningIcon,
-    ),
-    ScoreSubCategoryModel(
-      subTitle: 'Content is plain text and fully ATS-friendly.',
-      title: 'No images, tables, or text boxes',
-      statusIcon: AppIcons.checkMarkIcon,
-    ),
-    ScoreSubCategoryModel(
-      subTitle: 'Your text is readable by all screening systems.',
-      title: 'ATS-friendly fonts',
-      statusIcon: AppIcons.checkMarkIcon,
-    ),
-  ];
-
-  Rx<String> resumeTitle = 'Untitled'.obs;
-  Rx<int> generateResumeRadioSelected = 1.obs;
-  Rx<int> tailoredResumeRadioSelected = 1.obs;
-  Rx<double> textScale = 12.0.obs;
-  Rx<double> spaceSize = 0.25.obs;
-  final startDate = (null as DateTime?).obs;
-  final endDate = (null as DateTime?).obs;
-
-  void setStartDate(DateTime date) {
-    startDate.value = date;
+  getCoverLetters() async {
+    initialC = false;
+    // var response = await DashboardApiServices.getCoverLetters();
+    // debugPrint('$response');
+    coverLetterData = [];
+    // for (var letter in response['resumes']) {
+    //   coverLetterData.add(ResumeModel.fromJson(letter));
+    // }
+    if (coverLetterData.isEmpty) {
+      shownLetterMenu = ShownMenu.noData;
+      update(['letterList']);
+    }
   }
 
-  void setEndDate(DateTime date) {
-    endDate.value = date;
+  getResumes() async {
+    initialR = false;
+    var response = await DashboardApiServices.getResumes();
+    resumeData = [];
+    for (var resume in response['resumes']) {
+      resumeData.add(ResumeModel.fromJson(resume));
+    }
+    if (resumeData.isEmpty) {
+      shownResumeMenu = ShownMenu.noData;
+      update(['resumeList']);
+    }
   }
 
-  changeGenerateResumeRadio(value) {
-    generateResumeRadioSelected.value = value;
+  setResumeDefault(index) async {
+    try {
+      // await DashboardApiServices.setResumePrimary(resumeData[index].id);
+
+      for (var resume in resumeData) {
+        resume.isPrimary = false;
+      }
+      resumeData[index].isPrimary = true;
+      update(['resumeList']);
+    } catch (e) {
+      debugPrint('error $e');
+    }
   }
 
-  changeTailoredResumeRadio(value) {
-    tailoredResumeRadioSelected.value = value;
+  // 5 MB in bytes
+  final int _sizeLimit = 5 * 1024 * 1024;
+
+  Future<void> uploadFile(String type) async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['pdf'],
+        allowMultiple: false,
+      );
+
+      if (result != null) {
+        int fileSize = result.files.first.size;
+
+        if (fileSize > _sizeLimit) {
+          double sizeInMb = fileSize / (1024 * 1024);
+
+          Get.snackbar(
+            "File Too Large",
+            "Maximum size is 5MB. Selected file is ${sizeInMb.toStringAsFixed(2)}MB.",
+            snackPosition: SnackPosition.BOTTOM,
+          );
+          deleteSpecificFile(File(result.files.single.path!));
+          return;
+        }
+
+        if (result.files.single.path != null) {
+          selectedFile.value = File(result.files.single.path!);
+          fileName = result.files.single.name;
+
+          final pdfMultipart = await http.MultipartFile.fromPath(
+            type == 'resume' ? 'file' : 'coverLetter',
+            selectedFile.value!.path,
+            filename: fileName,
+            contentType: http.MediaType('application', 'pdf'),
+          );
+          if(type =='resume'){
+            var response = await DashboardApiServices.uploadResume(
+              homeController.currentUser.id,
+              pdfMultipart,
+            );
+            debugPrint('$response');
+            //when success
+            // getResumes();
+            // update(['resumeList']);
+          } else {
+            var response = await DashboardApiServices.uploadResume(
+              homeController.currentUser.id,
+              pdfMultipart,
+            );
+            debugPrint('$response');
+            //when success
+            // getCoverLetters();
+            // update(['letterList']);
+          }
+          deleteSpecificFile(selectedFile.value!);
+          selectedFile.value = null;
+        }
+      }
+    } catch (e) {
+      debugPrint("An unexpected error occurred: $e");
+      deleteSpecificFile(selectedFile.value!);
+      // Get.snackbar("Error", "An unexpected error occurred: $e");
+    }
   }
 
-  changeTextScale(double value) {
-    textScale.value = value;
-  }
-
-  changeSpaceSize(double value) {
-    spaceSize.value = value;
-  }
-
-  changeTitle() {
-    resumeTitleTC.text = resumeTitle.value;
-    Get.dialog(EditTitleDialog());
+  Future<void> deleteSpecificFile(File file) async {
+    try {
+      if (await file.exists()) {
+        await file.delete();
+        print("Specific temporary file deleted.");
+      }
+    } catch (e) {
+      rethrow;
+    }
   }
 }

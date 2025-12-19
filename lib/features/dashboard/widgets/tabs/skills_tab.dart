@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
-import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
+import 'package:job_seeker/features/dashboard/controller/new_resume_controller.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 import 'package:job_seeker/core/common/widgets/resume_detail_tile.dart';
 import 'package:job_seeker/core/common/widgets/delete_item_dialog.dart';
 
 class SkillsTab extends StatelessWidget {
-  final ResumeController resumeController = Get.find<ResumeController>();
+  final NewResumeController resumeController = Get.find<NewResumeController>();
 
   SkillsTab({super.key});
 
@@ -73,7 +73,9 @@ class SkillsTab extends StatelessWidget {
             ),
             ResumeDetailTile(
               titleText: 'Design System',
-              onTapDelete: () {Get.dialog(DeleteItemDialog());},
+              onTapDelete: () {
+                Get.dialog(DeleteItemDialog(index: 0, onConfirm: () {}));
+              },
             ),
           ],
         ),

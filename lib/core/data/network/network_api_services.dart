@@ -196,7 +196,7 @@ class NetworkApiServices extends BaseApiServices {
         throw UnAuthorizedException(responseBody["message"].toString());
       default:
         throw FetchDataException(
-          "Error Occur During Connection\nStatus-Code: ${response.statusCode}\nmessage:${responseBody["message"].toString()}",
+          "Error Occur During Connection\nStatus-Code: ${response.statusCode}",
         );
     }
   }

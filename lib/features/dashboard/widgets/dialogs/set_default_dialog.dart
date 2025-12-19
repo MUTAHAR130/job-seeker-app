@@ -4,7 +4,13 @@ import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:get/get.dart';
 
 class SetDefaultDialog extends StatelessWidget {
-  const SetDefaultDialog({super.key});
+  final int index;
+  final Function onConfirm;
+
+  const SetDefaultDialog({
+    super.key,
+    required this.index, required this.onConfirm,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +61,7 @@ class SetDefaultDialog extends StatelessWidget {
                     width: 120,
                     buttonText: 'Mark as Primary',
                     onPress: () {
+                      onConfirm();
                       Get.back();
                     },
                   ),

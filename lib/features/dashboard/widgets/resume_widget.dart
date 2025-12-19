@@ -5,20 +5,20 @@ import 'package:job_seeker/features/dashboard/widgets/three_dot_popup_menu.dart'
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:get/get.dart';
 
-class SavedResumeWidget extends StatelessWidget {
+class ResumeWidget extends StatelessWidget {
   final bool? isDefault;
-  final String resumeAsset;
-  final String resumeTitle;
+  final String asset;
+  final String title;
   final Function onTap;
   final bool? isRadio;
   final int? groupVal;
   final int index;
 
-  const SavedResumeWidget({
+  const ResumeWidget({
     super.key,
     this.isDefault,
-    required this.resumeAsset,
-    required this.resumeTitle,
+    required this.asset,
+    required this.title,
     required this.onTap,
     required this.index,
     this.isRadio,
@@ -34,7 +34,11 @@ class SavedResumeWidget extends StatelessWidget {
             SizedBox(
               height: 328,
               width: double.infinity,
-              child: SfPdfViewer.asset(resumeAsset),
+              child: Image.network(
+                asset,
+                fit: BoxFit.cover,
+                alignment: Alignment.topCenter,
+              ),
             ),
             Positioned.fill(
               child: GestureDetector(
@@ -60,12 +64,12 @@ class SavedResumeWidget extends StatelessWidget {
           color: Get.theme.colorScheme.surface,
           child: ListTile(
             title: Text(
-              resumeTitle,
+              title,
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             trailing: isRadio == true
                 ? Radio(value: index, groupValue: groupVal, onChanged: (val) {})
-                : ThreeDotPopupMenu(index: index),
+                : ThreeDotPopupMenu(index: index, currentTitle: title, ),
           ),
         ),
       ],

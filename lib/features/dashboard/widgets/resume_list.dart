@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:job_seeker/features/dashboard/models/saved_resume_model.dart';
-import 'package:job_seeker/features/dashboard/widgets/saved_resume_widget.dart';
+import 'package:job_seeker/features/dashboard/models/resume_model.dart';
+import 'package:job_seeker/features/dashboard/widgets/resume_widget.dart';
 
-class SavedResumeList extends StatelessWidget {
+class ResumeList extends StatelessWidget {
   final int itemCount;
-  final List<SavedResumeModel> savedResumeData;
+  final List<ResumeModel> resumeData;
   final bool? isRadio;
   final int? groupVal;
 
-  const SavedResumeList({
+  const ResumeList({
     super.key,
     required this.itemCount,
-    required this.savedResumeData,
+    required this.resumeData,
     this.isRadio,
     this.groupVal
   });
@@ -26,10 +26,10 @@ class SavedResumeList extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(top: 15),
-            child: SavedResumeWidget(
-              resumeAsset: savedResumeData[index].resumeAsset,
-              resumeTitle: savedResumeData[index].title,
-              isDefault: savedResumeData[index].isDefault,
+            child: ResumeWidget(
+              asset: resumeData[index].thumbnailUrl,
+              title: resumeData[index].title,
+              isDefault: resumeData[index].isPrimary,
               isRadio: isRadio,
               groupVal: groupVal,
               index: index,

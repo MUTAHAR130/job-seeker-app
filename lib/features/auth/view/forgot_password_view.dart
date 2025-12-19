@@ -18,8 +18,8 @@ class ForgotPasswordView extends StatelessWidget {
         if (didPop) {
           //other logic
           authController.verifyStatus.value = 'not sent';
-          authController.currentPassFieldTC.clear();
-          authController.newPassFieldTC.clear();
+          authController.currentPassTC.clear();
+          authController.confirmPassTC.clear();
           authController.passHidden.value = true;
         }
       },

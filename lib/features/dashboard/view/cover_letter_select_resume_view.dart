@@ -6,7 +6,7 @@ import 'package:job_seeker/core/common/widgets/white_card.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
 import 'package:job_seeker/features/dashboard/widgets/dialogs/generate_resume_options.dart';
-import 'package:job_seeker/features/dashboard/widgets/saved_resume_list.dart';
+import 'package:job_seeker/features/dashboard/widgets/resume_list.dart';
 
 class CoverLetterSelectResumeView extends StatelessWidget {
   final HomeController homeController = Get.find<HomeController>();
@@ -50,12 +50,13 @@ class CoverLetterSelectResumeView extends StatelessWidget {
               //will be in list view builder
               Obx(() {
                 if (homeController.shownResumeMenu.value == 'createResume') {
-                  return SavedResumeList(
-                    itemCount: homeController.savedResumeData.length,
-                    savedResumeData: homeController.savedResumeData,
-                    isRadio: true,
-                    groupVal: 0,
-                  );
+                  return Container();
+                  // return ResumeList(
+                  //   itemCount: homeController.savedResumeData.length,
+                  //   resumeData: homeController.savedResumeData,
+                  //   isRadio: true,
+                  //   groupVal: 0,
+                  // );
                 } else {
                   return Padding(
                     padding: const EdgeInsets.only(top: 100),

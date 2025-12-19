@@ -20,7 +20,7 @@ class ForgotPassInput extends StatelessWidget {
         children: [
           SizedBox(height: 15),
           InputField(
-            controller: authController.emailFieldTC,
+            controller: authController.emailTC,
             label: 'Email',
             mandatory: true,
             hintText: 'Enter email',

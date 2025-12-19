@@ -19,9 +19,12 @@ class ProfileView extends StatelessWidget {
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
         actions: [
-          InkWell(onTap: () {
-            homeController.logOut();
-          }, child: SvgPicture.string(AppIcons.logoutIcon)),
+          InkWell(
+            onTap: () {
+              homeController.logOut();
+            },
+            child: SvgPicture.string(AppIcons.logoutIcon),
+          ),
           SizedBox(width: 10),
         ],
       ),
@@ -32,16 +35,22 @@ class ProfileView extends StatelessWidget {
           children: [
             ListTile(
               contentPadding: EdgeInsets.all(0),
-              leading: CircleAvatar(
-                radius: 22,
-                backgroundImage: AssetImage('assets/images/temp.jpg'),
+              leading: InkWell(
+                onTap: (){homeController.changeAvatar();},
+                child: CircleAvatar(
+                  radius: 22,
+                  backgroundImage:
+                      homeController.currentUser.profilePicture != null
+                      ? NetworkImage(homeController.currentUser.profilePicture!)
+                      : AssetImage('assets/images/temp.jpg'),
+                ),
               ),
               title: Text(
-                '${homeController.currentUser?.firstName} ${homeController.currentUser?.lastName}',
+                '${homeController.currentUser.firstName} ${homeController.currentUser.lastName}',
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
               ),
               subtitle: Text(
-                homeController.currentUser!.email,
+                homeController.currentUser.email,
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
               ),
             ),

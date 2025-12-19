@@ -16,7 +16,7 @@ class ResetRequestPending extends StatelessWidget {
       topIcon: AppIcons.emailIcon,
       title: 'Verify Your email address',
       leadingSubTitle: 'We’ve sent a verification link to ',
-      subTitle: authController.emailFieldTC.text,
+      subTitle: authController.emailTC.text,
       trailingSubTitle:
           '. Please check your inbox and click the link to verify your request.',
       child: Column(

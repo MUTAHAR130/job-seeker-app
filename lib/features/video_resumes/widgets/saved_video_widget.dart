@@ -81,7 +81,7 @@ class SavedVideoWidget extends StatelessWidget {
                 ),
               ],
             ),
-            trailing: ThreeDotPopupMenu(index: index),
+            trailing: ThreeDotPopupMenu(index: index, currentTitle: title),
           ),
         ),
       ],

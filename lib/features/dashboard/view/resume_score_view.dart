@@ -4,12 +4,12 @@ import 'package:get/get.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
-import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
+import 'package:job_seeker/features/dashboard/controller/new_resume_controller.dart';
 import 'package:job_seeker/features/dashboard/widgets/fixing_issues_popup.dart';
 import 'package:job_seeker/features/dashboard/widgets/scored_category_tile.dart';
 
 class ResumeScoreView extends StatelessWidget {
-  final ResumeController resumeController = Get.find<ResumeController>();
+  final NewResumeController resumeController = Get.find<NewResumeController>();
 
   ResumeScoreView({super.key});
 

@@ -4,7 +4,14 @@ import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:get/get.dart';
 
 class DeleteItemDialog extends StatelessWidget {
-  const DeleteItemDialog({super.key});
+  final int index;
+  final Function onConfirm;
+
+  const DeleteItemDialog({
+    super.key,
+    required this.index,
+    required this.onConfirm,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +62,7 @@ class DeleteItemDialog extends StatelessWidget {
                     width: 50,
                     buttonText: 'Delete',
                     onPress: () {
+                      onConfirm(index);
                       Get.back();
                     },
                   ),

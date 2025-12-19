@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
-import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
+import 'package:job_seeker/features/dashboard/controller/new_resume_controller.dart';
 import 'package:job_seeker/features/dashboard/widgets/tabs/award_tab.dart';
 import 'package:job_seeker/features/dashboard/widgets/tabs/certification_tab.dart';
 import 'package:job_seeker/features/dashboard/widgets/tabs/education_tab.dart';
@@ -15,7 +15,7 @@ import 'package:job_seeker/features/dashboard/widgets/tabs/skills_tab.dart';
 import 'package:job_seeker/features/dashboard/widgets/tabs/work_exp_tab.dart';
 
 class GenerateResumeView extends StatelessWidget {
-  final ResumeController resumeController = Get.find<ResumeController>();
+  final NewResumeController resumeController = Get.find<NewResumeController>();
 
   GenerateResumeView({super.key});
 

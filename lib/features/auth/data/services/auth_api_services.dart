@@ -5,6 +5,16 @@ import 'package:job_seeker/core/data/network/network_api_services.dart';
 class AuthApiService {
   static final BaseApiServices _apiClient = NetworkApiServices();
 
+  static Future devLoginWithEmail(String email) async {
+    try {
+      return await _apiClient.postApi('${AppUrl.apiUrl}/oauth/dev-login', {
+        'email': email,
+      });
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   static Future loginWithEmail(String email, String password) async {
     try {
       return await _apiClient.postApi('${AppUrl.loginUrl}/login-with-email', {
@@ -19,7 +29,7 @@ class AuthApiService {
   static Future loginWithGoogle(String credential) async {
     try {
       return await _apiClient.postApi('${AppUrl.loginUrl}/login-with-google', {
-        'credential': credential,
+        'code': credential,
       });
     } catch (e) {
       rethrow;
@@ -68,9 +78,10 @@ class AuthApiService {
     }
   }
 
-  static Future signIn(
+  static Future signInWithEmail(
     String email,
     String password,
+    String confirmPass,
     String fullName,
     String userType,
   ) {
@@ -78,7 +89,7 @@ class AuthApiService {
       return _apiClient.postApi('${AppUrl.apiUrl}/signup/signup-with-email', {
         'email': email,
         'password': password,
-        'confirm_password': password,
+        'confirm_password': confirmPass,
         "fullname": fullName,
         "user_type": userType,
       });

@@ -3,4 +3,5 @@ class AppUrl {
   static const String apiUrl = '$baseUrl/api/v1';
   static const String loginUrl = '$apiUrl/login';
   static const String userUrl = '$apiUrl/user';
+  static const String resumeTemplateUrl = '$apiUrl/resume-templates';
 }

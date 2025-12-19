@@ -4,9 +4,11 @@ import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/common/widgets/custom_snack_bar.dart';
 import 'package:job_seeker/core/common/widgets/delete_item_dialog.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
+
 // import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
 import 'package:get/get.dart';
+
 // import 'package:job_seeker/features/job_search/widgets/dialogs/save_filter_dialog.dart';
 import 'package:job_seeker/features/saved_filters/controller/saved_filters_controller.dart';
 
@@ -45,7 +47,9 @@ class SavedFiltersView extends StatelessWidget {
                     SizedBox(width: 10),
                     InkWell(
                       onTap: () {
-                        Get.dialog(DeleteItemDialog());
+                        Get.dialog(
+                          DeleteItemDialog(index: 0, onConfirm: () {}),
+                        );
                       },
                       child: SvgPicture.string(AppIcons.deleteIcon),
                     ),

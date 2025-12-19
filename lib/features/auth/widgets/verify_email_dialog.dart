@@ -47,7 +47,7 @@ class VerifyEmailDialog extends StatelessWidget {
                   children: <TextSpan>[
                     const TextSpan(text: 'We’ve sent an email to '),
                     TextSpan(
-                      text: authController.emailFieldTC.text,
+                      text: authController.emailTC.text,
                       style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     const TextSpan(

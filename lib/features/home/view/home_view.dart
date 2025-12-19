@@ -8,7 +8,7 @@ import 'package:job_seeker/features/ai_interviews/controller/ai_interview_contro
 import 'package:job_seeker/features/ai_interviews/view/ai_interviews_view.dart';
 import 'package:job_seeker/features/dashboard/controller/cover_letter_controller.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
-import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
+import 'package:job_seeker/features/dashboard/controller/new_resume_controller.dart';
 import 'package:job_seeker/features/dashboard/view/dashboard_view.dart';
 import 'package:job_seeker/features/home/widgets/home_drawer.dart';
 import 'package:job_seeker/features/job_search/view/job_search_view.dart';
@@ -23,7 +23,7 @@ import 'package:job_seeker/features/video_resumes/view/video_resumes_view.dart';
 
 class HomeView extends StatelessWidget {
   final HomeController homeController = Get.find<HomeController>();
-  final ResumeController resumeController = Get.put(ResumeController());
+  final NewResumeController resumeController = Get.put(NewResumeController());
   final SavedFiltersController savedFiltersController = Get.put(
     SavedFiltersController(),
   );
@@ -59,7 +59,7 @@ class HomeView extends StatelessWidget {
       drawer: HomeDrawer(),
       appBar: AppBar(
         actions: [
-          SvgPicture.string(AppIcons.freePlanIcon, height: 28,),
+          SvgPicture.string(AppIcons.freePlanIcon, height: 28),
           SizedBox(width: 10),
           ActionButton(
             width: 68,
@@ -69,12 +69,14 @@ class HomeView extends StatelessWidget {
           ),
           SizedBox(width: 10),
           InkWell(
-            onTap: (){
+            onTap: () {
               Get.toNamed(AppRoutes.profileView);
             },
             child: CircleAvatar(
               radius: 20,
-              backgroundImage: AssetImage('assets/images/temp.jpg'),
+              backgroundImage: homeController.currentUser.profilePicture != null
+                  ? NetworkImage(homeController.currentUser.profilePicture!)
+                  : AssetImage('assets/images/temp.jpg'),
             ),
           ),
           SizedBox(width: 10),

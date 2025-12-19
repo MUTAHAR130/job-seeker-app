@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
@@ -44,57 +43,66 @@ class LoginView extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20),
                   ),
                   SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.string(
-                          AppIcons.googleIconSvg,
-                          height: 24,
-                          width: 24,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.string(
-                          AppIcons.windowsIconSvg,
-                          height: 24,
-                          width: 24,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: SvgPicture.string(
-                          AppIcons.linkedinIconSvg,
-                          height: 24,
-                          width: 24,
-                        ),
-                      ),
-                    ],
+                  ActionButton(
+                    inverted: true,
+                    prefixIcon: AppIcons.googleIconSvg,
+                    buttonText: 'Continue with Google',
+                    onPress: () {
+                      // authController.googleLoginAction();
+                    },
                   ),
+                  SizedBox(height: 15),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     IconButton(
+                  //       onPressed: () {},
+                  //       icon: SvgPicture.string(
+                  //         AppIcons.googleIconSvg,
+                  //         height: 24,
+                  //         width: 24,
+                  //       ),
+                  //     ),
+                  //     IconButton(
+                  //       onPressed: () {},
+                  //       icon: SvgPicture.string(
+                  //         AppIcons.windowsIconSvg,
+                  //         height: 24,
+                  //         width: 24,
+                  //       ),
+                  //     ),
+                  //     IconButton(
+                  //       onPressed: () {},
+                  //       icon: SvgPicture.string(
+                  //         AppIcons.linkedinIconSvg,
+                  //         height: 24,
+                  //         width: 24,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   Text(
                     'or',
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: 15),
                   InputField(
-                    controller: authController.emailFieldTC,
+                    controller: authController.emailTC,
                     label: 'Email',
                     mandatory: true,
                     hintText: 'Enter email',
-                    focusNode: authController.emailFocusNode,
+                    focusNode: authController.emailFN,
                   ),
                   SizedBox(height: 15),
                   Obx(
                     () => InputField(
-                      controller: authController.passwordFieldTC,
+                      controller: authController.passwordTC,
                       label: 'Password',
                       mandatory: true,
                       hidden: authController.passHidden.value,
                       hiddenToggle: authController.togglePassHidden,
                       hintText: 'Enter password',
-                      focusNode: authController.passFocusNode,
+                      focusNode: authController.passFN,
                     ),
                   ),
                   SizedBox(height: 10),
@@ -127,9 +135,9 @@ class LoginView extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          authController.emailFocusNode.unfocus();
-                          authController.passFocusNode.unfocus();
-                          Get.toNamed(AppRoutes.forgotPassword);
+                          authController.emailFN.unfocus();
+                          authController.passFN.unfocus();
+                          Get.toNamed(AppRoutes.forgotPasswordView);
                         },
                         child: Text(
                           'Forgot Password?',
@@ -141,10 +149,34 @@ class LoginView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 14),
+                  SizedBox(height: 15),
                   ActionButton(
                     buttonText: 'Login',
                     onPress: authController.loginAction,
+                  ),
+                  SizedBox(height: 15),
+                  InkWell(
+                    onTap: (){
+                      Get.offAllNamed(AppRoutes.signInView);
+                    },
+                    child: Text.rich(
+                      textAlign: TextAlign.center,
+                      TextSpan(
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(text: 'Don\'t have and account? '),
+                          TextSpan(
+                            text: 'Create Account',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
