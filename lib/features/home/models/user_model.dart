@@ -1,25 +1,25 @@
 class UserModel {
   final String id;
   final String email;
-  final String firstName;
-  final String lastName;
-  final String gender;
+  String firstName;
+  String lastName;
+  String gender;
   final String userType;
-  final DateTime createdAt;
+  DateTime createdAt;
   final String accountStatus;
-  final bool isEmailVerified;
-  final List<dynamic> connectedAccounts;
+  bool isEmailVerified;
+  List<dynamic> connectedAccounts;
   String? profilePicture;
-  final String? phoneNumber;
-  final String? address;
-  final String? city;
-  final String? state;
-  final String? country;
-  final String? postalCode;
-  final String? linkedin;
-  final String? github;
-  final String? website;
-  final bool twoFactorEnabled;
+  String? phoneNumber;
+  String? address;
+  String? city;
+  String? state;
+  String? country;
+  String? postalCode;
+  String? linkedin;
+  String? github;
+  String? website;
+  bool twoFactorEnabled;
   final DateTime? deletedAt;
   final String planId;
 
@@ -73,7 +73,9 @@ class UserModel {
       github: json['github'],
       website: json['website'],
       twoFactorEnabled: json['two_factor_enabled'] ?? false,
-      deletedAt: json['deleted_at'] != null ? DateTime.parse(json['deleted_at']) : null,
+      deletedAt: json['deleted_at'] != null
+          ? DateTime.parse(json['deleted_at'])
+          : null,
       planId: json['plan_id'] ?? '',
     );
   }

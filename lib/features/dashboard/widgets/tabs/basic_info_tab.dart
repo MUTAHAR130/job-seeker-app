@@ -1,14 +1,19 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
+import 'package:job_seeker/core/common/widgets/profile_picture.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:job_seeker/features/dashboard/controller/new_resume_controller.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
+import 'package:job_seeker/features/home/controller/home_controller.dart';
 
 class BasicInfoTab extends StatelessWidget {
-  final NewResumeController resumeController = Get.find<NewResumeController>();
+  final NewResumeController newResumeController =
+      Get.find<NewResumeController>();
+  final HomeController homeController = Get.find<HomeController>();
 
   BasicInfoTab({super.key});
 
@@ -32,28 +37,48 @@ class BasicInfoTab extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  InkWell(
-                    onTap: (){},
-                    child: Stack(
-                      children: [
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundImage: AssetImage('assets/images/temp.jpg'),
-                        ),
-                        Positioned(top: 0, right: 0,child: SvgPicture.string(AppIcons.editBoxRoundIcon)),
-                      ],
-                    ),
+                  Stack(
+                    children: [
+                      InkWell(
+                        onTap: (){
+                          newResumeController.getAvatar();
+                        },
+                        child:
+                            newResumeController.selectedPicture.value == null
+                            ? ProfilePicture(
+                                pictureUrl: homeController.currentUser.profilePicture,
+                                name: homeController.currentUser.firstName,
+                                radius: 30,
+                              )
+                            : CircleAvatar(
+                                radius: 35,
+                                backgroundImage: FileImage(
+                                  File(
+                                    newResumeController
+                                        .selectedPicture
+                                        .value!
+                                        .path,
+                                  ),
+                                ),
+                              ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: SvgPicture.string(AppIcons.editBoxRoundIcon),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 10),
                   InputField(
-                    controller: resumeController.nameFieldTC,
+                    controller: newResumeController.nameFieldTC,
                     label: 'Full Name',
                     mandatory: true,
                     hintText: 'Enter name',
                   ),
                   SizedBox(height: 15),
                   InputField(
-                    controller: resumeController.emailFieldTC,
+                    controller: newResumeController.emailFieldTC,
                     label: 'Contact Email',
                     mandatory: true,
                     hintText: 'Enter email',
@@ -76,7 +101,7 @@ class BasicInfoTab extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   InputField(
-                    controller: resumeController.emailFieldTC,
+                    controller: newResumeController.phoneNumberTC,
                     hintText: 'Enter phone number',
                   ),
                 ],

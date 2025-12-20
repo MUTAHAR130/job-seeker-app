@@ -81,7 +81,7 @@ class ResumeTemplateView extends StatelessWidget {
   }
 
   Future<Widget> TemplateList() async {
-    if(newResumeController.initial){
+    if (newResumeController.initial) {
       await newResumeController.getResumeTemplates();
     }
     return Expanded(
@@ -91,12 +91,13 @@ class ResumeTemplateView extends StatelessWidget {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
+              newResumeController.selectedTemplate =
+                  newResumeController.templateData[index].id;
+              debugPrint('here');
+              newResumeController.resumeGenerationSetup();
               Get.toNamed(AppRoutes.generateResume);
             },
             child: ResumeTemplateWidget(
-              onTap: () {
-                Get.toNamed(AppRoutes.generateResume);
-              },
               data: newResumeController.templateData[index],
             ),
           );

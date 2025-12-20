@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/bubble_list_widget.dart';
+import 'package:job_seeker/core/common/widgets/profile_picture.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
 
 class ProfileView extends StatelessWidget {
@@ -19,11 +21,11 @@ class ProfileView extends StatelessWidget {
           style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
         ),
         actions: [
-          InkWell(
-            onTap: () {
+          IconButton(
+            onPressed: () {
               homeController.logOut();
             },
-            child: SvgPicture.string(AppIcons.logoutIcon),
+            icon: SvgPicture.string(AppIcons.logoutIcon),
           ),
           SizedBox(width: 10),
         ],
@@ -33,17 +35,20 @@ class ProfileView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            ActionButton(
+              width: 100,
+              buttonText: 'Edit Profile',
+              onPress: () {
+                homeController.editProfile();
+              },
+            ),
+            SizedBox(height: 15),
             ListTile(
               contentPadding: EdgeInsets.all(0),
-              leading: InkWell(
-                onTap: (){homeController.changeAvatar();},
-                child: CircleAvatar(
-                  radius: 22,
-                  backgroundImage:
-                      homeController.currentUser.profilePicture != null
-                      ? NetworkImage(homeController.currentUser.profilePicture!)
-                      : AssetImage('assets/images/temp.jpg'),
-                ),
+              leading: ProfilePicture(
+                pictureUrl: homeController.currentUser.profilePicture,
+                name: homeController.currentUser.firstName,
+                radius: 23,
               ),
               title: Text(
                 '${homeController.currentUser.firstName} ${homeController.currentUser.lastName}',

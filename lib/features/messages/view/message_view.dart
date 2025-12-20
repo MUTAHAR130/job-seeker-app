@@ -5,10 +5,15 @@ import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
+import 'package:job_seeker/features/messages/controller/threads_controller.dart';
 import 'package:job_seeker/features/messages/widgets/message_tile.dart';
+import 'package:job_seeker/features/messages/widgets/new_conversation_dialog.dart';
+
 
 class MessageView extends StatelessWidget {
-  const MessageView({super.key});
+  final ThreadsController threadsController = Get.find<ThreadsController>();
+
+  MessageView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,9 @@ class MessageView extends StatelessWidget {
               width: 151,
               prefixIcon: AppIcons.addIcon,
               buttonText: 'New Message',
-              onPress: () {},
+              onPress: () {
+                Get.dialog(NewConversationDialog());
+              },
             ),
             SizedBox(height: 15),
             Row(
@@ -115,23 +122,56 @@ class MessageView extends StatelessWidget {
               ],
             ),
             SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return MessageTile(
-                    onTap: (){Get.toNamed(AppRoutes.chatsView);},
-                    profilePic: 'assets/images/temp.jpg',
-                    name: 'Emily Johnson',
-                    lastMessage:
-                        'Hi Alex! Thanks for reaching out. I\'d be happy to chat about potential opportunities. Let me know what type of roles you\'re looking for.',
+            FutureBuilder(
+              future: ThreadListWidget(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return snapshot.data!;
+                } else if (snapshot.hasError) {
+                  debugPrint('${snapshot.error}');
+                  return const Material(
+                    color: Colors.transparent,
+                    child: Center(
+                      child: Text(
+                        "An Error Occurred",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   );
-                },
-              ),
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Future<Widget> ThreadListWidget() async {
+    if (threadsController.initial) {
+      await threadsController.getThreads();
+    }
+    return GetBuilder(
+      id: 'threadList',
+      init: threadsController,
+      builder: (controller) {
+        return Expanded(
+          child: ListView.builder(
+            itemCount: controller.threadData.length,
+            itemBuilder: (context, index) {
+              return MessageTile(
+                onTap: () {
+                  threadsController.selectedThread =
+                      threadsController.threadData[index].id;
+                  Get.toNamed(AppRoutes.chatsView);
+                },
+                data: controller.threadData[index],
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

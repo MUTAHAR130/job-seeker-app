@@ -1,6 +1,8 @@
 import 'package:job_seeker/core/common/app_url.dart';
 import 'package:job_seeker/core/data/network/base_api_services.dart';
 import 'package:job_seeker/core/data/network/network_api_services.dart';
+import 'package:job_seeker/features/dashboard/models/job_data_model.dart';
+import 'package:job_seeker/features/home/models/profile_details_model.dart';
 
 class DashboardApiServices {
   static final BaseApiServices _apiClient = NetworkApiServices();
@@ -21,12 +23,22 @@ class DashboardApiServices {
     }
   }
 
-  static Future generateResume(String templateId, data) async {
+  static Future generateResume(
+    String templateId,
+    title,
+    ProfileDetailsModel profileDetails,
+    JobDataModel? jobData,
+    jobId,
+  ) async {
     try {
-      return await _apiClient.postApi(
-        '${AppUrl.resumeTemplateUrl}/generate-resume/$templateId',
-        data,
-      );
+      return await _apiClient
+          .postApi('${AppUrl.resumeTemplateUrl}/generate-resume/$templateId', {
+            "resume_id": "",
+            "resume_title": title,
+            "profile_details": profileDetails.toJson(),
+            "job_specific_data": jobData != null ? jobData.toJson() : {},
+            "jobId": jobId,
+          });
     } catch (e) {
       rethrow;
     }
@@ -67,8 +79,29 @@ class DashboardApiServices {
 
   static Future deleteResume(String resumeId) async {
     try {
+      return await _apiClient.getApi(
+        '${AppUrl.resumeTemplateUrl}/del-resume/$resumeId',
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future ForceDeleteResume(String resumeId) async {
+    try {
       return await _apiClient.deleteApi(
         '${AppUrl.resumeTemplateUrl}/force-delete-resume/$resumeId',
+        {},
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future unlinkResume(String resumeId) async {
+    try {
+      return await _apiClient.patchApi(
+        '${AppUrl.resumeTemplateUrl}/unlink-resume/$resumeId',
         {},
       );
     } catch (e) {

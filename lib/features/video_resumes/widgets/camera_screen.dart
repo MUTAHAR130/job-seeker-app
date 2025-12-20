@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:camera/camera.dart';
+import 'package:job_seeker/core/common/icons/app_icons.dart';
+import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/features/video_resumes/controller/camera_controller.dart';
 
 class CameraScreen extends StatelessWidget {
@@ -9,7 +12,9 @@ class CameraScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Inject the controller
-    final CameraRecordingController cameraRecordingController = Get.put(CameraRecordingController());
+    final CameraRecordingController cameraRecordingController = Get.put(
+      CameraRecordingController(),
+    );
 
     return Container(
       color: Colors.black,
@@ -19,62 +24,44 @@ class CameraScreen extends StatelessWidget {
           // 1. Camera Preview Widget
           Obx(() {
             if (!cameraRecordingController.isInitialized.value) {
-              return const Center(child: CircularProgressIndicator(color: Colors.white));
+              return const Center(
+                child: CircularProgressIndicator(color: Colors.white),
+              );
             }
 
             // Ensure the preview fills the screen while maintaining aspect ratio
             return SizedBox(
               width: Get.width,
               height: Get.height,
-              child: CameraPreview(cameraRecordingController.cameraController.value!),
+              child: CameraPreview(
+                cameraRecordingController.cameraController.value!,
+              ),
             );
           }),
 
-          // 2. Recording Status Indicator
-          Obx(() => Positioned(
-            top: 50,
-            child: cameraRecordingController.isRecording.value
-                ? Row(
-              children: [
-                const Icon(Icons.fiber_manual_record, color: Colors.red),
-                const SizedBox(width: 8),
-                Text('RECORDING', style: TextStyle(color: Colors.red.shade400, fontSize: 16)),
-              ],
-            )
-                : const SizedBox.shrink(),
-          )),
-
-          // 3. Control Button (Start/Stop)
+          // 2. Control Button (Start/Stop)
           Positioned(
-            bottom: 40,
+            right: 5,
+            bottom: 5,
             child: Obx(() {
               if (!cameraRecordingController.isInitialized.value) {
                 return const SizedBox.shrink();
               }
 
-              return GestureDetector(
-                onTap: () {
+              return ActionButton(
+                bgColor: Colors.red,
+                prefixIcon: AppIcons.whiteDotIcon,
+                width: cameraRecordingController.isRecording.value ? 70 : 140,
+                buttonText: cameraRecordingController.isRecording.value ? 'Stop' : 'Start Recording',
+                onPress: () {
                   if (cameraRecordingController.isRecording.value) {
-                    cameraRecordingController.stopVideoRecording();
+                    cameraRecordingController.isRecording.value = false;
+                    // cameraRecordingController.stopVideoRecording();
                   } else {
-                    cameraRecordingController.startVideoRecording();
+                    cameraRecordingController.isRecording.value = true;
+                    // cameraRecordingController.startVideoRecording();
                   }
                 },
-                child: Container(
-                  height: 80,
-                  width: 80,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 3),
-                  ),
-                  padding: const EdgeInsets.all(5),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: cameraRecordingController.isRecording.value ? Colors.red : Colors.white,
-                    ),
-                  ),
-                ),
               );
             }),
           ),

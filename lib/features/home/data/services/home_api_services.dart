@@ -29,6 +29,27 @@ class HomeApiServices {
     }
   }
 
+  static Future updateProfile(data) async {
+    try {
+      return await _apiClient.patchApi('${AppUrl.userUrl}/profile', data);
+      // return await _apiClient.patchApi('${AppUrl.userUrl}/profile', {
+      //   "first_name": "Nehal",
+      //   "last_name": "Mahdi",
+      //   "phone_number": "1234567890",
+      //   "gender": "MALE",
+      //   "professional_summary": "",
+      //   "job_search_status": "NOT_LOOKING",
+      //   "availability_period": 0,
+      //   "currency": "USD",
+      //   "company_name": "",
+      //   "company_size": "",
+      //   "industry": ""
+      // });
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   static Future uploadAvatar(data) async {
     try {
       return await _apiClient.multiPartPostApi(

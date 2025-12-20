@@ -137,7 +137,7 @@ class NetworkApiServices extends BaseApiServices {
           ? SharedData.getPrefsString(AppConstants.tokenKey)
           : null;
 
-      final response = await http.patch(
+      final response = await http.put(
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',

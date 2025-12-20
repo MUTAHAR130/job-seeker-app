@@ -59,6 +59,7 @@ class InterviewContextDialog extends StatelessWidget {
                     } else {
                       Get.dialog(
                         JobDetailsDialog(
+                          controller: aiInterviewController,
                           buttonLabel: 'Start Mock Interview',
                           onBack: InterviewContextDialog(),
                           action: () {},

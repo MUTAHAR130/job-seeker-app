@@ -1,10 +1,10 @@
 class ProfileDetailsModel {
   // Basic Information
   final String id;
-  final String email;
-  final String firstName;
-  final String lastName;
-  final String gender;
+  String email;
+  String firstName;
+  String lastName;
+  String gender;
   final String userType;
   final String accountStatus;
   final bool isEmailVerified;
@@ -13,13 +13,13 @@ class ProfileDetailsModel {
   final DateTime? deletedAt;
 
   // Profile Media & Contact
-  final String? profilePicture;
-  final String? phoneNumber;
-  final String? address;
-  final String? city;
-  final String? state;
-  final String? country;
-  final String? postalCode;
+  String? profilePicture;
+  String? phoneNumber;
+  String? address;
+  String? city;
+  String? state;
+  String? country;
+  String? postalCode;
 
   // Social & External Links
   final String? linkedin;

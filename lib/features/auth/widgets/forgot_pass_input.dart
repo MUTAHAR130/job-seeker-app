@@ -28,7 +28,7 @@ class ForgotPassInput extends StatelessWidget {
           SizedBox(height: 15),
           ActionButton(
             buttonText: 'Send Reset Link',
-            onPress: authController.sendVerification,
+            onPress: authController.sendResetEmail,
           ),
           SizedBox(height: 15),
           Text.rich(

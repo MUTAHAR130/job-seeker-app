@@ -4,13 +4,17 @@ import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 import 'package:get/get.dart';
+import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/messages/controller/messages_controller.dart';
+import 'package:job_seeker/features/messages/controller/threads_controller.dart';
 import 'package:job_seeker/features/messages/widgets/local_chat_tile.dart';
-import 'package:job_seeker/features/messages/controller/message_controller.dart';
 import 'package:job_seeker/features/messages/widgets/no_chats_message.dart';
 import 'package:job_seeker/features/messages/widgets/other_chat_tile.dart';
 
 class ChatsView extends StatelessWidget {
-  final MessageController messageController = Get.find<MessageController>();
+  final HomeController homeController = Get.find<HomeController>();
+  final ThreadsController threadsController = Get.find<ThreadsController>();
+  final MessagesController messagesController = Get.put(MessagesController());
 
   ChatsView({super.key});
 
@@ -50,26 +54,26 @@ class ChatsView extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           children: [
-            LocalChatTile(
-              time: '9:20 AM',
-              message:
-                  'Hi Emily! I noticed you work at TechCorp and wanted to connect. I\'m very interested in opportunities at your company.',
-            ),
-            OtherChatTile(
-              profilePicture: 'assets/images/temp.jpg',
-              name: 'Emily Johnson',
-              time: '9:00 AM',
-              message:
-                  'Hi Alex! Thanks for reaching out. I\'d be happy to chat about potential opportunities. Let me know what type of roles you\'re looking for.',
-            ),
-            NoChatsMessage(),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 0,
-                itemBuilder: (context, index) {
-                  return SizedBox();
-                },
-              ),
+            // NoChatsMessage(),
+            FutureBuilder(
+              future: MessageListWidget(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return snapshot.data!;
+                } else if (snapshot.hasError) {
+                  debugPrint('${snapshot.error}');
+                  return const Material(
+                    color: Colors.transparent,
+                    child: Center(
+                      child: Text(
+                        "An Error Occurred",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  );
+                }
+                return Expanded(child: const Center(child: CircularProgressIndicator()));
+              },
             ),
 
             //debug
@@ -77,7 +81,7 @@ class ChatsView extends StatelessWidget {
               children: [
                 Expanded(
                   child: InputField(
-                    controller: messageController.sendMessageTC,
+                    controller: messagesController.sendMessageTC,
                     hintText: 'Type a message',
                   ),
                 ),
@@ -90,13 +94,57 @@ class ChatsView extends StatelessWidget {
                   width: 40,
                   prefixIcon: AppIcons.sendIcon,
                   buttonText: '',
-                  onPress: () {},
+                  onPress: () {
+                    messagesController.sendMessage();
+                  },
                 ),
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Future<Widget> MessageListWidget() async {
+    if (messagesController.initial) {
+      messagesController.selectedThread = threadsController.selectedThread;
+      await messagesController.getMessages();
+    }
+    return GetBuilder(
+      id: 'messageList',
+      init: messagesController,
+      builder: (controller) {
+        return Expanded(
+          child: ListView.builder(
+            itemCount: messagesController.messageData.length,
+            itemBuilder: (context, index) {
+              if (messagesController.messageData[index].sender.id ==
+                  homeController.currentUser.id) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    LocalChatTile(
+                      data: messagesController.messageData[index],
+                    ),
+                    SizedBox(height: 15),
+                  ],
+                );
+              } else {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    OtherChatTile(
+                      data: messagesController.messageData[index],
+                    ),
+                    SizedBox(height: 15),
+                  ],
+                );
+              }
+            },
+          ),
+        );
+      },
     );
   }
 }

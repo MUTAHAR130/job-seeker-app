@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
-import 'package:job_seeker/core/routes/app_routes.dart';
 import 'package:job_seeker/features/auth/controller/auth_controller.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:get/get.dart';
+import 'package:job_seeker/features/auth/data/services/auth_api_services.dart';
 
 class VerifyEmailDialog extends StatelessWidget {
   final AuthController authController = Get.put(AuthController());
@@ -26,7 +26,9 @@ class VerifyEmailDialog extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: IconButton(
-                  onPressed: () {Get.back();},
+                  onPressed: () {
+                    Get.back();
+                  },
                   icon: Icon(
                     Icons.close,
                     size: 25,
@@ -61,7 +63,10 @@ class VerifyEmailDialog extends StatelessWidget {
               ActionButton(
                 buttonText: 'Resend Link',
                 onPress: () {
-                  Get.back();
+                  authController.contactSupportVisible.value = true;
+                  AuthApiService.sendVerificationEmail(
+                    authController.emailTC.text.trim(),
+                  );
                 },
               ),
               SizedBox(height: 15),
@@ -72,7 +77,7 @@ class VerifyEmailDialog extends StatelessWidget {
                     buttonText: 'Contact Support',
                     inverted: true,
                     onPress: () {
-                      Get.offAllNamed(AppRoutes.home);
+                      // Get.offAllNamed(AppRoutes.home);
                     },
                   ),
                 ),

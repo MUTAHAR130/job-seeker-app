@@ -1,32 +1,67 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/features/dashboard/data/services/dashboard_api_services.dart';
+import 'package:job_seeker/features/dashboard/models/job_data_model.dart';
 import 'package:job_seeker/features/dashboard/models/resume_template_model.dart';
 import 'package:job_seeker/features/dashboard/models/score_sub_category_model.dart';
 import 'package:job_seeker/features/dashboard/widgets/dialogs/edit_resume_dialog.dart';
+import 'package:job_seeker/features/home/controller/home_controller.dart';
+import 'package:job_seeker/features/home/data/services/home_api_services.dart';
+import 'package:job_seeker/features/home/models/profile_details_model.dart';
+import 'package:http/http.dart' as http;
 
 class NewResumeController extends GetxController {
+  final HomeController homeController = Get.find<HomeController>();
   List<ResumeTemplateModel> templateData = [];
   bool initial = true;
+  String selectedTemplate = '';
+  String selectedJob = '';
 
-  getResumeTemplates() async{
+  getResumeTemplates() async {
     initial = false;
     var response = await DashboardApiServices.getResumeTemplates();
-    for(var template in response['templates']){
+    for (var template in response['templates']) {
       templateData.add(ResumeTemplateModel.fromJson(template));
     }
   }
 
-  generateResumeFromTemplate(){
+  ProfileDetailsModel? profileDetails = null;
 
+  generateResumeFromTemplate() async {
+    profileDetails!.email = emailFieldTC.text.trim();
+    profileDetails!.phoneNumber = phoneNumberTC.text.trim();
+
+    JobDataModel? jobData = null;
+    if (selectedJob == '') {
+      jobData = JobDataModel(
+        company: jobDialogCompanyTC.text.trim(),
+        role: jobDialogTitleTC.text.trim(),
+        description: jobDialogDescTC.text.trim(),
+        keywords: [],
+        requirements: [],
+        skills: [],
+        internalJobId: '',
+      );
+    }
+    await DashboardApiServices.generateResume(
+      selectedTemplate,
+      resumeTitleTC.text.trim(),
+      profileDetails!,
+      jobData,
+      selectedJob,
+    );
   }
 
   TextEditingController resumeTitleTC = TextEditingController();
 
   //basic info fields
+  String profileUrl = '';
+  var selectedPicture = Rxn<XFile>();
   TextEditingController nameFieldTC = TextEditingController();
   TextEditingController emailFieldTC = TextEditingController();
+  TextEditingController phoneNumberTC = TextEditingController();
 
   //prof sum fields
   TextEditingController profSumTC = TextEditingController();
@@ -80,6 +115,11 @@ class NewResumeController extends GetxController {
     ),
   ];
 
+  //job dialog fields
+  TextEditingController jobDialogTitleTC = TextEditingController();
+  TextEditingController jobDialogCompanyTC = TextEditingController();
+  TextEditingController jobDialogDescTC = TextEditingController();
+
   Rx<String> resumeTitle = 'Untitled'.obs;
   Rx<int> generateResumeRadioSelected = 1.obs;
   Rx<int> tailoredResumeRadioSelected = 1.obs;
@@ -115,5 +155,38 @@ class NewResumeController extends GetxController {
   changeTitle() {
     resumeTitleTC.text = resumeTitle.value;
     Get.dialog(EditTitleDialog());
+  }
+
+  getAvatar() async {
+    selectedPicture.value = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+    changeAvatar();
+  }
+
+  changeAvatar() async {
+    try {
+      final pdfMultipart = await http.MultipartFile.fromPath(
+        'avatar',
+        selectedPicture.value!.path,
+        filename: selectedPicture.value!.name,
+        contentType: http.MediaType('image', 'jpeg'),
+      );
+
+      await HomeApiServices.uploadAvatar(pdfMultipart);
+      selectedPicture.value = null;
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  resumeGenerationSetup() async {
+    var response = await HomeApiServices.getProfileDetail();
+    profileDetails = ProfileDetailsModel.fromJson(response['user']);
+    resumeTitleTC.text = 'Untitled';
+
+    nameFieldTC.text = '${profileDetails!.fullName}';
+    emailFieldTC.text = profileDetails!.email;
+    phoneNumberTC.text = profileDetails!.phoneNumber ?? '';
   }
 }

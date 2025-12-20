@@ -4,13 +4,13 @@ import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 import 'package:job_seeker/core/common/widgets/multi_line_input_field.dart';
-import 'package:job_seeker/features/dashboard/controller/cover_letter_controller.dart';
+import 'package:job_seeker/features/dashboard/controller/new_cover_letter_controller.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class GenerateCoverLetterView extends StatelessWidget {
-  final CoverLetterController coverLetterController =
-      Get.find<CoverLetterController>();
+  final NewCoverLetterController coverLetterController =
+      Get.find<NewCoverLetterController>();
 
   GenerateCoverLetterView({super.key});
 

@@ -1,11 +1,11 @@
 class ProfileModel {
   final String id;
   final String email;
-  final String firstName;
-  final String lastName;
-  final String gender;
-  final String? phoneNumber;
-  final String? profilePicture;
+  String firstName;
+  String lastName;
+  String gender;
+  String? phoneNumber;
+  String? profilePicture;
   final DateTime? createdAt;
   final dynamic jobSeeker; // Kept dynamic as it was null in your sample
   final dynamic recruiter; // Kept dynamic as it was null in your sample

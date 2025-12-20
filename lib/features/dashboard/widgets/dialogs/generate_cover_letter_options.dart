@@ -3,15 +3,15 @@ import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/white_card.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
-import 'package:job_seeker/features/dashboard/controller/cover_letter_controller.dart';
+import 'package:job_seeker/features/dashboard/controller/new_cover_letter_controller.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/features/dashboard/widgets/dialogs/job_details_dialog.dart';
 import 'package:job_seeker/core/common/widgets/radio_tile.dart';
 
 class GenerateCoverLetterOptions extends StatelessWidget {
-  final CoverLetterController coverLetterController =
-      Get.find<CoverLetterController>();
+  final NewCoverLetterController coverLetterController =
+      Get.find<NewCoverLetterController>();
   final HomeController homeController = Get.find<HomeController>();
 
   GenerateCoverLetterOptions({super.key});
@@ -56,11 +56,11 @@ class GenerateCoverLetterOptions extends StatelessWidget {
                 onPress: () {
                   if (coverLetterController.generateLetterRadioSelected.value == 1) {
                     Get.back();
-                    homeController.shownLetterMenu.value = 'letterList';
                   } else {
                     Get.back();
                     Get.dialog(
                       JobDetailsDialog(
+                        controller: coverLetterController,
                         buttonLabel: 'Generate Resume',
                         onBack: GenerateCoverLetterOptions(),
                         action: () {

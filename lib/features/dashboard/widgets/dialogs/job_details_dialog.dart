@@ -5,17 +5,20 @@ import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/common/widgets/input_field.dart';
 import 'package:job_seeker/core/common/widgets/multi_line_input_field.dart';
 import 'package:job_seeker/core/common/widgets/white_curved_box.dart';
-import 'package:job_seeker/features/dashboard/controller/cover_letter_controller.dart';
 import 'package:get/get.dart';
 
 class JobDetailsDialog extends StatelessWidget {
   final String buttonLabel;
   final Widget onBack;
   final Function action;
-  final CoverLetterController coverLetterController =
-      Get.find<CoverLetterController>();
+  final controller;
 
-  JobDetailsDialog({super.key, required this.onBack, required this.action, required this.buttonLabel});
+  JobDetailsDialog({
+    super.key,
+    required this.onBack,
+    required this.action,
+    required this.buttonLabel, this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -59,21 +62,21 @@ class JobDetailsDialog extends StatelessWidget {
               ),
               SizedBox(height: 15),
               InputField(
-                controller: coverLetterController.jobDialogTitleTC,
+                controller: controller.jobDialogTitleTC,
                 label: 'Job Title',
                 mandatory: true,
                 hintText: 'Enter job title',
               ),
               SizedBox(height: 15),
               InputField(
-                controller: coverLetterController.jobDialogCompanyTC,
+                controller: controller.jobDialogCompanyTC,
                 label: 'Company Name',
                 mandatory: true,
                 hintText: 'Enter company name',
               ),
               SizedBox(height: 15),
               MultiLineInputField(
-                controller: coverLetterController.jobDialogDescTC,
+                controller: controller.jobDialogDescTC,
                 label: 'Job Description',
                 mandatory: true,
                 hintText: 'Write a short summary about the job experience',

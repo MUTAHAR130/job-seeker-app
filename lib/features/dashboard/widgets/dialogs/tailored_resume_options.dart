@@ -10,7 +10,7 @@ import 'package:job_seeker/features/dashboard/widgets/dialogs/job_listing_dialog
 import 'package:job_seeker/core/common/widgets/radio_tile.dart';
 
 class TailoredResumeOptions extends StatelessWidget {
-  final NewResumeController resumeController = Get.find<NewResumeController>();
+  final NewResumeController newResumeController = Get.find<NewResumeController>();
 
   TailoredResumeOptions({super.key});
 
@@ -34,35 +34,36 @@ class TailoredResumeOptions extends StatelessWidget {
               Obx(
                 () => RadioTile(
                   radioVal: 1,
-                  groupVal: resumeController.tailoredResumeRadioSelected.value,
+                  groupVal: newResumeController.tailoredResumeRadioSelected.value,
                   title: 'Select from Job Listings',
                   subtitle:
                       'Choose a job directly from SmartResume’s internal listings to automatically tailor your resume.',
-                  changeVal: resumeController.changeTailoredResumeRadio,
+                  changeVal: newResumeController.changeTailoredResumeRadio,
                 ),
               ),
               SizedBox(height: 10),
               Obx(
                 () => RadioTile(
                   radioVal: 2,
-                  groupVal: resumeController.tailoredResumeRadioSelected.value,
+                  groupVal: newResumeController.tailoredResumeRadioSelected.value,
                   title: 'Enter Job Details Manually',
                   subtitle:
                       'Provide the job title, company name, and description to generate a customized resume.',
-                  changeVal: resumeController.changeTailoredResumeRadio,
+                  changeVal: newResumeController.changeTailoredResumeRadio,
                 ),
               ),
               SizedBox(height: 10),
               ActionButton(
                 buttonText: 'Continue',
                 onPress: () {
-                  if (resumeController.tailoredResumeRadioSelected.value == 1) {
+                  if (newResumeController.tailoredResumeRadioSelected.value == 1) {
                     Get.back();
                     Get.dialog(JobListingDialog());
                   } else {
                     Get.back();
                     Get.dialog(
                       JobDetailsDialog(
+                        controller: newResumeController,
                         buttonLabel: 'Generate Resume',
                         onBack: TailoredResumeOptions(),
                         action: () {},

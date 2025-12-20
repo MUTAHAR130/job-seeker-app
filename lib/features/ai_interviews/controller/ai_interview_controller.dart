@@ -7,6 +7,11 @@ class AIInterviewController extends GetxController{
 
   TextEditingController listSearchTC = TextEditingController();
 
+  //job detail dialog fields
+  TextEditingController jobDialogTitleTC = TextEditingController();
+  TextEditingController jobDialogCompanyTC = TextEditingController();
+  TextEditingController jobDialogDescTC = TextEditingController();
+
   Rx<int> responseModeRadio = 1.obs;
   Rx<int> interviewContextRadio = 1.obs;
 

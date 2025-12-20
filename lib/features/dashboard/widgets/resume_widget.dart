@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:job_seeker/core/common/icons/app_icons.dart';
+import 'package:job_seeker/features/dashboard/controller/resume_controller.dart';
 import 'package:job_seeker/features/dashboard/widgets/three_dot_popup_menu.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:get/get.dart';
 
 class ResumeWidget extends StatelessWidget {
+  final ResumeController resumeController = Get.find<ResumeController>();
   final bool? isDefault;
   final String asset;
   final String title;
@@ -14,7 +16,7 @@ class ResumeWidget extends StatelessWidget {
   final int? groupVal;
   final int index;
 
-  const ResumeWidget({
+  ResumeWidget({
     super.key,
     this.isDefault,
     required this.asset,

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:job_seeker/features/dashboard/widgets/dialogs/edit_resume_dialog.dart';
 
-class CoverLetterController extends GetxController {
+class NewCoverLetterController extends GetxController {
   TextEditingController resumeTitleTC = TextEditingController();
 
   //cover letter details

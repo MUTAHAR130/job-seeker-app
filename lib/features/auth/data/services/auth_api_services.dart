@@ -50,7 +50,7 @@ class AuthApiService {
   static Future verifyEmail(String token) async {
     try {
       return await _apiClient.postApi('${AppUrl.userUrl}/verify-email', {
-        'email': token,
+        'token': token,
       });
     } catch (e) {
       rethrow;

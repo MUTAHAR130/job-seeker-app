@@ -3,14 +3,12 @@ import 'package:job_seeker/features/dashboard/models/resume_model.dart';
 import 'package:job_seeker/features/dashboard/widgets/resume_widget.dart';
 
 class ResumeList extends StatelessWidget {
-  final int itemCount;
   final List<ResumeModel> resumeData;
   final bool? isRadio;
   final int? groupVal;
 
   const ResumeList({
     super.key,
-    required this.itemCount,
     required this.resumeData,
     this.isRadio,
     this.groupVal
@@ -22,7 +20,7 @@ class ResumeList extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: itemCount,
+        itemCount: resumeData.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.only(top: 15),

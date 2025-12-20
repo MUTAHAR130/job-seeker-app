@@ -12,8 +12,16 @@ import 'package:job_seeker/features/home/models/profile_details_model.dart';
 import 'package:job_seeker/features/home/models/profile_model.dart';
 import 'package:job_seeker/features/home/models/user_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:job_seeker/features/home/widgets/edit_profile_dialog.dart';
 
 class HomeController extends GetxController {
+  TextEditingController profileFNameTC = TextEditingController();
+  TextEditingController profileLNameTC = TextEditingController();
+  TextEditingController phoneNumberTC = TextEditingController();
+  List<String> genderOptions = ['Prefer not to specify', 'MALE', 'FEMALE'];
+  String selectedGender = 'Prefer not to specify';
+  var selectedPicture = Rxn<XFile>();
+
   @override
   void onReady() {
     super.onReady();
@@ -22,14 +30,19 @@ class HomeController extends GetxController {
 
   initialize() async {
     if (await SharedData.containKey(AppConstants.tokenKey)) {
-      try {
-        var response = await HomeApiServices.getUser();
-        currentUser = UserModel.fromJson(response['user']);
-        getProfile();
-        Get.offNamed(AppRoutes.home);
-      } catch (e) {
-        debugPrint('error $e');
-        Get.offNamed(AppRoutes.loginView);
+      if (await SharedData.containKey(AppConstants.rememberMeCheck) &&
+          await SharedData.getPrefsBool(AppConstants.rememberMeCheck)) {
+        try {
+          var response = await HomeApiServices.getUser();
+          currentUser = UserModel.fromJson(response['user']);
+          getProfile();
+          Get.offNamed(AppRoutes.home);
+        } catch (e) {
+          debugPrint('error $e');
+          Get.offNamed(AppRoutes.loginView);
+        }
+      } else {
+        SharedData.removeKey(AppConstants.tokenKey);
       }
     } else {
       Get.offNamed(AppRoutes.loginView);
@@ -153,13 +166,6 @@ class HomeController extends GetxController {
     ),
   ];
 
-  Rx<String> shownResumeMenu = 'createResume'.obs;
-  Rx<String> shownLetterMenu = 'createLetter'.obs;
-
-  changeMenu(String value) {
-    shownResumeMenu.value = value;
-  }
-
   changeDrawer(index) async {
     for (var campaign in drawerOptions) {
       campaign.selected = false;
@@ -178,21 +184,65 @@ class HomeController extends GetxController {
     // currentUserProfileDetails = ProfileDetailsModel.fromJson(response2['user']);
   }
 
-  changeAvatar() async {
-    var result = await ImagePicker().pickImage(source: ImageSource.gallery);
-    final pdfMultipart = await http.MultipartFile.fromPath(
-      'avatar',
-      result!.path,
-      filename: result.name,
-      contentType: http.MediaType('image', 'jpeg'),
-    );
+  setGender(value) {
+    selectedGender = value;
+  }
 
-    var response = await HomeApiServices.uploadAvatar(pdfMultipart);
-    currentUser.profilePicture = response['avatarUrl'];
+  editProfile() {
+    profileFNameTC.text = currentUserProfile.firstName;
+    profileLNameTC.text = currentUserProfile.lastName;
+    phoneNumberTC.text = currentUserProfile.phoneNumber ?? '';
+    selectedGender = currentUserProfile.gender == "NOT_SPECIFIED"
+        ? 'Prefer not to specify'
+        : currentUser.gender;
+    Get.dialog(EditProfileDialog());
+  }
+
+  saveProfile() async {
+    try {
+      ProfileModel temp = currentUserProfile;
+      temp.firstName = profileFNameTC.text.trim();
+      temp.lastName = profileLNameTC.text.trim();
+      temp.gender = selectedGender;
+      if (selectedPicture.value != null) {
+        changeAvatar();
+      }
+      // var data = temp.toJson();
+      // await HomeApiServices.updateProfile(data);
+      Get.back();
+    } catch (e) {
+      debugPrint('$e');
+    }
+  }
+
+  getAvatar() async {
+    selectedPicture.value = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+  }
+
+  changeAvatar() async {
+    try {
+      final pdfMultipart = await http.MultipartFile.fromPath(
+        'avatar',
+        selectedPicture.value!.path,
+        filename: selectedPicture.value!.name,
+        contentType: http.MediaType('image', 'jpeg'),
+      );
+
+      var response = await HomeApiServices.uploadAvatar(pdfMultipart);
+      currentUser.profilePicture = response['avatarUrl'];
+      selectedPicture.value = null;
+    } catch (e) {
+      debugPrint('$e');
+    }
   }
 
   logOut() async {
     await SharedData.removeKey(AppConstants.tokenKey);
+    if (await SharedData.containKey(AppConstants.rememberMeCheck)) {
+      await SharedData.removeKey(AppConstants.rememberMeCheck);
+    }
     Get.offAllNamed(AppRoutes.loginView);
   }
 }

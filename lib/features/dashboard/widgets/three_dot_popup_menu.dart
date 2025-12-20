@@ -35,14 +35,14 @@ class ThreeDotPopupMenu extends StatelessWidget {
     debugPrint(index.toString());
     switch (action) {
       case MenuItemAction.downloadPdf:
-        break;
+        onDownload!(index);
       case MenuItemAction.setDefault:
         Get.dialog(
           SetDefaultDialog(index: index, onConfirm: onDefault ?? () {}),
         );
         break;
       case MenuItemAction.duplicate:
-        break;
+        onDuplicate!(index);
       case MenuItemAction.edit:
         Get.dialog(
           EditItemTitleDialog(
@@ -101,30 +101,30 @@ class ThreeDotPopupMenu extends StatelessWidget {
             icon: AppIcons.downloadIcon,
             title: 'Download PDF',
           ),
-        if(onDefault != null)
-        _buildPopupMenuItem(
-          value: MenuItemAction.setDefault,
-          icon: AppIcons.bookMarkIcon,
-          title: 'Set as default',
-        ),
-        if(onDuplicate != null)
-        _buildPopupMenuItem(
-          value: MenuItemAction.duplicate,
-          icon: AppIcons.duplicateIcon,
-          title: 'Duplicate',
-        ),
-        if(onEdit != null)
-        _buildPopupMenuItem(
-          value: MenuItemAction.edit,
-          icon: AppIcons.editIcon,
-          title: 'Edit',
-        ),
-        if(onDelete != null)
-        _buildPopupMenuItem(
-          value: MenuItemAction.delete,
-          icon: AppIcons.deleteIcon,
-          title: 'Delete',
-        ),
+        if (onDefault != null)
+          _buildPopupMenuItem(
+            value: MenuItemAction.setDefault,
+            icon: AppIcons.bookMarkIcon,
+            title: 'Set as default',
+          ),
+        if (onDuplicate != null)
+          _buildPopupMenuItem(
+            value: MenuItemAction.duplicate,
+            icon: AppIcons.duplicateIcon,
+            title: 'Duplicate',
+          ),
+        if (onEdit != null)
+          _buildPopupMenuItem(
+            value: MenuItemAction.edit,
+            icon: AppIcons.editIcon,
+            title: 'Edit',
+          ),
+        if (onDelete != null)
+          _buildPopupMenuItem(
+            value: MenuItemAction.delete,
+            icon: AppIcons.deleteIcon,
+            title: 'Delete',
+          ),
       ],
     );
   }

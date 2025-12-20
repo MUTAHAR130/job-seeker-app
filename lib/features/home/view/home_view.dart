@@ -6,7 +6,7 @@ import 'package:job_seeker/core/common/widgets/action_button.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
 import 'package:job_seeker/features/ai_interviews/controller/ai_interview_controller.dart';
 import 'package:job_seeker/features/ai_interviews/view/ai_interviews_view.dart';
-import 'package:job_seeker/features/dashboard/controller/cover_letter_controller.dart';
+import 'package:job_seeker/features/dashboard/controller/new_cover_letter_controller.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
 import 'package:job_seeker/features/dashboard/controller/new_resume_controller.dart';
 import 'package:job_seeker/features/dashboard/view/dashboard_view.dart';
@@ -14,7 +14,7 @@ import 'package:job_seeker/features/home/widgets/home_drawer.dart';
 import 'package:job_seeker/features/job_search/view/job_search_view.dart';
 import 'package:job_seeker/features/job_settings/controller/job_settings_controller.dart';
 import 'package:job_seeker/features/job_settings/view/job_settings_view.dart';
-import 'package:job_seeker/features/messages/controller/message_controller.dart';
+import 'package:job_seeker/features/messages/controller/threads_controller.dart';
 import 'package:job_seeker/features/messages/view/message_view.dart';
 import 'package:job_seeker/features/saved_filters/controller/saved_filters_controller.dart';
 import 'package:job_seeker/features/saved_filters/view/saved_filter_view.dart';
@@ -27,10 +27,10 @@ class HomeView extends StatelessWidget {
   final SavedFiltersController savedFiltersController = Get.put(
     SavedFiltersController(),
   );
-  final CoverLetterController coverLetterController = Get.put(
-    CoverLetterController(),
+  final NewCoverLetterController coverLetterController = Get.put(
+    NewCoverLetterController(),
   );
-  final MessageController messageController = Get.put(MessageController());
+  final ThreadsController messageController = Get.put(ThreadsController());
   final JobSettingsController jobSettingsController = Get.put(
     JobSettingsController(),
   );

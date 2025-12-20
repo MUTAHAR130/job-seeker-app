@@ -20,29 +20,37 @@ class ResumeController extends GetxController {
   String fileName = '';
 
   getCoverLetters() async {
-    initialC = false;
-    // var response = await DashboardApiServices.getCoverLetters();
-    // debugPrint('$response');
-    coverLetterData = [];
-    // for (var letter in response['resumes']) {
-    //   coverLetterData.add(ResumeModel.fromJson(letter));
-    // }
-    if (coverLetterData.isEmpty) {
-      shownLetterMenu = ShownMenu.noData;
-      update(['letterList']);
+    try {
+      initialC = false;
+      // var response = await DashboardApiServices.getCoverLetters();
+      // debugPrint('$response');
+      coverLetterData = [];
+      // for (var letter in response['resumes']) {
+      //   coverLetterData.add(ResumeModel.fromJson(letter));
+      // }
+      if (coverLetterData.isEmpty) {
+        shownLetterMenu = ShownMenu.noData;
+        update(['letterList']);
+      }
+    } catch (e) {
+      debugPrint('$e');
     }
   }
 
   getResumes() async {
-    initialR = false;
-    var response = await DashboardApiServices.getResumes();
-    resumeData = [];
-    for (var resume in response['resumes']) {
-      resumeData.add(ResumeModel.fromJson(resume));
-    }
-    if (resumeData.isEmpty) {
-      shownResumeMenu = ShownMenu.noData;
-      update(['resumeList']);
+    try {
+      initialR = false;
+      var response = await DashboardApiServices.getResumes();
+      resumeData = [];
+      for (var resume in response['resumes']) {
+        resumeData.add(ResumeModel.fromJson(resume));
+      }
+      if (resumeData.isEmpty) {
+        shownResumeMenu = ShownMenu.noData;
+        update(['resumeList']);
+      }
+    } catch (e) {
+      debugPrint('$e');
     }
   }
 
@@ -57,6 +65,19 @@ class ResumeController extends GetxController {
       update(['resumeList']);
     } catch (e) {
       debugPrint('error $e');
+    }
+  }
+
+  // editResumeTitle(index) async {
+  //
+  // }
+
+  deleteResume(index) async {
+    try {
+      await DashboardApiServices.deleteResume(resumeData[index].id);
+      resumeData.removeAt(index);
+    } catch (e) {
+      debugPrint('$e');
     }
   }
 
@@ -96,7 +117,7 @@ class ResumeController extends GetxController {
             filename: fileName,
             contentType: http.MediaType('application', 'pdf'),
           );
-          if(type =='resume'){
+          if (type == 'resume') {
             var response = await DashboardApiServices.uploadResume(
               homeController.currentUser.id,
               pdfMultipart,

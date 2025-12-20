@@ -105,7 +105,6 @@ class DashboardView extends StatelessWidget {
       builder: (controller) {
         if (resumeController.shownResumeMenu == ShownMenu.hasData) {
           return ResumeList(
-            itemCount: resumeController.resumeData.length,
             resumeData: resumeController.resumeData,
           );
         } else {

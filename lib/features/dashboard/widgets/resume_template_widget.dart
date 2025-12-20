@@ -7,9 +7,8 @@ import 'package:job_seeker/features/dashboard/models/resume_template_model.dart'
 
 class ResumeTemplateWidget extends StatelessWidget {
   final ResumeTemplateModel data;
-  final Function? onTap;
 
-  const ResumeTemplateWidget({super.key, this.onTap, required this.data});
+  const ResumeTemplateWidget({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {

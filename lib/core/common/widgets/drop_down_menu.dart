@@ -13,6 +13,7 @@ class LabeledDropDownMenu extends StatelessWidget {
   final String hintText;
   final String? defaultValue;
   final Rx<String> selectedValue = ''.obs;
+  final double? itemHeight;
 
   LabeledDropDownMenu({
     super.key,
@@ -24,7 +25,7 @@ class LabeledDropDownMenu extends StatelessWidget {
     required this.onChange,
     required this.hintText,
     this.defaultValue,
-    this.mandatory,
+    this.mandatory, this.itemHeight,
   }) {
     selectedValue.value = defaultValue ?? '';
   }
@@ -77,7 +78,7 @@ class LabeledDropDownMenu extends StatelessWidget {
                   ),
                 ),
                 menuItemStyleData: MenuItemStyleData(
-                  height: 25,
+                  height: itemHeight ?? 25,
                   padding: EdgeInsets.all(0),
                 ),
                 hint: Text(
@@ -101,7 +102,7 @@ class LabeledDropDownMenu extends StatelessWidget {
                 }).toList(),
                 onChanged: (val) {
                   selectedValue.value = val ?? '';
-                  onChange();
+                  onChange(val);
                 },
               ),
             ),

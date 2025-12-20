@@ -5,6 +5,7 @@ import 'package:job_seeker/core/common/widgets/custom_snack_bar.dart';
 import 'package:job_seeker/core/routes/app_routes.dart';
 import 'package:job_seeker/core/services/shared_data.dart';
 import 'package:job_seeker/features/auth/data/services/auth_api_services.dart';
+import 'package:job_seeker/features/auth/widgets/verify_email_dialog.dart';
 import 'package:job_seeker/features/home/controller/home_controller.dart';
 import 'package:job_seeker/features/home/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,8 +28,8 @@ class AuthController extends GetxController {
 
   Rx<bool> passHidden = true.obs;
   Rx<bool> confirmPassHidden = true.obs;
-  Rx<bool> rememberCheckBox = false.obs;
-  Rx<bool> contactSupportVisible = true.obs;
+  Rx<bool> rememberCheckBox = true.obs;
+  Rx<bool> contactSupportVisible = false.obs;
   Rx<String> verifyStatus = 'not sent'.obs;
 
   togglePassHidden() {
@@ -43,10 +44,10 @@ class AuthController extends GetxController {
     rememberCheckBox.value = value;
   }
 
-  sendVerification() async {
+  sendResetEmail() async {
     if (RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$').hasMatch(emailTC.text.trim())) {
-      // await _repository.sendVerificationEmail(emailFieldTC.text.trim());
-      // verifyStatus.value = 'pending';
+      await AuthApiService.resetPassRequest(emailTC.text.trim());
+      verifyStatus.value = 'pending';
     } else {
       //invalid email
       verifyStatus.value = 'pending';
@@ -76,29 +77,14 @@ class AuthController extends GetxController {
         nameTC.text.trim(),
         'JOBSEEKER',
       );
-      homeController.currentUser = UserModel.fromJson(response['newUserCreated']);
+      homeController.currentUser = UserModel.fromJson(
+        response['newUserCreated'],
+      );
       homeController.getProfile();
       SharedData.setPrefsString(AppConstants.tokenKey, response['authToken']);
       Get.offAllNamed(AppRoutes.home);
     } catch (e) {
       CustomSnackBar.showFailedSnackBar('User already exists with this email');
-      debugPrint('error: $e');
-    }
-  }
-
-  googleLoginAction() async {
-    try {
-      var credential = await _handleGoogleLogin();
-      // credential.user.uid;
-      if (credential != null) {
-        debugPrint('$credential');
-        var response = await AuthApiService.loginWithGoogle(credential.user!.uid);
-        homeController.currentUser = UserModel.fromJson(response['user']);
-        homeController.getProfile();
-        SharedData.setPrefsString(AppConstants.tokenKey, response['authToken']);
-        Get.offAllNamed(AppRoutes.home);
-      }
-    } catch (e) {
       debugPrint('error: $e');
     }
   }
@@ -111,18 +97,49 @@ class AuthController extends GetxController {
         emailTC.text.trim(),
         passwordTC.text.trim(),
       );
-      // var response = await AuthApiService.devLoginWithEmail(
-      //   emailFieldTC.text.trim(),
-      // );
       homeController.currentUser = UserModel.fromJson(response['user']);
-      homeController.getProfile();
-      SharedData.setPrefsString(AppConstants.tokenKey, response['authToken']);
-      Get.offAllNamed(AppRoutes.home);
+      if (!homeController.currentUser.isEmailVerified) {
+        //run to send to verification
+        // var response = await AuthApiService.sendVerificationEmail(
+        //   homeController.currentUser.email,
+        // );
+        // String token = response['token'];
+        // Get.dialog(VerifyEmailDialog());
+
+        //run manually at some point?
+        // await AuthApiService.verifyEmail(token);
+      } else{
+        if(rememberCheckBox.value){
+          SharedData.setPrefsBool(AppConstants.rememberMeCheck, true);
+        }
+        SharedData.setPrefsString(AppConstants.tokenKey, response['authToken']);
+        homeController.getProfile();
+        Get.offAllNamed(AppRoutes.home);
+      }
     } catch (e) {
       debugPrint('error: $e');
     }
     //on 5 failed logins
     // Get.dialog(LoginFailDialog());
+  }
+
+  googleLoginAction() async {
+    try {
+      var credential = await _handleGoogleLogin();
+      // credential.user.uid;
+      if (credential != null) {
+        debugPrint('$credential');
+        var response = await AuthApiService.loginWithGoogle(
+          credential.user!.uid,
+        );
+        homeController.currentUser = UserModel.fromJson(response['user']);
+        homeController.getProfile();
+        SharedData.setPrefsString(AppConstants.tokenKey, response['authToken']);
+        Get.offAllNamed(AppRoutes.home);
+      }
+    } catch (e) {
+      debugPrint('error: $e');
+    }
   }
 
   final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -144,11 +161,13 @@ class AuthController extends GetxController {
     if (googleUser == null) return null;
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth = await googleUser.authentication;
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser.authentication;
 
     // Create a new credential
-    final credential =
-    GoogleAuthProvider.credential(idToken: googleAuth?.idToken);
+    final credential = GoogleAuthProvider.credential(
+      idToken: googleAuth?.idToken,
+    );
 
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
